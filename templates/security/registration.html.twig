@@ -1,0 +1,31 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Inscription{% endblock %}
+
+{% block body %}
+      {{ form_start(registrationForm) }}
+
+                <div class="form-group">
+                    {{ form_row(registrationForm.email, {'attr': {'class': 'form-control', 'placeholder': 'name@mail.com'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(registrationForm.password, {'attr': {'class': 'form-control', 'placeholder': 'Entrez votre mot de passe'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(registrationForm.confirm_password, {'attr': {'class': 'form-control', 'placeholder': 'Confirmez votre mot de passe'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(registrationForm.companyName, {'attr': {'class': 'form-control', 'placeholder': 'Mon Entreprise..'}}) }}
+                </div>
+
+                <div class="form-group">
+                    {{ form_row(registrationForm.tel, {'attr': {'class': 'form-control', 'placeholder': '0602030405'}}) }}
+                </div>
+                
+                <button type="submit" class="btn btn-success">S'inscrire</button>
+
+    {{ form_end(registrationForm) }}
+{% endblock %}

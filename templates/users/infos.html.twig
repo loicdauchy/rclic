@@ -1,0 +1,268 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes infos
+{% endblock %}
+
+{% block body %}
+
+{{ form_start(user) }}
+<br>
+<br>
+<div class="container">
+<div class="mb-5 p-5 shadow arrondi bg-light">
+
+<div class="row mt-3 ml-3 mb-4">
+				<h2>Gérez vos informations</h2>
+			</div>
+            <div class="row col-12">
+                <div class="col-4">
+                    {{ form_row(user.timeLapse, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="col-2">
+                    {{ form_row(user.employeesNbr, {'attr': {'class': 'form-control'}}) }}
+                </div>
+
+                <div class="col-6">
+                    {{ form_row(user.showPreta, {'attr': {'class': 'form-control'}}) }}
+                </div>
+            </div>
+                <div class="row my-5 pl-5">
+                    <h6>Renseigner vos horaires d'ouverture hebdomadaire</h6>
+                </div>
+
+                <div class="row col-12">
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
+                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
+                            <input type="checkbox" aria-label="Checkbox for following text input" name="lundiCheck" id="lundiCheck">
+                            Lundi
+                            <i class="fas fa-sort-down pointer" id="lundiDropdownBtn"></i>
+                        </div>
+                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="lundiDropdown" style="background:#eceeef;">
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Début de journée</label>
+                                <input type="time" class="form-control" name="lundiStart" value="08:00" id="lundiStart">
+                            </div>
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Fin de journée</label>
+                                <input type="time" class="form-control" name="lundiEnd" value="19:00" id="lundiEnd">
+                            </div>
+                        </div> 
+                    </div>  
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
+                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
+                            <input type="checkbox" aria-label="Checkbox for following text input" name="mardiCheck" id="mardiCheck">
+                            Mardi
+                            <i class="fas fa-sort-down pointer" id="mardiDropdownBtn"></i>
+                        </div>
+                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="mardiDropdown" style="background:#eceeef;">
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Début de journée</label>
+                                <input type="time" class="form-control" name="mardiStart" value="08:00" id="mardiStart">
+                            </div>
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Fin de journée</label>
+                                <input type="time" class="form-control" name="mardiEnd" value="19:00" id="mardiEnd">
+                            </div>
+                        </div>
+                    </div>  
+                         
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
+                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
+                            <input type="checkbox" aria-label="Checkbox for following text input" name="mercrediCheck" id="mercrediCheck">
+                            Mercredi
+                            <i class="fas fa-sort-down pointer" id="mercrediDropdownBtn"></i>
+                        </div>
+                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="mercrediDropdown" style="background:#eceeef;">
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Début de journée</label>
+                                <input type="time" class="form-control" name="mercrediStart" value="08:00" id="mercrediStart">
+                            </div>
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Fin de journée</label>
+                                <input type="time" class="form-control" name="mercrediEnd" value="19:00" id="mercrediEnd">
+                            </div>
+                        </div>
+                    </div>      
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
+                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
+                            <input type="checkbox" aria-label="Checkbox for following text input" name="jeudiCheck" id="jeudiCheck">
+                            Jeudi
+                            <i class="fas fa-sort-down pointer" id="jeudiDropdownBtn"></i>
+                        </div>
+                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="jeudiDropdown" style="background:#eceeef;">
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Début de journée</label>
+                                <input type="time" class="form-control" name="jeudiStart" value="08:00" id="jeudiStart">
+                            </div>
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Fin de journée</label>
+                                <input type="time" class="form-control" name="jeudiEnd" value="19:00" id="jeudiEnd">
+                            </div>
+                        </div>
+                    </div>   
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
+                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
+                            <input type="checkbox" aria-label="Checkbox for following text input" name="vendrediCheck" id="vendrediCheck">
+                            Vendredi
+                            <i class="fas fa-sort-down pointer" id="vendrediDropdownBtn"></i>
+                        </div>
+                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="vendrediDropdown" style="background:#eceeef;">
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Début de journée</label>
+                                <input type="time" class="form-control" name="vendrediStart" value="08:00" id="vendrediStart">
+                            </div>
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Fin de journée</label>
+                                <input type="time" class="form-control" name="vendrediEnd" value="19:00" id="vendrediEnd">
+                            </div>
+                        </div>
+                    </div>      
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
+                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
+                            <input type="checkbox" aria-label="Checkbox for following text input" name="samediCheck" id="samediCheck">
+                            Samedi
+                            <i class="fas fa-sort-down pointer" id="samediDropdownBtn"></i>
+                        </div>
+                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="samediDropdown" style="background:#eceeef;">
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Début de journée</label>
+                                <input type="time" class="form-control" name="samediStart" value="08:00" id="samediStart">
+                            </div>
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Fin de journée</label>
+                                <input type="time" class="form-control" name="samediEnd" value="19:00" id="samediEnd">
+                            </div>
+                        </div>
+                    </div> 
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
+                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
+                            <input type="checkbox" aria-label="Checkbox for following text input" name="dimancheCheck" id="dimancheCheck">
+                            Dimanche
+                            <i class="fas fa-sort-down pointer" id="dimancheDropdownBtn"></i>
+                        </div>
+                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="dimancheDropdown" style="background:#eceeef;">
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Début de journée</label>
+                                <input type="time" class="form-control" name="dimancheStart" value="08:00" id="dimancheStart">
+                            </div>
+                            <div class="form-group fontOne">
+                                <label class="fontOne">Fin de journée</label>
+                                <input type="time" class="form-control" name="dimancheEnd" value="19:00" id="dimancheEnd">
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+            <br>
+            <div class="col-3">
+            <br>
+                <button type="submit" class="btn btn-dark">Confirmer</button>
+            </div>
+                <br>
+
+                <input type="hidden" value="{{ userId }}" id="userId">
+
+    
+        </div>
+    </div>
+
+
+{{ form_end(user) }}
+      
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+        window.onload = () => {
+            document.querySelector('.button-left').addEventListener('click', function() {
+              document.querySelector('.sidebar').classList.toggle('fliph');
+            })
+        }
+
+        var userId = document.getElementById('userId').value;
+
+        document.getElementById('dimancheDropdownBtn').addEventListener('click', function(){
+            document.getElementById('dimancheDropdown').classList.toggle('open');
+        })
+        document.getElementById('samediDropdownBtn').addEventListener('click', function(){
+            document.getElementById('samediDropdown').classList.toggle('open');
+        })
+        document.getElementById('vendrediDropdownBtn').addEventListener('click', function(){
+            document.getElementById('vendrediDropdown').classList.toggle('open');
+        })
+        document.getElementById('jeudiDropdownBtn').addEventListener('click', function(){
+            document.getElementById('jeudiDropdown').classList.toggle('open');
+        })
+        document.getElementById('mercrediDropdownBtn').addEventListener('click', function(){
+            document.getElementById('mercrediDropdown').classList.toggle('open');
+        })
+        document.getElementById('mardiDropdownBtn').addEventListener('click', function(){
+            document.getElementById('mardiDropdown').classList.toggle('open');
+        })
+        document.getElementById('lundiDropdownBtn').addEventListener('click', function(){
+            document.getElementById('lundiDropdown').classList.toggle('open');
+        })
+
+        function callUserInfos(){
+            var xhr = new XMLHttpRequest();
+            xhr.open('GET', '/api/users/'+userId);
+            xhr.onload = () => {
+                const res = JSON.parse(xhr.response);
+                userInfos = res;
+                console.log({
+                  type: "CONSOLE USER",
+                  data: userInfos
+                });
+                
+                for(var i = 0; i < res.workDays.length; i++){
+                  var day = res.workDays[i];
+               
+                  if(day.daysOfWeek[0] === 1){
+                      document.getElementById('lundiCheck').checked = true;
+                      document.getElementById('lundiStart').value = day.startTime;
+                      document.getElementById('lundiEnd').value = day.endTime;
+                  }else if(day.daysOfWeek[0] === 2){
+                      document.getElementById('mardiCheck').checked = true;
+                      document.getElementById('mardiStart').value = day.startTime;
+                      document.getElementById('mardiEnd').value = day.endTime;
+                  }else if(day.daysOfWeek[0] === 3){
+                      document.getElementById('mercrediCheck').checked = true;
+                      document.getElementById('mercrediStart').value = day.startTime;
+                      document.getElementById('mercrediEnd').value = day.endTime;
+                  }else if(day.daysOfWeek[0] === 4){
+                      document.getElementById('jeudiCheck').checked = true;
+                      document.getElementById('jeudiStart').value = day.startTime;
+                      document.getElementById('jeudiEnd').value = day.endTime;
+                  }else if(day.daysOfWeek[0] === 5){
+                      document.getElementById('vendrediCheck').checked = true;
+                      document.getElementById('vendrediStart').value = day.startTime;
+                      document.getElementById('vendrediEnd').value = day.endTime;
+                  }else if(day.daysOfWeek[0] === 6){
+                      document.getElementById('samediCheck').checked = true;
+                      document.getElementById('samediStart').value = day.startTime;
+                      document.getElementById('samediEnd').value = day.endTime;
+                  }else if(day.daysOfWeek[0] === 7){
+                      document.getElementById('dimancheCheck').checked = true;
+                      document.getElementById('dimancheStart').value = day.startTime;
+                      document.getElementById('dimancheEnd').value = day.endTime;
+                  }
+                }
+    
+            }
+            xhr.setRequestHeader("Content-Type", "application/json");    
+            xhr.send();
+        }
+
+        window.onload = () => {
+            callUserInfos();
+        }      
+
+    </script>
+{% endblock javascripts %}

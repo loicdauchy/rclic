@@ -1,0 +1,46 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes prestations
+{% endblock %}
+
+{% block body %}
+
+	<div class="container mb-5 mt-5">
+	
+		<div class="row">
+
+			{% for p in presta %}
+				<div class="col-lg-3 col-md-4 col-12 mt-5 mb-5">
+					<div class="card arrondi shadow bg-white">
+						<div class="card-body">
+							<h5 class="card-title ">{{ p.name }}</h5>
+							<img class="card-img-top" src="{{ asset('images/'~p.image) }}" width="150" height="150" alt="Card image cap">
+							<p class="card-text">
+								{{ p.prestaTime }} min</p>
+							{% if p.category %}
+								<p class="card-text">
+									{{ p.category.name }}</p>
+							{% endif %}
+							<a href="{{path('prestation_edit', { 'id': p.id })}}" class="btn btn-warning">Mise à jour</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+{% endblock %}
+
+{% block javascripts %}
+
+	<script>
+		
+		window.onload = () => {
+			document.querySelector('.button-left').addEventListener('click', function() {
+			  document.querySelector('.sidebar').classList.toggle('fliph');
+			})
+		}
+
+	</script>
+
+{% endblock javascripts %}

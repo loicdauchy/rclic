@@ -1,0 +1,165 @@
+{% if not app.user %}
+
+	<header>
+		
+			<div class="row justify-content-end align-items-center topBar">
+				<p class="text-light mb-0 mr-3">
+					Appelez-nous au 
+					<a href="tel:+33767535224" style="color:rgb(193, 147, 50);">+33 (0)7 67 53 52 24</a>
+				</p>
+
+				<button class="btn btn-warning btnTopBar">Être rappelé</button>
+				<button class="btn btn-success btnTopBar"><a class="text-light" style="text-decoration: none;" href="{{ path('app_login') }}">Connexion</a></button>
+			</div>
+		
+
+		<nav class="navbar navbar-expand-lg navbar-light bg-light">
+			<a class="navbar-brand ml-3" href="{{ path('home') }}"><img src="{{asset('logo/logoAppTransparent.png')}}" alt="" id="navLogo"></a>
+			<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+				<span class="navbar-toggler-icon"></span>
+			</button>
+
+			<div class="collapse navbar-collapse" id="navbarColor03">
+				<ul class="navbar-nav ml-auto">
+					<li class="nav-item">
+						<a class="nav-link active" href="{{ path('home') }}">Accueil
+						</a>
+					</li>
+					<li class="nav-item">
+						<a class="nav-link" href="#">Prise de rdv</a>
+					</li>
+					{% if not app.user %}
+						{# <li class="nav-item">
+							<a class="nav-link" href="{{ path('app_register') }}">Inscription</a>
+						</li> #}
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_register') }}">Solution</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_register') }}">Outil</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_register') }}">Exemples</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_register') }}">Tarifs</a>
+						</li>
+						<li class="nav-item">
+							<a class="nav-link" href="{{ path('app_register') }}">Contact</a>
+						</li>
+					{% endif %}
+					{% if app.user %}
+						<li class="nav-item dropdown">
+							<a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" id="userMenu"></a>
+							<div class="dropdown-menu dropdown-menu-right">
+								<a class="dropdown-item" href="{{ path('userInfos', { 'id': app.user.id }) }}">Gérer vos informations</a>
+								<a class="dropdown-item" href="{{ path('agenda', { 'id': app.user.id }) }}">Votre Agenda</a>
+								<a class="dropdown-item" href="{{ path('prestations', { 'id': app.user.id }) }}">Gestions des catégories et des prestations</a>
+								<div class="dropdown-divider"></div>
+								<a class="nav-link text-danger" href="{{ path('app_logout') }}">Deconnexion</a>
+							</div>
+						</li>
+						
+					{% endif %}
+				</ul>
+			</div>
+		</nav>
+	</header>
+
+	{% if not app.user %}
+	{% if app.request.get('_route') == 'home' %}
+		<div class="row banner">
+			<div class="shadow justify-content-center align-items-center  d-flex flex-column">
+				<h1 class="text-light">
+					Prise de Rendez-vous
+				</h1>
+				<h4 class="text-light">
+					Smart Agenda - 
+					Envoie de SMS -
+					Adaptable à n'importe quel site web
+				</h4>
+
+				<button class="btn btn-outline-light rounded">Voir la démo</button>
+			</div>
+		</div>
+	{% endif %}
+	{% endif %}
+
+{% endif %}
+
+{% if app.user %}
+<input type="hidden" id="companyName" value="{{app.user.companyName}}">
+
+<div class="main row">
+  <aside class="col-2 position-fixed asideBar">
+	<div class="sidebar left">
+
+	  <div class="user-panel">
+
+		<div class="pull-left image" id="userMenu">
+		</div>
+
+		<div class="pull-left info">
+		  {% if app.user.companyName %}
+			<p>{{ app.user.companyName }}</p>
+			{% else %}
+			<p>{{ app.user.email }}</p>
+		  {% endif %}
+		</div>
+
+	  </div>
+		<ul class="list-sidebar bg-defoult">	
+			<li> <a href="{{ path('home') }}" class="flexNavBtnA"><i class="fa fa-th-large mr-1 w-10"></i> <span class="nav-label">Dashboards</span> </a></li>
+			<li> <a href="{{ path('userInfos', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-user mr-1 w-10"></i> <span class="nav-label">Mes infos</span></a> </li>
+			
+			<li> <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active flexNavBtnDropDown" > <i class="fas fa-briefcase mr-1 w-10"></i> <span class="nav-label"> Prestations </span> <span class="fa fa-chevron-left pull-right"></span> </a>
+				<ul class="sub-menu collapse" id="dashboard">
+				  <li class="active"><a href="{{ path('prestations', { 'id': app.user.id }) }}">Ajouts</a></li>
+				  <li><a href="{{ path('showCategories', { 'id': app.user.id }) }}">Mes catégories</a></li>
+				  <li><a href="{{ path('showPrestations', { 'id': app.user.id }) }}">Mes préstations</a></li>
+				</ul>
+
+			<li> <a href="#" data-toggle="collapse" data-target="#tables" class="collapsed active flexNavBtnDropDown" ><i class="fas fa-users mr-1 w-10"></i> <span class="nav-label">Collaborateurs</span><span class="fa fa-chevron-left pull-right"></span></a>
+				<ul  class="sub-menu collapse" id="tables" >
+					<li><a href="{{ path('employes', { 'id': app.user.id }) }}">Ajouts</a></li>
+					<li><a href="{{ path('showEmployes', { 'id': app.user.id }) }}">Mes collaborateurs</a></li>
+				</ul>
+
+			
+			<li> <a href="{{ path('agenda', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-calendar-alt mr-1 w-10"></i><span class="nav-label">Mon agenda</span></a> </li>
+			<li> <a href="{{ path('agenda', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-chart-bar mr-1 w-10"></i><span class="nav-label">Mes chiffres</span></a> </li>
+			<li> <a href="#" class="flexNavBtnA"><i class="fas fa-folder mr-1 w-10"></i> <span class="nav-label">Fiches clients</span></a> </li>
+			<li> <a href="#" class="flexNavBtnA"><i class="fas fa-calendar-check mr-1 w-10"></i> <span class="nav-label">Interface de RDV</span></a> </li>
+			<li> <a href="{{ path('agenda', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-cog mr-1 w-10"></i><span class="nav-label">Paramètres</span></a> </li>
+			<li> <a href="{{ path('app_logout') }}" class="flexNavBtnA"><i class="fas fa-power-off text-danger mr-1 w-10"></i> <span class="nav-label">Deconnexion</span></a> </li>
+			
+		</ul>
+	</div>
+  </aside>
+  <section class="contentRight col-10 px-5">
+{% endif %}
+
+{% for label,messages in app.flashes %}
+	<div class="container text-center my-5">
+		<div class="alert alert-{{label}}">
+			{% for message in messages %}
+				<p> {{ message | raw }} </p>
+			{% endfor %}
+		</div>
+	</div>
+{% endfor %}
+
+
+{% block javascripts %}
+	<script>
+		window.onload = () => {
+			document.querySelector('.button-left').addEventListener('click', function() {
+			  document.querySelector('.sidebar').classList.toggle('fliph');
+			})
+		}
+	</script>
+{% endblock javascripts %}
+
+
+
+

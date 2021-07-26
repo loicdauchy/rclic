@@ -1,0 +1,42 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes catégories
+{% endblock %}
+
+{% block body %}
+
+	<div class="container mb-5 mt-5">
+
+		<div class="row">
+
+			{% for c in category %}
+				<div class="col-lg-3 col-md-4 col-12 mt-5 mb-5">
+					<div class="card arrondi shadow bg-white">
+						<div class="card-body">
+							<h5 class="card-title">{{ c.name }}</h5>
+							<img class="card-img-top" src="{{ asset('images/'~c.image) }}" width="150" height="150" alt="Card image cap">
+							<br><br>	
+							<a href="{{path('category_edit', { 'id': c.id })}}" class="btn btn-warning">Mise à jour</a>
+						</div>
+					</div>
+				</div>
+			{% endfor %}
+		</div>
+	</div>
+
+	
+{% endblock %}
+
+{% block javascripts %}
+
+	<script>
+		
+		window.onload = () => {
+			document.querySelector('.button-left').addEventListener('click', function() {
+			  document.querySelector('.sidebar').classList.toggle('fliph');
+			})
+		}
+
+	</script>
+
+{% endblock javascripts %}

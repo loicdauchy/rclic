@@ -1,0 +1,301 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}
+
+    {% if not app.user %}
+        Accueil
+    {% endif %}
+
+    {% if app.user %}
+        Dashboards
+    {% endif %}
+
+{% endblock %}
+
+{% block body %}
+
+    {% if not app.user %}
+
+        <div class="description row justify-content-center align-items-center py-5">
+            <img src="{{ asset('logo/logoAppSingle.png') }}" alt="" class="mb-3">
+            <h4 class="text-center">La solution de prise de rendez-vous qui s'adapte le plus facilement possible à votre profession ainsi qu'à votre entreprise.</h4>
+        </div>
+
+
+        <div class="row plusValue">
+            <div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center align-items-center flex-column px-5">
+                <i class="fas fa-calendar-alt goldIcon mb-3"></i>
+                <h6 class="text-light text-center">Un Agenda intélligent</h6>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center align-items-center flex-column px-5">
+                <i class="far fa-check-circle goldIcon mb-3"></i>
+                <h6 class="text-light text-center">Prise de rendez-vous pensé pour être adaptable et simple</h6>
+            </div>
+            <div class="col-12 col-sm-6 col-md-4 d-flex justify-content-center align-items-center flex-column px-5">
+                <i class="far fa-bell goldIcon mb-3"></i>
+                <h6 class="text-light text-center">Vos clients reçoivent un sms pour ne pas oublier leur rendez-vous</h6>
+            </div>
+        </div>
+
+
+        <div class="row exemples bg-light align-items-center justify-content-around py-5">
+
+            <div class="col-12 d-flex justify-content-center align-items-center flex-column my-5">
+                <div class="d-flex justify-content-center align-items-center">
+                    <img src="{{ asset('logo/logoAppSingle.png') }}" alt="" class="exempleLogoPart mr-2">
+                    <h3 style="color: rgb(77, 77, 77); font-weight:800;">
+                        Exemples d'utilisation
+                    </h3>
+                </div>
+                <p class="my-5 w-75 text-center size-12">De nombreux métiers nécessite des prises de <b class="text-gold">rendez-vous</b> de la part de clients. Voici quelques exemples pour lesquels notre solution simplifiera votre activité.</p>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3 d-flex justify-content-center align-items-center">
+                <div class="card shadow">
+                    <img class="card-img-top imgCard" src="{{ asset('logo/salonCoiffure.jpg') }}" alt="Card image cap">
+                    <div class="card-body bg-white">
+                    <h5 class="card-title">Salon de coiffure</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary text-white discoverBtn">Découvrir</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3 d-flex justify-content-center align-items-center">
+                <div class="card shadow">
+                    <img class="card-img-top imgCard" src="{{ asset('logo/restaurant.jpg') }}" alt="Card image cap">
+                    <div class="card-body bg-white">
+                    <h5 class="card-title">Restaurant</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary text-white discoverBtn">Découvrir</a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-12 col-sm-6 col-md-3 d-flex justify-content-center align-items-center">
+                <div class="card shadow">
+                    <img class="card-img-top imgCard" src="{{ asset('logo/garageAuto.jpg') }}" alt="Card image cap">
+                    <div class="card-body bg-white">
+                    <h5 class="card-title">Garage automobile</h5>
+                    <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+                    <a href="#" class="btn btn-primary text-white discoverBtn">Découvrir</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row solutionTest justify-content-center align-items-center py-5">
+
+            <div class="col-12 col-sm-6 d-flex justify-content-center align-items-center flex-column my-5">
+                <h2 class="text-light">Tester gratuitement notre solution</h2>
+                <p class="text-light">N'hésitez pas à nous contacter pour toute demande concernant nos tarifs.</p>
+                <button class="btn btn-warning rounded">Demandez un devis</button>
+            </div>
+
+            <div class="col-12 col-8 d-flex justify-content-center align-items-center">
+                <p class="text-light text-center w-75">
+                Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque labore deserunt unde eaque similique rerum autem eveniet recusandae quidem quo fugit ratione dolorem, non hic expedita! Aperiam esse porro non est obcaecati quisquam provident tempore ab dolorem laudantium recusandae labore tenetur, maxime vel necessitatibus consequuntur iste optio vero perspiciatis libero repellendus? Architecto aperiam quae, optio accusamus dolorum tenetur autem natus nobis tempore fuga, voluptas corrupti eius, omnis illo illum. Amet consequuntur earum consequatur minima assumenda totam veritatis dolorum! Molestias dicta dolorum excepturi delectus harum, ad eveniet fugiat porro. Dolore asperiores qui unde quae aut culpa, quam ratione iste explicabo reprehenderit beatae ullam nesciunt architecto officia necessitatibus temporibus nihil quo delectus natus! Totam rerum veritatis ullam labore. Repudiandae nisi voluptatibus provident, harum praesentium maxime, sed fugiat, ducimus nam architecto ea inventore!
+                </p>
+            </div>
+
+        </div>
+    {% endif %}
+
+    {% if app.user %}
+        <div class="container">
+            <div class="row h50vh mt-5">
+                <div class="col-12 col-md-6 calCol">
+                    <input type="hidden" value="{{ app.user.id }}" id="userId">
+                    <div id='calendar' class="mt-1 mb-5"></div>
+                </div>
+                <div class="col-12 col-md-6">
+                    <canvas id="myChart"></canvas>
+                </div>
+            </div>
+        </div>
+    {% endif %}
+{% endblock %}
+
+{% block javascripts %}
+    {% if app.user %}
+        <script>
+
+            window.onload = () => { 
+                callUserInfos();  
+            }
+
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Red', 'Blue', 'Yellow', 'Green', 'Purple', 'Orange'],
+                    datasets: [{
+                        label: '# de RDV',
+                        data: [12, 19, 3, 5, 2, 3],
+                        backgroundColor: [
+                            'rgba(255, 99, 132, 0.2)',
+                            'rgba(54, 162, 235, 0.2)',
+                            'rgba(255, 206, 86, 0.2)',
+                            'rgba(75, 192, 192, 0.2)',
+                            'rgba(153, 102, 255, 0.2)',
+                            'rgba(255, 159, 64, 0.2)'
+                        ],
+                        borderColor: [
+                            'rgba(255, 99, 132, 1)',
+                            'rgba(54, 162, 235, 1)',
+                            'rgba(255, 206, 86, 1)',
+                            'rgba(75, 192, 192, 1)',
+                            'rgba(153, 102, 255, 1)',
+                            'rgba(255, 159, 64, 1)'
+                        ],
+                        borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                beginAtZero: true
+                            }
+                        }
+                    }
+                });
+
+            var userId = document.getElementById('userId').value;
+            var userInfos = [];
+      
+            var agendaEvents = [];
+            var prestations = [];
+      
+            var cal = null;
+
+            var workSpec = []
+            var workMin
+            var workMax
+            var workDays
+            var hideDays
+            var eventColorUp = "";
+
+            var calendarOptions = {
+                initialView: 'timeGridDay',
+                headerToolbar: false,
+                buttonText: {
+                today: "Aujourd'hui",
+                day: "Jour",
+                month: "Mois",
+                week: "Semaine",
+                list: "Liste"
+                },
+                locale: 'fr',
+                timeZone: 'Europe/Paris',
+                nowIndicator: true,
+                selectable: false,
+                editable: false,
+                events: agendaEvents,
+                slotMinTime: workMin,
+                slotMaxTime: workMax,
+                height: 'auto',
+                allDaySlot: false,
+                hiddenDays: hideDays,
+                businessHours: workSpec,
+                eventDidMount: function (info) {
+                if(!info.isMirror){
+                    $(info.el).tooltip({
+                        title: info.event.extendedProps.description || info.event.title+' | '+  info.event.extendedProps.prestation || info.event.title,
+                        container: 'body',
+                        delay: { "show": 50, "hide": 50 },
+                        trigger: 'hover',
+                        placement: 'top',
+                        html: true,
+                    });    
+                }
+                },    
+            }; 
+
+            function showCalendar(){
+                var calendarEl = document.querySelector('#calendar');
+                var calendar = new FullCalendar.Calendar(calendarEl, calendarOptions);
+                calendar.on('eventChange', (e) => {
+                console.log(e)
+                calendar.render();
+                })   
+                console.log(calendar)  
+                cal = calendar;     
+                calendar.render();
+            }
+
+            function getEventBackgroundColor(color){
+                if(color === ""){
+                  return "#30C8CD";
+                }else{
+                  return color;
+                }
+            }
+
+            function callAppointments(){
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/api/appointments/get/'+userId);
+                xhr.onload = () => {
+                    const res = JSON.parse(xhr.response);
+                    console.log(res);
+                    for(var i = 0; i < res['hydra:member'][0].length; i++){
+                        var rdv = res['hydra:member'][0][i];
+                        agendaEvents.push({
+                            title: rdv.firstname+' '+rdv.lastname,
+                            start: new Date(rdv.start).toISOString(),
+                            end: new Date(rdv.end).toISOString(),
+                            id: rdv.id,
+                            groupId: rdv.groupeId,
+                            description: rdv.note,
+                            prestation: rdv.prestation.name,
+                            prestationId: rdv.prestation.id,
+                            backgroundColor: getEventBackgroundColor(rdv.prestation.agendaColor),
+                            borderColor: getEventBackgroundColor(rdv.prestation.agendaColor)
+                        })
+                    }
+                    console.log(agendaEvents)
+                    document.querySelector('#calendar').innerHTML = "";
+                    showCalendar();
+                }
+                xhr.setRequestHeader("Content-Type", "application/json");    
+                xhr.send();
+            }
+
+
+            function callUserInfos(){
+                var xhr = new XMLHttpRequest();
+                xhr.open('GET', '/api/users/'+userId);
+                xhr.onload = () => {
+                    const res = JSON.parse(xhr.response);
+                    userInfos = res;
+                    console.log({
+                      type: "CONSOLE USER",
+                      data: userInfos
+                    });
+                    
+                    for(var i = 0; i < res.workDays.length; i++){
+                      workSpec.push(res.workDays[i]);
+                    }
+        
+                    workMin = workSpec.map(item => item.startTime).sort().shift()
+                    workMax = workSpec.map(item => item.endTime).sort().pop()
+                    workDays = [...new Set(workSpec.flatMap(item => item.daysOfWeek))]
+                    hideDays = [...Array(7).keys()].filter(day => !workDays.includes(day))
+        
+                    calendarOptions = {...calendarOptions, slotMinTime: workMin, 
+                                                           slotMaxTime: workMax,
+                                                           hiddenDays: hideDays,
+                                                           businessHours: workSpec
+                                                          };
+        
+                    console.log(workSpec)
+                    callAppointments();
+                }
+                xhr.setRequestHeader("Content-Type", "application/json");    
+                xhr.send();
+              }
+        </script>
+    {% endif %}
+{% endblock javascripts %}
+
