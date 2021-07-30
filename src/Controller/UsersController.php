@@ -5,15 +5,19 @@ namespace App\Controller;
 use Exception;
 use App\Entity\Users;
 use App\Entity\Categories;
+use App\Entity\FichesClients;
 use App\Entity\Prestations;
 use App\Form\AddCategoryType;
 use App\Form\AddEmployeType;
 use App\Form\AddUserInfosType;
 use App\Form\AddPrestationType;
 use App\Form\EditEmployeType;
+use App\Form\FicheClientType;
+use App\Form\SearchFichesClientsType;
 use Symfony\Component\Finder\Finder;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\AppointmentsRepository;
+use App\Repository\FichesClientsRepository;
 use App\Repository\UsersRepository;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -646,5 +650,61 @@ class UsersController extends AbstractController
             ]);
         }
         
+    }
+
+
+    /**
+     * @Route("/fiches-clients/{id}", name="fichesClients")
+     */
+    public function fichesClients($id, FichesClientsRepository $repo, Request $request){
+
+        if ($id === strval($this->getUser()->getId())) {
+
+            $result = [];
+
+            $searchForm = $this->createForm(SearchFichesClientsType::class);
+            $searchForm->handleRequest($request);
+
+            if($searchForm->isSubmitted() && $searchForm->isValid()){
+
+                $data = $searchForm->getData();
+                $nom = $data->getNom();
+                
+                $result = $repo->findFicheClientByCritere($nom);
+
+            }
+
+            return $this->render("users/fichesClients.html.twig", [
+                'fichesClients' => $repo->findFichesClientsByCommerce($this->getUser()),
+                'searchForm' => $searchForm->createView(),
+                'result' => $result
+            ]);
+
+        }else{
+
+            return $this->render("security/404.html.twig", [
+
+            ]);
+
+        }
+    }
+
+
+    /**
+     * @Route("/fiches-clients/edite/{id}", name="EditFichesClients")
+     */
+    public function editFichesClients($id, FichesClients $fichesClients, EntityManagerInterface $manager, Request $request){
+
+        $form = $this->createForm(FicheClientType::class, $fichesClients);
+        $form->handleRequest($request);
+        if($form->isSubmitted() && $form->isValid()){
+            $manager->persist($fichesClients);
+            $manager->flush();
+        }
+
+        return $this->render("users/EditFichesClients.html.twig", [
+            'ficheClient' => $fichesClients,
+            'ficheClientForm' => $form->createView()
+        ]);
     }
 }

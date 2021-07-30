@@ -91,7 +91,7 @@
 <input type="hidden" id="companyName" value="{{app.user.companyName}}">
 
 <div class="main row">
-  <aside class="col-2 position-fixed asideBar">
+  <aside class="col-lg-2 col-md-3 col-sm-4 position-fixed asideBar" id="asideBar">
 	<div class="sidebar left">
 
 	  <div class="user-panel">
@@ -108,7 +108,7 @@
 		</div>
 
 	  </div>
-		<ul class="list-sidebar bg-defoult">	
+		<ul class="list-sidebar bg-defoult" id="sideBarLeft">	
 			<li> <a href="{{ path('home') }}" class="flexNavBtnA"><i class="fa fa-th-large mr-1 w-10"></i> <span class="nav-label">Dashboards</span> </a></li>
 			<li> <a href="{{ path('userInfos', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-user mr-1 w-10"></i> <span class="nav-label">Mes infos</span></a> </li>
 			
@@ -128,7 +128,7 @@
 			
 			<li> <a href="{{ path('agenda', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-calendar-alt mr-1 w-10"></i><span class="nav-label">Mon agenda</span></a> </li>
 			<li> <a href="{{ path('agenda', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-chart-bar mr-1 w-10"></i><span class="nav-label">Mes chiffres</span></a> </li>
-			<li> <a href="#" class="flexNavBtnA"><i class="fas fa-folder mr-1 w-10"></i> <span class="nav-label">Fiches clients</span></a> </li>
+			<li> <a href="{{ path('fichesClients', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-folder mr-1 w-10"></i> <span class="nav-label">Fiches clients</span></a> </li>
 			<li> <a href="#" class="flexNavBtnA"><i class="fas fa-calendar-check mr-1 w-10"></i> <span class="nav-label">Interface de RDV</span></a> </li>
 			<li> <a href="{{ path('agenda', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-cog mr-1 w-10"></i><span class="nav-label">Paramètres</span></a> </li>
 			<li> <a href="{{ path('app_logout') }}" class="flexNavBtnA"><i class="fas fa-power-off text-danger mr-1 w-10"></i> <span class="nav-label">Deconnexion</span></a> </li>
@@ -136,7 +136,12 @@
 		</ul>
 	</div>
   </aside>
-  <section class="contentRight col-10 px-5">
+
+  <section class="contentRight col-lg-10 col-md-9 col-sm-8 px-5" id="mainContent">
+
+  <i class="fas fa-bars burgerMenu" id="burgerMenu"></i>
+  <i class="fas fa-times burgerMenu none" id="closeBurgerMenu"></i>
+
 {% endif %}
 
 {% for label,messages in app.flashes %}

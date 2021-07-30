@@ -2,6 +2,7 @@
 
 namespace App\Entity;
 
+use App\Entity\FichesClients;
 use Doctrine\ORM\Mapping as ORM;
 use App\Repository\UsersRepository;
 use Doctrine\Common\Collections\Collection;
@@ -146,6 +147,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $employeesNbr;
 
+    /**
+     * @ORM\OneToMany(targetEntity=FichesClients::class, mappedBy="commerce")
+     */
+    private $fichesClients;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -153,6 +159,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->prestation = new ArrayCollection();
         $this->employes = new ArrayCollection();
         $this->rdv = new ArrayCollection();
+        $this->fichesClients = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -496,6 +503,36 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
             // set the owning side to null (unless already changed)
             if ($rdv->getUserTakeAppointments() === $this) {
                 $rdv->setUserTakeAppointments(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|FichesClients[]
+     */
+    public function getFichesClients(): Collection
+    {
+        return $this->fichesClients;
+    }
+
+    public function addFichesClient(FichesClients $fichesClient): self
+    {
+        if (!$this->fichesClients->contains($fichesClient)) {
+            $this->fichesClients[] = $fichesClient;
+            $fichesClient->setCommerce($this);
+        }
+
+        return $this;
+    }
+
+    public function removeFichesClient(FichesClients $fichesClient): self
+    {
+        if ($this->fichesClients->removeElement($fichesClient)) {
+            // set the owning side to null (unless already changed)
+            if ($fichesClient->getCommerce() === $this) {
+                $fichesClient->setCommerce(null);
             }
         }
 

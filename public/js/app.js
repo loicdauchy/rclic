@@ -40,4 +40,35 @@ function generateAvatar(
 
 
 
+document.getElementById('burgerMenu').addEventListener('click', function(){
+
+  document.getElementById('asideBar').classList.add('openMenu');
+
+  document.getElementById('burgerMenu').classList.add('none');
+  document.getElementById('closeBurgerMenu').classList.remove('none');
+
+  setTimeout(() => {
+    document.getElementById('sideBarLeft').classList.add('sidebarLeftBlock');
+  } ,200)
+
+})
+
+
+
+document.getElementById('closeBurgerMenu').addEventListener('click', function(){
+
+    document.getElementById('sideBarLeft').classList.remove('sidebarLeftBlock');
+
+    document.getElementById('burgerMenu').classList.remove('none');
+    document.getElementById('closeBurgerMenu').classList.add('none');
+
+    setTimeout(() => {
+      document.getElementById('asideBar').classList.remove('openMenu');
+    } ,10)
+
+})
+
+
+
+
   

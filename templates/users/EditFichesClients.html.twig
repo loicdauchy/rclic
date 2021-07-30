@@ -1,0 +1,92 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}{{ ficheClient.nom }}  {{ ficheClient.prenom }}
+{% endblock %}
+
+{% block body %}
+
+    {{ form_start(ficheClientForm) }}
+
+    <div class="container">
+        <div class="mb-5 p-5 shadow arrondi bg-light mt-5">
+    
+                    <div class="row col-12">
+
+                        <div class="col-12 col-md-6">
+                            {{ form_row(ficheClientForm.nom, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                        <div class="col-12 col-md-6">
+                            {{ form_row(ficheClientForm.prenom, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                        
+                    </div>
+
+                    <div class="row col-12 mb-5 pb-5">
+     
+                        {{ form_row(ficheClientForm.birthday, {'attr': {'class': 'form-control'}}) }}
+                       
+                    </div>
+
+                    <div class="row col-12">
+
+                        <div class="col-12 col-md-6 col-lg-4">
+                            {{ form_row(ficheClientForm.email, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-4">
+                            {{ form_row(ficheClientForm.tel, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                        <div class="col-12 col-md-6 col-lg-4">
+                            {{ form_row(ficheClientForm.cp, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+
+                    </div>
+
+                    <div class="row">
+                        <div class="form-group">
+                            {{ form_row(ficheClientForm.note, {'attr': {'class': 'form-control'}}) }}
+                        </div>
+                    </div>
+
+                    <div class="row my-5 pl-5">
+                        <h6>Rendez-vous</h6>
+                    </div>
+        
+                    <div class="row col-12"></div>
+        
+                           
+              
+                    <div class="col-3">
+                    <br>
+                        <button type="submit" class="btn btn-warning">Modifier</button>
+                    </div>
+                        <br>
+            
+                </div>
+            </div>
+
+    {{ form_end(ficheClientForm) }}
+      
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        window.onload = () => {
+        
+            ClassicEditor
+                  .create( document.querySelector( '#fiche_client_note' ), {
+                    language: 'fr'
+                  } )
+                  .then( editor => {
+                          editorAdd = editor;
+                          console.log( editor );
+                  } )
+                  .catch( error => {
+                          console.error( error );
+                  } );
+
+          }
+    </script>
+{% endblock javascripts %}

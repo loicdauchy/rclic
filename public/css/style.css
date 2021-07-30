@@ -397,3 +397,56 @@ a.navbar-brand {
 
 .fliph .user-panel{ display: none; }
 
+.burgerMenu{
+    display: none;
+    font-size: 2rem;
+    position: fixed;
+    top: 1%;
+    right: 2%;
+    cursor: pointer;
+    z-index: 1000000;
+}
+
+
+@media(max-width:700px){
+    aside.asideBar{
+        width: 0%;
+        overflow: hidden;
+        padding: 0;
+        transition: 0.2s ease-in-out;
+        z-index: 100000000;
+    }
+    .contentRight{
+        max-width: 100% !important;
+    }
+    .burgerMenu{
+        display: block !important;
+    }
+    .openMenu{
+        width: 50% !important;
+        transition: 0.2s ease-in-out;
+        padding: 0px 15px !important;
+    }
+    #sideBarLeft{
+        display: none;
+    }
+    .sidebarLeftBlock{
+        display: block !important;
+    }
+
+    .none{
+        display: none !important;
+    }
+    
+}
+@media(max-width:600px){
+    .openMenu{
+        width: 60% !important;
+    }
+}
+@media(max-width:370px){
+    .openMenu{
+        width: 80% !important;
+    }
+}
+

@@ -1,0 +1,62 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Fiches Clients
+{% endblock %}
+
+{% block body %}
+
+    <div class="container mt-5 mb-5">
+
+        <div class="row">
+
+            {{ form_start(searchForm) }}
+
+                {{ form_row(searchForm.nom, {'attr': {'class': 'form-control'}}) }}
+      
+                <button type="submit" class="btn btn-primary">Rechercher</button>
+
+            {{ form_end(searchForm) }}
+
+        </div>
+
+        {% if result |length > 0 %}
+            
+            <div class="row justify-content-center align-items-center">
+
+                    {% for f in result %}
+                        <div class="card shadow arrondi col-12 col-sm-6 col-md-4 col-lg-3 bg-white mx-2 my-2" style="height: 250px;">
+                            <i class="fas fa-user-circle card-user-top mt-2" style="color:rgb(136, 167, 196);"></i>
+                            <div class="card-body card-center">
+                            <h5 class="card-title text-center">{{ f.nom }}  {{ f.prenom }}</h5>
+                            <a href="{{ path('EditFichesClients', { 'id': f.id }) }}" class="btn btn-primary" style="background:rgb(136, 167, 196);">Voir la fiche</a>
+                            </div>
+                        </div>
+                    {% endfor %}
+            </div>
+
+            {% else %}
+
+            <div class="row justify-content-center align-items-center">
+
+                {% for f in fichesClients %}
+                    <div class="card shadow arrondi col-12 col-sm-6 col-md-4 col-lg-3 bg-white mx-2 my-2" style="height: 250px;">
+                        <i class="fas fa-user-circle card-user-top mt-2" style="color:rgb(136, 167, 196);"></i>
+                        <div class="card-body card-center">
+                        <h5 class="card-title text-center">{{ f.nom }}  {{ f.prenom }}</h5>
+                        <a href="{{ path('EditFichesClients', { 'id': f.id }) }}" class="btn btn-primary" style="background:rgb(136, 167, 196);">Voir la fiche</a>
+                        </div>
+                    </div>
+                {% endfor %}
+            
+            </div>
+
+        {% endif %}
+    </div>
+      
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+
+    </script>
+{% endblock javascripts %}
