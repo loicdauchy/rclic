@@ -19,6 +19,7 @@ use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\AppointmentsRepository;
 use App\Repository\FichesClientsRepository;
 use App\Repository\UsersRepository;
+use DateTime;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
@@ -702,9 +703,27 @@ class UsersController extends AbstractController
             $manager->flush();
         }
 
+        $rdv = $fichesClients->getRdv();
+
+        usort($rdv, function($a, $b) {
+            return $a['start']['date'] < $b['start']['date'];
+        });
+
+        for($i = 0; $i < count($rdv); $i++){
+
+            if(new DateTime($rdv[$i]['start']['date']) > new DateTime()){
+                $rdv[$i]['check'] = true;
+            }else{
+                $rdv[$i]['check'] = false;
+            }
+
+        }
+
+
         return $this->render("users/EditFichesClients.html.twig", [
             'ficheClient' => $fichesClients,
-            'ficheClientForm' => $form->createView()
+            'ficheClientForm' => $form->createView(),
+            'rdv' => $rdv
         ]);
     }
 }

@@ -247,6 +247,9 @@
             });    
           }
         },
+        datesSet: () => {
+          getTitleView();
+        },
         select: (arg) => {
     
           document.getElementById('start').value = formatDate(arg.start);
@@ -479,6 +482,7 @@
                      parseInt(formatDateForGetHourForCompare(end).replace(':', '')) >= parseInt(collaborateurs[i].workDays[x].startTime.replace(':', '')) &&
                      parseInt(formatDateForGetHourForCompare(end).replace(':', '')) <= parseInt(collaborateurs[i].workDays[x].endTime.replace(':', ''))
                    ){
+                     
                      var c =  collaborateurs[i];
 
                      ///////////////////// Si le collaborateur a des rdv  /////////////////////
@@ -517,6 +521,10 @@
                               parseInt(formatDateForGetHourForCompare(end).replace(':', '')) <= parseInt(formatDateForGetHourForCompare(rdvEnd).replace(':', ''))
                             ){
                               // DO NOTHING
+                              console.log({
+                                type: "CONSOLE Collaborateur pas dispo",
+                                data : rdvStart
+                              });
                             }else{
 
                               if(collaborateurDispo.length > 0){
@@ -531,6 +539,10 @@
                       
                                   if(checkIfCollaborateurIsInArray === collaborateurDispo.length){
                                     collaborateurDispo.push(c);
+                                    console.log({
+                                      type: "CONSOLE PUSH 1",
+                                      data: rdvStart
+                                    });
                                   }
                                 }
                                 
@@ -538,6 +550,10 @@
                               }else{
                       
                                 collaborateurDispo.push(c);
+                                console.log({
+                                  type: "CONSOLE PUSH 2",
+                                  data: rdvStart
+                                });
                       
                               }
   
@@ -778,6 +794,23 @@
         xhr.send();
       }
 
+      function getTitleView(){
+        if (window.matchMedia("(max-width: 700px)").matches) {
+          var view = cal.currentData;
+          var viewName = view.viewTitle;
+          var navBar = document.getElementById('navBarMobile');
+          
+          if(document.getElementById('agendaTitle')){
+            document.getElementById('agendaTitle').innerHTML = viewName;
+          }else{
+            var title = document.createElement('h6');
+            title.id = 'agendaTitle';
+            title.innerHTML = viewName;
+            navBar.appendChild(title);
+          }
+        }
+      }
+
 
       ////////////////////////////////// LISTENER /////////////////////////////////////////////////////////:
 
@@ -833,7 +866,7 @@
    
 
           var xhr = new XMLHttpRequest();
-          xhr.open('POST', '/api/appointments');
+          xhr.open('POST', '/api/appointments/post');
           xhr.onload = () => {
               const res = JSON.parse(xhr.response);  
               console.log({
@@ -905,7 +938,7 @@
       
 
               var xhr = new XMLHttpRequest();
-              xhr.open('POST', '/api/appointments');
+              xhr.open('POST', '/api/appointments/post');
               xhr.onload = () => {
                       const res = JSON.parse(xhr.response);  
 
@@ -1088,4 +1121,21 @@
       })
     </script>
 
+{% endblock %}
+
+{% block stylesheets %}
+  <style>
+    @media(max-width:700px){
+      .contentRight{
+        padding: 15px 10px 15px 10px !important;
+      }
+      button.fc-today-button.fc-button.fc-button-primary{
+        display: none !important;
+      }
+      .modal{
+        margin-top: 40px;
+        padding-bottom: 40px;
+      }
+    }
+  </style>
 {% endblock %}

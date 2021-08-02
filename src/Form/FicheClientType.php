@@ -25,9 +25,7 @@ class FicheClientType extends AbstractType
             ->add('prenom', TextType::class, [
                 'label' => 'Prénom'
             ])
-            ->add('rdv', HiddenType::class)
-            
-            ->add('note', TextareaType::class, [
+            ->add('note', HiddenType::class, [
                 'label' => 'Note'
             ])
             ->add('email', EmailType::class, [

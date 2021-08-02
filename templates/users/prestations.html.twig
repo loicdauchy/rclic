@@ -7,94 +7,107 @@
 <br>
 <br>
 	<div class="container">
+
 			{{ form_start(addCategory) }}
-			<div class="mb-5 p-5 shadow arrondi bg-light">
-			<div class="row mt-3 ml-3 mb-4">
-				<h2>Ajoutez une catégorie</h2>
-			</div>
-			<div class="row col-12">
-				<div class="col-6">
-					{{ form_row(addCategory.name, {'attr': {'class': 'form-control'}}) }}
-				</div>
 
-				<div class="col-6">
-					{{ form_row(addCategory.image, {'attr': {'class': 'form-control'}}) }}
-					<p>
-						<i id="nameFileCategory"></i>
-					</p>
-				</div>
-			</div>
+				<div class="mb-5 p-5 shadow arrondi bg-light">
 
-			<div class="col-3 mb-3">
-				<button type="submit" class="btn btn-dark">Ajouter</button>
-			</div>
-			<br>
+					<div class="row mt-3 ml-1 mb-4">
+						<h4>Ajoutez une catégorie</h4>
+					</div>
+
+					<div class="row">
+						<div class="col-lg-6 col-12">
+							{{ form_row(addCategory.name, {'attr': {'class': 'form-control'}}) }}
+						</div>
+
+						<div class="col-lg-6 col-12">
+							{{ form_row(addCategory.image, {'attr': {'class': 'form-control-file'}}) }}
+							<p>
+								<i id="nameFileCategory"></i>
+							</p>
+						</div>
+					</div>
+
+					<div class="col-12 mb-3 pl-0">
+						<button type="submit" class="btn btn-dark">Ajouter</button>
+					</div>
+
+				</div>
+				
 			{{ form_end(addCategory) }}
-		</div>
+		
 	</div>
 
 	<div class="container">
-			{{ form_start(addPresta) }}
+
+		{{ form_start(addPresta) }}
+
 			<div class="mb-5 p-5 shadow arrondi bg-light">
-			<div class="row mt-3 ml-3 mb-4">
-				<h2>Ajoutez une prestation</h2>
-			</div>
-			<div class="row col-12">
-				<div class="col-6">
-					{{ form_row(addPresta.name, {'attr': {'class': 'form-control'}}) }}
-				</div>
-				<div class="col-6">
-					{{ form_row(addPresta.category, {'attr': {'class': 'form-control'}}) }}
-				</div>
-			</div>
 
-			<div class="row col-12">
-				<div class="col-6">
-					{{ form_row(addPresta.image, {'attr': {'class': 'form-control'}}) }}
-					<p>
-						<i id="nameFile"></i>
-					</p>
+				<div class="row mt-3 ml-1 mb-4">
+					<h4>Ajoutez une prestation</h4>
 				</div>
 
-				<div class="col-6">
-					{{ form_row(addPresta.prestaTime, {'attr': {'class': 'form-control'}}) }}
-				</div>
+				<div class="row">
 
-			
-				{{ form_row(addPresta.agendaColor, {'attr': {'class': 'form-control'}}) }}
-
-			</div>
-
-			<div class="row col-12 mt-2 mb-4">
-
-				<div class="col-5 d-flex justify-content-around align-items-start shadow pr-5 py-2 rounded bg-white" style="margin-left:15px;">
-					<div class="d-flex flex-column">
-						<h6 class="w-100">Séléctionner votre couleur</h6>
-						<div id="boxColor"></div>
-						<p class="mt-2"><b id="hexaText"></b></p>
-						<p><b id="rgbText"></b></p>
+					<div class="col-lg-6 col-12">
+						{{ form_row(addPresta.name, {'attr': {'class': 'form-control'}}) }}
 					</div>
-					<div id="picker" class="col-3"></div>
+					<div class="col-lg-6 col-12">
+						{{ form_row(addPresta.category, {'attr': {'class': 'form-control'}}) }}
+					</div>
+
 				</div>
-			</div>
 
-			<div class="row col-12">
+				<div class="row">
 
-				<div class="col-6" id="addBreakTimeBtn">
+					<div class="col-6 form-group">
+						{{ form_row(addPresta.image, {'attr': {'class': 'form-control-file'}}) }} 
+						<p>
+							<i id="nameFile"></i>
+						</p>
+					</div>
+
+					<div class="col-6">
+						{{ form_row(addPresta.prestaTime, {'attr': {'class': 'form-control'}}) }}
+					</div>
+				
+					{{ form_row(addPresta.agendaColor, {'attr': {'class': 'form-control'}}) }}
+
+				</div>
+
+				<div class="row mt-2 mb-4">
+
+					<div class="col-lg-5 col-12 d-flex justify-content-around align-items-start shadow rounded bg-white px-3 pt-3" style="padding-right:15px;">
+						<div class="d-flex flex-column">
+							<h6 class="w-100">Séléctionner votre couleur</h6>
+							<div id="boxColor"></div>
+							<p class="mt-2"><b id="hexaText"></b></p>
+							<p><b id="rgbText"></b></p>
+						</div>
+						<div id="picker" class="col-4"></div>
+					</div>
+
+				</div>
+
+			<div class="row">
+
+				<div class="col-lg-6 col-12" id="addBreakTimeBtn">
 					<div class="btn btn-outline btn-primary mb-3" id="addBreakTimeBtn">Ajouter un temps de pause</div>
 				</div>
 
-				<div id="breaktime" style="display:none;" class="col-6">
+				<div id="breaktime" style="display:none;" class="col-lg-6 col-12">
 					{{ form_row(addPresta.breakTime, {'attr': {'class': 'form-control'}}) }}
 				</div>
 
-				<div id="prestaTime2" style="display:none;" class="col-6">
+				<div id="prestaTime2" style="display:none;" class="col-lg-6 col-12">
 					{{ form_row(addPresta.prestaTime2, {'attr': {'class': 'form-control'}}) }}
 				</div>
 
 			</div>
 
-			<div class="col-3 mb-3 mt-2">
+			<div class="col-3 mb-3 mt-2 pl-0">
 				<button type="submit" class="btn btn-dark">Ajouter</button>
 			</div>
 		</div>
@@ -109,9 +122,16 @@
 	<script>
 		
 		window.onload = () => {
+			var width = 100;
+			if (window.matchMedia("(max-width: 600px)").matches) {
+				width = 60;
+				/* La largeur minimum de l'affichage est 600 px inclus */
+			  } else {
+				/* L'affichage est inférieur à 600px de large */
+			}
 			var colorPicker = new iro.ColorPicker("#picker", {
 				// Set the size of the color picker
-				width: 100,
+				width: width,
 				// Set the initial color to pure red
 				color: "#f00"
 				

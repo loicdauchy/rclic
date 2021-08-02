@@ -139,8 +139,10 @@
 
   <section class="contentRight col-lg-10 col-md-9 col-sm-8 px-5" id="mainContent">
 
-  <i class="fas fa-bars burgerMenu" id="burgerMenu"></i>
-  <i class="fas fa-times burgerMenu none" id="closeBurgerMenu"></i>
+  <div id="navBarMobile">
+	<i class="fas fa-bars burgerMenu" id="burgerMenu"></i>
+	<i class="fas fa-times burgerMenu none" id="closeBurgerMenu"></i>
+  </div>
 
 {% endif %}
 
@@ -157,11 +159,6 @@
 
 {% block javascripts %}
 	<script>
-		window.onload = () => {
-			document.querySelector('.button-left').addEventListener('click', function() {
-			  document.querySelector('.sidebar').classList.toggle('fliph');
-			})
-		}
 	</script>
 {% endblock javascripts %}
 

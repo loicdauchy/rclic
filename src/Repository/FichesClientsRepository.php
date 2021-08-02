@@ -47,6 +47,20 @@ class FichesClientsRepository extends ServiceEntityRepository
         ;
     }
 
+   /**
+    * @return FichesClients Returns an array of FichesClients objects
+    */   
+    public function findFicheClientByTel($tel)
+    {
+        return $this->createQueryBuilder('f')
+            ->andWhere('f.tel = :tel')
+            ->setParameter('tel', $tel)
+            ->setMaxResults(1)
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
 
     /*
     public function findOneBySomeField($value): ?FichesClients

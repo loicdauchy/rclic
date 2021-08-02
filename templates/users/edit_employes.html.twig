@@ -6,18 +6,18 @@
 {{ form_start(editEmploye) }}
 
 <div class="container">
-    <div class="mb-5 p-5 shadow arrondi bg-light mt-5">
-    
-                <div class="row mt-3 ml-3 mb-4">
-                        <h2>{{ employe.companyName }}</h2>
+    <div class="mb-5 p-2 mt-5">
+
+                <div class="row mt-3 ml-0 mb-4">
+                    <h4>{{ employe.companyName }}</h4>
                 </div>
 
-                <div class="row col-12">
-                    <div class="col-4">
+                <div class="row">
+                    <div class="col-lg-4 col-12">
                         {{ form_row(editEmploye.email, {'attr': {'class': 'form-control'}}) }}
                     </div>
     
-                    <div class="col-6">
+                    <div class="col-lg-6 col-12">
                         {{ form_row(editEmploye.companyName, {'attr': {'class': 'form-control'}}) }}
                     </div>
       
@@ -25,24 +25,25 @@
                     
                 </div>
 
-                <div class="row col-12 mt-2 mb-4">
+                <div class="row mt-2 mb-4">
 
-                    <div class="col-5 d-flex justify-content-around align-items-start shadow pr-5 py-2 rounded bg-white" style="margin-left:15px;">
-                        <div class="d-flex flex-column">
-                            <h6 class="w-100">Modifier la couleur</h6>
-                            <div id="boxColor"></div>
-                            <p class="mt-2"><b id="hexaText"></b></p>
-                            <p><b id="rgbText"></b></p>
-                        </div>
-                        <div id="picker" class="col-3"></div>
-                    </div>
-                </div>
+					<div class="col-lg-5 col-12 d-flex justify-content-around align-items-start  rounded px-3 pt-3" style="padding-right:15px;">
+						<div class="d-flex flex-column">
+							<h6 class="w-100">Modifier la couleur</h6>
+							<div id="boxColor"></div>
+							<p class="mt-2"><b id="hexaText"></b></p>
+							<p><b id="rgbText"></b></p>
+						</div>
+						<div id="picker" class="col-4"></div>
+					</div>
+
+				</div>
 
                     <div class="row my-5 pl-5">
                         <h6>Horaires</h6>
                     </div>
     
-                    <div class="row col-12">
+                    <div class="row">
     
                         <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
                             <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
@@ -267,9 +268,16 @@
     
             window.onload = () => {
                 callUserInfos();
+                var width = 100;
+                if (window.matchMedia("(max-width: 600px)").matches) {
+                    width = 60;
+                    /* La largeur minimum de l'affichage est 600 px inclus */
+                } else {
+                    /* L'affichage est inférieur à 600px de large */
+                }
                 var colorPicker = new iro.ColorPicker("#picker", {
                     // Set the size of the color picker
-                    width: 100,
+                    width: width,
                     // Set the initial color to pure red
                     color: document.getElementById('edit_employe_employeColor').value || '#f400'
                     

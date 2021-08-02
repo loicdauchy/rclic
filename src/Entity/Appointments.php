@@ -20,6 +20,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *  collectionOperations={
  *       "get"={},
  *       "post"={},
+ *       "post_Appointments"={
+ *          "method"="POST",
+ *          "path"="/appointments/post",
+ *          "controller"=App\Controller\Api\PostAppointments::class
+ *       },
  *       "get_Appointments"={
  *          "method"="GET",
  *          "path"="/appointments/get/{id}",
