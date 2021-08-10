@@ -30,6 +30,12 @@
           </div>   
 
           <div class="form-group">
+            <label for="selectCollaborateur">Collaborateurs disponible</label>
+            <select value="" id="selectCollaborateur" class="form-control">
+            </select>
+          </div>  
+
+          <div class="form-group">
             <label for="start">Début</label>
             <input type="datetime-local" value="" id="start" name="start" class="form-control" disabled="disabled">
           </div>  
@@ -66,13 +72,7 @@
           <div class="form-group">
             <label for="">Note</label>
             <textarea id="editor" class="form-control"></textarea>
-          </div>
-          
-          <div class="form-group">
-            <label for="selectCollaborateur">Collaborateurs disponible</label>
-            <select value="" id="selectCollaborateur" class="form-control">
-            </select>
-          </div>   
+          </div> 
 
         </div>
         <div class="modal-footer">
@@ -89,7 +89,7 @@
     <div class="modal-dialog" role="document">
       <div class="modal-content">
         <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Ajout d'un RDV</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Modification d'un RDV</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
             <span aria-hidden="true">&times;</span>
           </button>
@@ -97,40 +97,40 @@
         <div class="modal-body">
           <h6 class="card-subtitle mb-2 text-muted" id="cardSubtitleEdit"></h6>
 
-          <div class="d-flex justify-content-between align-items-center">
+            <div class="form-group">
+              <label for="selectPrestaEdit">Prestation</label>
+              <select value="" id="selectPrestaEdit" class="form-control" disabled="disabled">
+              </select>
+            </div>   
+
+            <div class="d-flex justify-content-between align-items-center">
 
             <div class="form-group">
               <label for="firstnameEdit">Prénom</label>
-              <input type="text" value="" id="firstnameEdit" name="firstnameEdit" class="form-control">
+              <input type="text" value="" id="firstnameEdit" name="firstnameEdit" class="form-control" disabled="disabled">
             </div>   
             
             <div class="form-group">
               <label for="lastnameEdit">Nom</label>
-              <input type="text" value="" id="lastnameEdit" name="lastnameEdit" class="form-control">
+              <input type="text" value="" id="lastnameEdit" name="lastnameEdit" class="form-control" disabled="disabled">
             </div>   
 
           </div>
 
           <div class="form-group">
             <label for="emailEdit">E-mail</label>
-            <input type="email" value="" id="emailEdit" name="emailEdit" class="form-control">
+            <input type="email" value="" id="emailEdit" name="emailEdit" class="form-control" disabled="disabled">
           </div>    
 
           <div class="form-group">
             <label for="telEdit">Tél</label>
-            <input type="tel" value="" id="telEdit" name="telEdit" class="form-control">
+            <input type="tel" value="" id="telEdit" name="telEdit" class="form-control" disabled="disabled">
           </div>  
 
           <div class="form-group">
             <label for="">Note</label>
             <textarea id="editor2" class="form-control"></textarea>
           </div>
-
-          <div class="form-group">
-            <label for="selectPrestaEdit">Prestation</label>
-            <select value="" id="selectPrestaEdit" class="form-control" disabled="disabled">
-            </select>
-          </div>   
 
           <div class="form-group">
             <label for="startEdit">Début</label>
@@ -205,11 +205,11 @@
       // FULLCALENDAR OPTIONS PART
 
       var calendarOptions = {
-        initialView: 'timeGridWeek',
+        initialView: 'timeGridDay',
         headerToolbar: {
           left: 'prev,next today',
           center: 'title',
-          right: 'dayGridMonth,timeGridWeek,listMonth',
+          right: 'timeGridDay,timeGridWeek,listMonth',
         },
         buttonText: {
           today: "Aujourd'hui",
@@ -460,142 +460,203 @@
           day = 7;
         }
 
-        if(breaktime === false){
+        ///////////////////// Pour chaque collaborateur /////////////////////
 
-          ///////////////////// Pour chaque collaborateur /////////////////////
+        for(var i = 0; i < collaborateurs.length; i++){
 
-          for(var i = 0; i < collaborateurs.length; i++){
+          ///////////////////// Pour chaque jour de travail du collaborateur  /////////////////////
+      
+          for(var x = 0; x < collaborateurs[i].workDays.length; x++){
 
-            ///////////////////// Pour chaque jour de travail du collaborateur  /////////////////////
-        
-            for(var x = 0; x < collaborateurs[i].workDays.length; x++){
+              ///////////////////// Si le jour de travail est égale au jour de la demande du rdv  /////////////////////
 
-                ///////////////////// Si le jour de travail est égale au jour de la demande du rdv  /////////////////////
+              if(collaborateurs[i].workDays[x].daysOfWeek[0] === parseInt(day)){
 
-                if(collaborateurs[i].workDays[x].daysOfWeek[0] === parseInt(day)){
+                  ///////////////////// Si les dates de début et de fin de la demande de rdv se situe entre les horaires de la journée du collaborateur   /////////////////////
 
-                   ///////////////////// Si les dates de début et de fin de la demande de rdv se situe entre les horaires de la journée du collaborateur   /////////////////////
+                  if(
+                    parseInt(formatDateForGetHourForCompare(start).replace(':', '')) >= parseInt(collaborateurs[i].workDays[x].startTime.replace(':', '')) &&
+                    parseInt(formatDateForGetHourForCompare(start).replace(':', '')) <= parseInt(collaborateurs[i].workDays[x].endTime.replace(':', '')) &&
+                    parseInt(formatDateForGetHourForCompare(end).replace(':', '')) >= parseInt(collaborateurs[i].workDays[x].startTime.replace(':', '')) &&
+                    parseInt(formatDateForGetHourForCompare(end).replace(':', '')) <= parseInt(collaborateurs[i].workDays[x].endTime.replace(':', ''))
+                  ){
+                    
+                    var c =  collaborateurs[i];
 
-                   if(
-                     parseInt(formatDateForGetHourForCompare(start).replace(':', '')) >= parseInt(collaborateurs[i].workDays[x].startTime.replace(':', '')) &&
-                     parseInt(formatDateForGetHourForCompare(start).replace(':', '')) <= parseInt(collaborateurs[i].workDays[x].endTime.replace(':', '')) &&
-                     parseInt(formatDateForGetHourForCompare(end).replace(':', '')) >= parseInt(collaborateurs[i].workDays[x].startTime.replace(':', '')) &&
-                     parseInt(formatDateForGetHourForCompare(end).replace(':', '')) <= parseInt(collaborateurs[i].workDays[x].endTime.replace(':', ''))
-                   ){
-                     
-                     var c =  collaborateurs[i];
+                    ///////////////////// Si le collaborateur a des rdv  /////////////////////
 
-                     ///////////////////// Si le collaborateur a des rdv  /////////////////////
+                    if(c.rdv.length > 0){
 
-                     if(c.rdv.length > 0){
+                      console.log({
+                        type: "CONSOLE RDV DAY",
+                        data: c.rdv
+                      });
 
-                        console.log({
-                          type: "CONSOLE RDV DAY",
-                          data: c.rdv
-                        });
+                      ///////////////////// Pour chaque rdv du collaborateur  /////////////////////
+                      var rdvInterfere = 0;
+                      for(var y = 0; y < c.rdv.length; y++){
 
-                        ///////////////////// Pour chaque rdv du collaborateur  /////////////////////
+                        var rdvStart = new Date(c.rdv[y].start);
+                        var rdvEnd = new Date(c.rdv[y].end);
+
+                        var rdvDay = rdvStart.getDay();
+                        if(rdvDay === 0){
+                          rdvDay = 7;
+                        }
+
+                        console.log(rdvDay+' '+day);
+
+                        ///////////////////// Si le jour du rdv existant est égale au jour de la demande du rdv  /////////////////////
+
+                        if(dateWithoutHoursIsEqual(rdvStart, start)){
+
+                          ///////////////////// Si la date de début ou la date de fin se trouve entre le rdv deja existant  /////////////////////
+                      
+                          if(
+                            parseInt(formatDateForGetHourForCompare(rdvStart).replace(':', '')) >= parseInt(formatDateForGetHourForCompare(start).replace(':', '')) &&
+                            parseInt(formatDateForGetHourForCompare(rdvStart).replace(':', '')) < parseInt(formatDateForGetHourForCompare(end).replace(':', '')) ||
+                            parseInt(formatDateForGetHourForCompare(rdvEnd).replace(':', '')) > parseInt(formatDateForGetHourForCompare(start).replace(':', '')) &&
+                            parseInt(formatDateForGetHourForCompare(rdvEnd).replace(':', '')) <= parseInt(formatDateForGetHourForCompare(end).replace(':', ''))
+                          ){
+
+                              rdvInterfere = 1;
+
+                          }
+                        }
+                      }
+
+                      if(breaktime === true && rdvInterfere === 0){
 
                         for(var y = 0; y < c.rdv.length; y++){
 
                           var rdvStart = new Date(c.rdv[y].start);
                           var rdvEnd = new Date(c.rdv[y].end);
-
+  
                           var rdvDay = rdvStart.getDay();
                           if(rdvDay === 0){
                             rdvDay = 7;
                           }
-
+  
                           console.log(rdvDay+' '+day);
-
+  
                           ///////////////////// Si le jour du rdv existant est égale au jour de la demande du rdv  /////////////////////
-    
-                          if(rdvDay === day){
-
+  
+                          if(dateWithoutHoursIsEqual(rdvStart, start)){
+  
                             ///////////////////// Si la date de début ou la date de fin se trouve entre le rdv deja existant  /////////////////////
                         
                             if(
-                              parseInt(formatDateForGetHourForCompare(start).replace(':', '')) >= parseInt(formatDateForGetHourForCompare(rdvStart).replace(':', '')) &&
-                              parseInt(formatDateForGetHourForCompare(start).replace(':', '')) < parseInt(formatDateForGetHourForCompare(rdvEnd).replace(':', '')) ||
-                              parseInt(formatDateForGetHourForCompare(end).replace(':', '')) > parseInt(formatDateForGetHourForCompare(rdvStart).replace(':', '')) &&
-                              parseInt(formatDateForGetHourForCompare(end).replace(':', '')) <= parseInt(formatDateForGetHourForCompare(rdvEnd).replace(':', ''))
+                              parseInt(formatDateForGetHourForCompare(rdvStart).replace(':', '')) >= parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes).replace(':', '')) &&
+                              parseInt(formatDateForGetHourForCompare(rdvStart).replace(':', '')) < parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes + prestaTime2).replace(':', '')) ||
+                              parseInt(formatDateForGetHourForCompare(rdvEnd).replace(':', '')) > parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes).replace(':', '')) &&
+                              parseInt(formatDateForGetHourForCompare(rdvEnd).replace(':', '')) <= parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes + prestaTime2).replace(':', ''))
                             ){
-                              // DO NOTHING
-                              console.log({
-                                type: "CONSOLE Collaborateur pas dispo",
-                                data : rdvStart
-                              });
-                            }else{
-
-                              if(collaborateurDispo.length > 0){
-
-                                var checkIfCollaborateurIsInArray = 0;
-
-                                for(var z = 0; z < collaborateurDispo.length; z++){
-                      
-                                  if(c.id !== collaborateurDispo[z].id){
-                                    checkIfCollaborateurIsInArray++;
-                                  }
-                      
-                                  if(checkIfCollaborateurIsInArray === collaborateurDispo.length){
-                                    collaborateurDispo.push(c);
-                                    console.log({
-                                      type: "CONSOLE PUSH 1",
-                                      data: rdvStart
-                                    });
-                                  }
-                                }
-                                
-                      
-                              }else{
-                      
-                                collaborateurDispo.push(c);
-                                console.log({
-                                  type: "CONSOLE PUSH 2",
-                                  data: rdvStart
-                                });
-                      
-                              }
+  
+                                rdvInterfere = 1;
   
                             }
-  
-                          }else{
                             
-                            if(collaborateurDispo.length > 0){
-
-                              var checkIfCollaborateurIsInArray = 0;
-
-                              for(var z = 0; z < collaborateurDispo.length; z++){
-                    
-                                if(c.id !== collaborateurDispo[z].id){
-                                  checkIfCollaborateurIsInArray++;
-                                }
-                    
-                                if(checkIfCollaborateurIsInArray === collaborateurDispo.length){
-                                  collaborateurDispo.push(c);
-                                }
-                              }
-                              
-                    
-                            }else{
-                    
-                              collaborateurDispo.push(c);
-                    
-                            }
-
                           }
                         }
 
-                     }else{
+                      }
 
-                      collaborateurDispo.push(c);
 
-                     }
-                   }       
-                }
-            }
+                      if(rdvInterfere == 0){
+
+                        if(collaborateurDispo.length > 0){
+
+                          var checkIfCollaborateurIsInArray = 0;
+
+                          for(var z = 0; z < collaborateurDispo.length; z++){
+                
+                            if(c.id !== collaborateurDispo[z].id){
+                              checkIfCollaborateurIsInArray++;
+                            }
+                
+                            if(checkIfCollaborateurIsInArray === collaborateurDispo.length){
+
+                              if(breaktime === false){
+
+                                collaborateurDispo.push(c);
+
+                              }else{
+
+                                if(
+                                  parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes).replace(':', '')) >= parseInt(collaborateurs[i].workDays[x].startTime.replace(':', '')) &&
+                                  parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes).replace(':', '')) <= parseInt(collaborateurs[i].workDays[x].endTime.replace(':', '')) &&
+                                  parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes + prestaTime2).replace(':', '')) >= parseInt(collaborateurs[i].workDays[x].startTime.replace(':', '')) &&
+                                  parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes + prestaTime2).replace(':', '')) <= parseInt(collaborateurs[i].workDays[x].endTime.replace(':', ''))
+                                ){
+
+                                  collaborateurDispo.push(c);
+
+                                }
+
+                              }
+                             
+                              console.log({
+                                type: "CONSOLE PUSH 1",
+                                data: rdvStart
+                              });
+                            }
+                          }
+                          
+                
+                        }else{
+                
+                          if(breaktime === false){
+
+                            collaborateurDispo.push(c);
+
+                          }else{
+
+                            if(
+                              parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes).replace(':', '')) >= parseInt(collaborateurs[i].workDays[x].startTime.replace(':', '')) &&
+                              parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes).replace(':', '')) <= parseInt(collaborateurs[i].workDays[x].endTime.replace(':', '')) &&
+                              parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes + prestaTime2).replace(':', '')) >= parseInt(collaborateurs[i].workDays[x].startTime.replace(':', '')) &&
+                              parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes + prestaTime2).replace(':', '')) <= parseInt(collaborateurs[i].workDays[x].endTime.replace(':', ''))
+                            ){
+
+                              collaborateurDispo.push(c);
+                              
+                            }
+
+                          }
+                
+                        }  
+
+                      }
+
+
+                    }else{
+
+                      if(breaktime === false){
+
+                        collaborateurDispo.push(c);
+
+                      }else{
+
+                        if(
+                          parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes).replace(':', '')) >= parseInt(collaborateurs[i].workDays[x].startTime.replace(':', '')) &&
+                          parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes).replace(':', '')) <= parseInt(collaborateurs[i].workDays[x].endTime.replace(':', '')) &&
+                          parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes + prestaTime2).replace(':', '')) >= parseInt(collaborateurs[i].workDays[x].startTime.replace(':', '')) &&
+                          parseInt(formatDateForGetHourForCompare2(end, breakTimeMinutes + prestaTime2).replace(':', '')) <= parseInt(collaborateurs[i].workDays[x].endTime.replace(':', ''))
+                        ){
+
+                          collaborateurDispo.push(c);
+                          
+                        }
+
+                      }
+              
+                    }
+                  }       
+              }
           }
         }
+        
+        
        console.log(collaborateurDispo);
        var selectCollaborateur = document.getElementById('selectCollaborateur');
             for(var i = 0; i < collaborateurDispo.length; i++){
@@ -640,7 +701,7 @@
           minutes = '0'+minutes;
         }
         var fullHour = hour+':'+minutes+':00';
-        console.log(fullHour)
+   
         return fullHour.toString();
       }
 
@@ -655,6 +716,25 @@
           minutes = '0'+minutes;
         }
         var fullHour = hour+':'+minutes;
+    
+
+        return fullHour.toString();
+      }
+
+      function formatDateForGetHourForCompare2(dateForHour, int){
+        var date = new Date(dateForHour);
+        date.setMinutes(date.getMinutes() + int);
+
+        var hour = date.getHours() - 2;
+        if(hour < 10){
+          hour = '0'+hour;
+        }
+        var minutes = date.getMinutes();
+        if(minutes < 10){
+          minutes = '0'+minutes;
+        }
+        var fullHour = hour+':'+minutes;
+        console.log(fullHour.toString());
 
         return fullHour.toString();
       }
@@ -698,8 +778,8 @@
                     description: rdv.note,
                     prestation: rdv.prestation.name,
                     prestationId: rdv.prestation.id,
-                    backgroundColor: getEventBackgroundColor(rdv.prestation.agendaColor),
-                    borderColor: getEventBackgroundColor(rdv.prestation.agendaColor)
+                    backgroundColor: getEventBackgroundColor(rdv.userTakeAppointments.employeColor),
+                    borderColor: getEventBackgroundColor(rdv.userTakeAppointments.employeColor)
                 })
             }
             console.log(agendaEvents)
@@ -826,6 +906,13 @@
           note = null;
         }
 
+        var colorCollaborateur
+        for(var i = 0; i < collaborateurs.length; i++){
+          if(collaborateurs[i].id === parseInt(document.getElementById('selectCollaborateur').value)){
+            colorCollaborateur = collaborateurs[i].employeColor;
+          }
+        }
+
         var uniqGroupId = getRandomIntInclusive(1, 100000000);
 
         console.log({
@@ -860,8 +947,8 @@
             description: note,
             prestation: document.getElementById('selectPresta').options[document.getElementById('selectPresta').selectedIndex].text,
             prestationId: document.getElementById('selectPresta').value,
-            backgroundColor: getEventBackgroundColor(eventColor),
-            borderColor: getEventBackgroundColor(eventColor)
+            backgroundColor: getEventBackgroundColor(colorCollaborateur),
+            borderColor: getEventBackgroundColor(colorCollaborateur)
           })
    
 
@@ -880,6 +967,13 @@
                 }
               }   
               console.log(agendaEvents);
+
+              for(var i = 0; i < collaborateurs.length; i++){
+                if(collaborateurs[i].id === parseInt(document.getElementById('selectCollaborateur').value)){
+                  collaborateurs[i].rdv.push(res['hydra:member'][0]);
+                  console.log(collaborateurs[i])
+                }
+              }
 
               if(breaktime === false){
                 calendarOptions = {...calendarOptions, events: agendaEvents};
@@ -919,9 +1013,10 @@
                 note: note,
                 groupeId : parseInt(uniqGroupId),
                 prestation: "/api/prestations/"+document.getElementById('selectPresta').value,
-                users: "/api/users/"+userId
+                users: "/api/users/"+userId,
+                userTakeAppointments: "/api/users/"+document.getElementById('selectCollaborateur').value,
               }
-              console.log(formulaire)
+              console.log(formulaire2)
 
               agendaEvents.push({
                 id: -2,
@@ -932,7 +1027,7 @@
                 description: note,
                 prestation: document.getElementById('selectPresta').options[document.getElementById('selectPresta').selectedIndex].text,
                 prestationId: document.getElementById('selectPresta').value,
-                backgroundColor: getEventBackgroundColor(eventColor),
+                backgroundColor: getEventBackgroundColor(colorCollaborateur),
                 borderColor: getEventBackgroundColor(eventColor)
               })
       
@@ -948,6 +1043,13 @@
                         }
                       }   
                       console.log(agendaEvents);
+
+                      for(var i = 0; i < collaborateurs.length; i++){
+                        if(collaborateurs[i].id === parseInt(document.getElementById('selectCollaborateur').value)){
+                          collaborateurs[i].rdv.push(res['hydra:member'][0]);
+                          console.log(collaborateurs[i])
+                        }
+                      }
 
                       setTimeout(() => {
                         calendarOptions = {...calendarOptions, events: agendaEvents};

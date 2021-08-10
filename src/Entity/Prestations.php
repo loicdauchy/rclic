@@ -33,25 +33,25 @@ class Prestations
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:presta", "read:appointments", "read:collaborateur"})
+     * @Groups({"read:presta", "read:appointments", "read:collaborateur", "read:category"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:presta", "read:appointments", "read:collaborateur"})
+     * @Groups({"read:presta", "read:appointments", "read:collaborateur", "read:category"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:presta", "read:appointments", "read:collaborateur"})
+     * @Groups({"read:presta", "read:appointments", "read:collaborateur", "read:category"})
      */
     private $image;
 
     /**
      * @ORM\Column(type="integer")
-     * @Groups({"read:presta", "read:appointments", "read:collaborateur"})
+     * @Groups({"read:presta", "read:appointments", "read:collaborateur", "read:category"})
      */
     private $prestaTime;
 
@@ -73,19 +73,19 @@ class Prestations
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"read:presta", "read:appointments", "read:collaborateur"})
+     * @Groups({"read:presta", "read:appointments", "read:collaborateur", "read:category"})
      */
     private $breakTime;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:presta", "read:appointments", "read:collaborateur"})
+     * @Groups({"read:presta", "read:appointments", "read:collaborateur", "read:category"})
      */
     private $agendaColor;
 
     /**
      * @ORM\Column(type="integer", nullable=true)
-     * @Groups({"read:presta", "read:appointments", "read:collaborateur"})
+     * @Groups({"read:presta", "read:appointments", "read:collaborateur", "read:category"})
      */
     private $prestaTime2;
 

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Appointments;
 use Exception;
 use App\Entity\Users;
 use App\Entity\Categories;
@@ -724,6 +725,15 @@ class UsersController extends AbstractController
             'ficheClient' => $fichesClients,
             'ficheClientForm' => $form->createView(),
             'rdv' => $rdv
+        ]);
+    }
+
+    /**
+     * @Route("/interface-rdv/{id}", name="interfaceRdv")
+     */
+    public function interfaceRdv($id){
+        return $this->render("users/interfaceRdv.html.twig", [
+            "userId" => $id
         ]);
     }
 }

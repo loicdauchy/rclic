@@ -57,7 +57,11 @@
 
 				{% include "partials/scripts.html.twig" %}
 
-				<script src="{{asset('js/app.js')}}"></script>
+				{% if app.request.attributes.get('_route') != "interfaceRdv" %}
+
+					<script src="{{asset('js/app.js')}}"></script>
+
+				{% endif %}
 
 				{% block javascripts %}{% endblock %}
 

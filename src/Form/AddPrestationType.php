@@ -10,12 +10,13 @@ use Symfony\Component\Security\Core\Security;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Bridge\Doctrine\Form\Type\EntityType;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\NumberType;
-use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
-use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\FileType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ColorType;
 use Symfony\Component\Form\Extension\Core\Type\HiddenType;
+use Symfony\Component\Form\Extension\Core\Type\NumberType;
+use Symfony\Component\Form\Extension\Core\Type\IntegerType;
+use Symfony\Component\Form\Extension\Core\Type\CheckboxType;
 
 class AddPrestationType extends AbstractType
 {
@@ -42,7 +43,7 @@ class AddPrestationType extends AbstractType
                 'label' => 'Insérez votre image',
                 'mapped' => false
             ])
-            ->add('prestaTime', NumberType::class, [
+            ->add('prestaTime', IntegerType::class, [
                 'label' => 'Durée en minutes'
             ])
             ->add('category', EntityType::class, [
@@ -55,11 +56,11 @@ class AddPrestationType extends AbstractType
                 'label' => 'Choississez la couleur de votre prestation',
                 'required' => false,
             ])
-            ->add('breakTime', NumberType::class, [
+            ->add('breakTime', IntegerType::class, [
                 'label' => 'Durée du temps de pause',
                 'required' => false
             ])
-            ->add('prestaTime2', NumberType::class, [
+            ->add('prestaTime2', IntegerType::class, [
                 'label' => 'Durée de la seconde parti de la prestation',
                 'required' => false
             ]);

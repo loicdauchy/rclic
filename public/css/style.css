@@ -500,4 +500,45 @@ select#fiche_client_birthday_year{
     font-size: 2rem;
     cursor: pointer;
 }
-
+div.alert > p {
+    margin-bottom: 0;
+}
+.imageCategory{
+    height: 220px;
+    width: 100%;
+}
+.infoDiv{
+    width: 100%;
+    height: 80px;
+}
+#interface{
+    min-height: 100vh;
+}
+.categoryDiv{
+    height: 300px;
+}
+.svgAnother{
+    width: 100px;
+    height: 100px;
+}
+.backButton{
+    position: absolute;
+    font-size: 2rem;
+    color: #444444;
+    cursor: pointer;
+    top: 3%;
+    left: 3%;
+}
+.iUser{
+    font-size: 10rem;
+}
+.textDateReservation{
+    cursor: pointer;
+    font-weight: 600;
+    transition: 0.2s ease-in-out;
+    z-index: 100;
+}
+.textDateReservation:hover{
+    background: rgba(255, 255, 255, 0.433);
+    transition: 0.2s ease-in-out;
+}

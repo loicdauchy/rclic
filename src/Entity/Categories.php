@@ -10,7 +10,20 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Serializer\Annotation\Groups;
 /**
  * @ORM\Entity(repositoryClass=CategoriesRepository::class)
- * @ApiResource()
+ * @ApiResource(
+ *  normalizationContext={"groups"={"read:category"}},
+ *  itemOperations={
+ *      "get"={},
+ *  },
+ *  collectionOperations={
+ *       "get"={},
+ *       "get_category"={
+ *          "method"="GET",
+ *          "path"="/category/get/{id}",
+ *          "controller"=App\Controller\Api\GetCategory::class
+ *       }
+ *  }
+ * )
  */
 class Categories
 {
@@ -18,19 +31,19 @@ class Categories
      * @ORM\Id
      * @ORM\GeneratedValue
      * @ORM\Column(type="integer")
-     * @Groups({"read:presta"})
+     * @Groups({"read:presta", "read:category"})
      */
     private $id;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:presta"})
+     * @Groups({"read:presta", "read:category"})
      */
     private $name;
 
     /**
      * @ORM\Column(type="string", length=255)
-     * @Groups({"read:presta"})
+     * @Groups({"read:presta", "read:category"})
      */
     private $image;
 
@@ -41,6 +54,7 @@ class Categories
 
     /**
      * @ORM\OneToMany(targetEntity=Prestations::class, mappedBy="category")
+     * @Groups({"read:category"})
      */
     private $prestations;
 

@@ -83,7 +83,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * @ORM\Column(type="json", nullable=true)
-     * @Groups({"read:users", "read:collaborateur"})
+     * @Groups({"read:users", "read:collaborateur", "read:appointments"})
      */
     private $workDays;
 
