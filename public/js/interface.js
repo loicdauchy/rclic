@@ -195,7 +195,9 @@ function categoryChoice(event){
 
                 var backButton = document.createElement("i");
                     backButton.classList.add("fas", "fa-arrow-left", "backButton");
-                    backButton.addEventListener("click", showCategorie);
+                    backButton.addEventListener("click", function(){
+                        window.location.reload();
+                    });
                 
                 interface.appendChild(backButton);
 
@@ -207,7 +209,9 @@ function categoryChoice(event){
 
                 var backButton = document.createElement("i");
                     backButton.classList.add("fas", "fa-arrow-left", "backButton");
-                    backButton.addEventListener("click", showCategorie);
+                    backButton.addEventListener("click", function(){
+                        window.location.reload();
+                    });
                 
                 interface.appendChild(backButton);
 
@@ -247,7 +251,9 @@ function prestationsChoice(event){
 
         var backButton = document.createElement("i");
             backButton.classList.add("fas", "fa-arrow-left", "backButton");
-            backButton.addEventListener("click", showCategorie);
+            backButton.addEventListener("click", function(){
+                window.location.reload();
+            });
         
         interface.appendChild(backButton);
 
@@ -695,7 +701,9 @@ function showCalendar(bool){
 
     var backButton = document.createElement("i");
         backButton.classList.add("fas", "fa-arrow-left", "backButton");
-        backButton.addEventListener("click", showCategorie);
+        backButton.addEventListener("click", function(){
+            window.location.reload();
+        });
     
     interface.appendChild(backButton);
 
