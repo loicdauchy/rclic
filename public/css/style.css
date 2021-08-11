@@ -536,7 +536,7 @@ div.alert > p {
     cursor: pointer;
     font-weight: 600;
     transition: 0.2s ease-in-out;
-    z-index: 100;
+    z-index: 10000000000000000000000 !important;
 }
 .textDateReservation:hover{
     background: rgba(255, 255, 255, 0.433);
