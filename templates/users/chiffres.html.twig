@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes chiffres{% endblock %}
+
+{% block body %}
+    <div class="container">
+        <div id="main"></div>
+    </div>  
+    <input type="hidden" id="userId" value="{{userId}}">
+{% endblock %}
+
+{% block javascripts %}
+    <script src="{{ asset('js/chiffres.js') }}"></script>
+{% endblock javascripts %}

@@ -754,6 +754,11 @@ class UsersController extends AbstractController
             if($form->isSubmitted() && $form->isValid()){
                 $manager->persist($config);
                 $manager->flush();
+
+                return $this->redirectToRoute('interfaceRdv', [
+                    'id' => $id
+                ]);
+
             }
             return $this->render("users/config.html.twig", [
                 "userId" => $id,
@@ -768,6 +773,24 @@ class UsersController extends AbstractController
 
         }
 
+    }
+
+    /**
+     * @Route("/chiffres/{id}", name="chiffres")
+     */
+    public function chiffre($id){
+        if ($id === strval($this->getUser()->getId())) {
+
+            return $this->render("users/chiffres.html.twig", [
+                "userId" => $id,
+            ]);
+        }else{
+
+            return $this->render("security/404.html.twig", [
+
+            ]);
+
+        }
     }
 
 }

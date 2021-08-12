@@ -19,6 +19,9 @@
 				<div class="col-lg-6 col-12">
 					{{ form_row(addPresta.category, {'attr': {'class': 'form-control'}}) }}
 				</div>
+				<div class="col-lg-6 col-12">
+					{{ form_row(addPresta.price, {'attr': {'class': 'form-control'}}) }}
+				</div>
 			</div>
 
 			<div class="row">
@@ -42,7 +45,7 @@
 					<div class="col-lg-5 col-12 d-flex justify-content-around align-items-start  rounded px-3 pt-3" style="padding-right:15px;">
 						<div class="d-flex flex-column">
 							<h6 class="w-100">Selectionner votre couleur</h6>
-							<div id="boxColor"></div>
+							<div id="boxColor" class="boxColor"></div>
 							<p class="mt-2"><b id="hexaText"></b></p>
 							<p><b id="rgbText"></b></p>
 						</div>

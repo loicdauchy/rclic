@@ -112,6 +112,7 @@ function setConfigInterface(interfaceBg, interfaceColor, buttonBg, buttonColor){
         for(var i = 0; i < calendarBtn.length; i++){
             calendarBtn[i].style.color = config.buttonTextColor;
             calendarBtn[i].style.backgroundColor = config.buttonBackgroundColor;
+            calendarBtn[i].style.border = "none";
         }
 
         var fcIcon = document.getElementsByClassName('fc-icon');

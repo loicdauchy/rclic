@@ -187,7 +187,6 @@ function generateCards(
  */
 function HttpRequest(method, url, data, id){
 
-    console.log(url+'/'+id.toString());
     return new Promise(function (resolve, reject) {
         var xhr = new XMLHttpRequest();
 

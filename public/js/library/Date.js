@@ -45,6 +45,24 @@ function dateWithHoursIsEqual(date1, date2) {
     }
 }
 
+/**
+ * 
+ * @param {*} dateToCompare 
+ * @param {*} date1 
+ * @param {*} date2 
+ */
+function dateIsBetween(dateToCompare, start, end){
+    var between = new Date(dateToCompare);
+    var date1 = new Date(start);
+    var date2 = new Date(end);
+    
+    if(between >= date1 && between < date2){
+        return true;
+    }else{
+        return false;
+    }
+}
+
 // COMPARE IF DATE IS SUP
 // Return true if date1 is superior to date2 else false
 // Return type: boolean

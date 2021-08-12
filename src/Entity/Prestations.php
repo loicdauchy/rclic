@@ -56,6 +56,12 @@ class Prestations
     private $prestaTime;
 
     /**
+     * @ORM\Column(type="integer", nullable=true)
+     * @Groups({"read:presta", "read:appointments", "read:collaborateur", "read:category"})
+     */
+    private $price;
+
+    /**
      * @ORM\ManyToOne(targetEntity=Users::class, inversedBy="prestation")
      */
     private $users;
@@ -221,6 +227,18 @@ class Prestations
     public function setPrestaTime2(?int $prestaTime2): self
     {
         $this->prestaTime2 = $prestaTime2;
+
+        return $this;
+    }
+
+    public function getPrice(): ?int
+    {
+        return $this->price;
+    }
+
+    public function setPrice(?int $price): self
+    {
+        $this->price = $price;
 
         return $this;
     }

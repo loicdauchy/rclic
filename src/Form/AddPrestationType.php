@@ -46,6 +46,9 @@ class AddPrestationType extends AbstractType
             ->add('prestaTime', IntegerType::class, [
                 'label' => 'Durée en minutes'
             ])
+            ->add('price', IntegerType::class, [
+                'label' => 'Prix de la prestation'
+            ])
             ->add('category', EntityType::class, [
                 'class' => Categories::class,
                 'label' => 'Selectionnez une catégorie',
