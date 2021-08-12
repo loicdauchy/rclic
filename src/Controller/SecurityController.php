@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Config;
 use App\Entity\Users;
 use App\Form\RegistrationType;
 use Doctrine\ORM\EntityManagerInterface;
@@ -45,6 +46,13 @@ class SecurityController extends AbstractController
             $user->setRoles(["ROLE_ENTREPRISE"]);
             $manager->persist($user);
             $manager->flush();
+
+            $config = new Config();
+            $config->setUsers($user);
+
+            $manager->persist($config);
+            $manager->flush();
+            
             return $this->redirectToRoute('app_login');
         }
         return $this->render('security/registration.html.twig', [
