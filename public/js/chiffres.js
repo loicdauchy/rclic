@@ -55,6 +55,7 @@ function showCalendar(){
     var calDiv = document.createElement("div");
         calDiv.id = "calendar";
         calDiv.style.marginTop = "20px";
+        calDiv.style.width = "100%";
 
     main.appendChild(calDiv);
 
