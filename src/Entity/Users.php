@@ -152,6 +152,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $fichesClients;
 
+    /**
+     * @ORM\OneToOne(targetEntity=Config::class, mappedBy="users", cascade={"persist", "remove"})
+     */
+    private $config;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -535,6 +540,23 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $fichesClient->setCommerce(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getConfig(): ?Config
+    {
+        return $this->config;
+    }
+
+    public function setConfig(Config $config): self
+    {
+        // set the owning side of the relation if necessary
+        if ($config->getUsers() !== $this) {
+            $config->setUsers($this);
+        }
+
+        $this->config = $config;
 
         return $this;
     }

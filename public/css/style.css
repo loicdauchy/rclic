@@ -293,7 +293,7 @@ a:hover{ text-decoration: none; }
 a.navbar-brand {
     width: 165px;
 }
-#boxColor{
+.boxColor{
     width: 80px;
     height: 40px;
     border-radius: 10px;
@@ -304,6 +304,13 @@ a.navbar-brand {
 .calCol{
     max-height: 100%;
     overflow: scroll;
+}
+
+.dispoView{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
 }
 
 

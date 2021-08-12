@@ -12,12 +12,14 @@ use App\Form\AddCategoryType;
 use App\Form\AddEmployeType;
 use App\Form\AddUserInfosType;
 use App\Form\AddPrestationType;
+use App\Form\ConfigType;
 use App\Form\EditEmployeType;
 use App\Form\FicheClientType;
 use App\Form\SearchFichesClientsType;
 use Symfony\Component\Finder\Finder;
 use Doctrine\ORM\EntityManagerInterface;
 use App\Repository\AppointmentsRepository;
+use App\Repository\ConfigRepository;
 use App\Repository\FichesClientsRepository;
 use App\Repository\UsersRepository;
 use DateTime;
@@ -736,4 +738,36 @@ class UsersController extends AbstractController
             "userId" => $id
         ]);
     }
+
+    /**
+     * @Route("/config/{id}", name="config")
+     */
+    public function config($id, Request $request, EntityManagerInterface $manager, ConfigRepository $configRepository, Users $user){
+
+        if ($id === strval($this->getUser()->getId())) {
+
+            $config = $configRepository->findConfigByUser($user)[0];
+
+            $form = $this->createForm(ConfigType::class, $config);
+            $form->handleRequest($request);
+
+            if($form->isSubmitted() && $form->isValid()){
+                $manager->persist($config);
+                $manager->flush();
+            }
+            return $this->render("users/config.html.twig", [
+                "userId" => $id,
+                "formConfig" => $form->createView()
+            ]);
+
+        }else{
+
+            return $this->render("security/404.html.twig", [
+
+            ]);
+
+        }
+
+    }
+
 }

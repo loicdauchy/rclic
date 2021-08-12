@@ -1,0 +1,170 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Mes paramètres
+{% endblock %}
+
+{% block body %}
+
+{{ form_start(formConfig) }}
+
+<div class="container">
+    <div class="mb-5 p-2 mt-5">
+    
+    	<div class="row mt-3 ml-0 mb-4">
+			<h4>Paramètres de votre interface client</h4>
+		</div>
+                
+        {{ form_row(formConfig.interfaceBackgroundColor, {'attr': {'class': 'form-control'}}) }}          
+        {{ form_row(formConfig.buttonBackgroundColor, {'attr': {'class': 'form-control'}}) }}             
+        {{ form_row(formConfig.textColor, {'attr': {'class': 'form-control'}}) }}
+        {{ form_row(formConfig.buttonTextColor, {'attr': {'class': 'form-control'}}) }}
+                            
+
+        <div class="row mt-2 mb-4">
+
+            <div class="col-lg-5 col-12 d-flex justify-content-around align-items-start  rounded px-3 pt-3 my-2" style="padding-right:15px;">
+                <div class="d-flex flex-column">
+                    <h6 class="w-100">Couleur de fond de votre interface.</h6>
+                    <div id="boxColor" class="boxColor"></div>
+                    <p class="mt-2"><b id="hexaText"></b></p>
+                    <p><b id="rgbText"></b></p>
+                </div>
+                <div id="picker" class="col-4"></div>
+            </div>
+
+            <div class="col-lg-5 col-12 d-flex justify-content-around align-items-start  rounded px-3 pt-3 my-2" style="padding-right:15px;">
+                <div class="d-flex flex-column">
+                    <h6 class="w-100">Couleur de fond de vos boutons.</h6>
+                    <div id="boxColor2" class="boxColor"></div>
+                    <p class="mt-2"><b id="hexaText2"></b></p>
+                    <p><b id="rgbText2"></b></p>
+                </div>
+                <div id="picker2" class="col-4"></div>
+            </div>
+
+            <div class="col-lg-5 col-12 d-flex justify-content-around align-items-start  rounded px-3 pt-3 my-2" style="padding-right:15px;">
+                <div class="d-flex flex-column">
+                    <h6 class="w-100">Couleur du text de l'interface.</h6>
+                    <div id="boxColor3" class="boxColor"></div>
+                    <p class="mt-2"><b id="hexaText3"></b></p>
+                    <p><b id="rgbText3"></b></p>
+                </div>
+                <div id="picker3" class="col-4"></div>
+            </div>
+
+            <div class="col-lg-5 col-12 d-flex justify-content-around align-items-start  rounded px-3 pt-3 my-2" style="padding-right:15px;">
+                <div class="d-flex flex-column">
+                    <h6 class="w-100">Couleur du text de vos boutons.</h6>
+                    <div id="boxColor4" class="boxColor"></div>
+                    <p class="mt-2"><b id="hexaText4"></b></p>
+                    <p><b id="rgbText4"></b></p>
+                </div>
+                <div id="picker4" class="col-4"></div>
+            </div>
+
+        </div>
+
+                      
+        <div class="col-3 pl-0">
+            <button type="submit" class="btn btn-warning">Modifier</button>
+        </div>
+        
+    </div>
+</div>
+    
+    
+    {{ form_end(formConfig) }}
+
+{% endblock %}
+
+
+{% block javascripts %}
+
+	<script>
+
+        window.onload = () => {
+
+            var width = 100;
+            if (window.matchMedia("(max-width: 600px)").matches) {
+                width = 60;
+                /* La largeur minimum de l'affichage est 600 px inclus */
+            } else {
+                /* L'affichage est inférieur à 600px de large */
+            }
+
+
+            // INTERFACE BACKGROUND
+            var colorPicker = new iro.ColorPicker("#picker", {
+                // Set the size of the color picker
+                width: width,
+                // Set the initial color to pure red
+                color: document.getElementById('config_interfaceBackgroundColor').value || '#f400'
+                
+            });
+
+            colorPicker.on(['color:init', 'color:change'], function(color) {
+                // log the current color as a HEX string
+                console.log(color.hexString);
+                document.getElementById('boxColor').style.backgroundColor = color.hexString;
+                document.getElementById('config_interfaceBackgroundColor').value = color.hexString;
+                document.getElementById('hexaText').innerHTML = color.hexString;
+                document.getElementById('rgbText').innerHTML = color.rgbString;
+            });
+
+            // BUTTON BACKGROUND
+            var colorPicker2 = new iro.ColorPicker("#picker2", {
+                // Set the size of the color picker
+                width: width,
+                // Set the initial color to pure red
+                color: document.getElementById('config_buttonBackgroundColor').value || '#f400'
+                
+            });
+
+            colorPicker2.on(['color:init', 'color:change'], function(color) {
+                // log the current color as a HEX string
+                console.log(color.hexString);
+                document.getElementById('boxColor2').style.backgroundColor = color.hexString;
+                document.getElementById('config_buttonBackgroundColor').value = color.hexString;
+                document.getElementById('hexaText2').innerHTML = color.hexString;
+                document.getElementById('rgbText2').innerHTML = color.rgbString;
+            });
+
+            // INTERFACE TEXT COLOR
+            var colorPicker3 = new iro.ColorPicker("#picker3", {
+                // Set the size of the color picker
+                width: width,
+                // Set the initial color to pure red
+                color: document.getElementById('config_textColor').value || '#f400'
+                
+            });
+
+            colorPicker3.on(['color:init', 'color:change'], function(color) {
+                // log the current color as a HEX string
+                console.log(color.hexString);
+                document.getElementById('boxColor3').style.backgroundColor = color.hexString;
+                document.getElementById('config_textColor').value = color.hexString;
+                document.getElementById('hexaText3').innerHTML = color.hexString;
+                document.getElementById('rgbText3').innerHTML = color.rgbString;
+            });
+
+            // BUTTONS TEXT COLOR
+            var colorPicker4 = new iro.ColorPicker("#picker4", {
+                // Set the size of the color picker
+                width: width,
+                // Set the initial color to pure red
+                color: document.getElementById('config_buttonTextColor').value || '#f400'
+                
+            });
+
+            colorPicker4.on(['color:init', 'color:change'], function(color) {
+                // log the current color as a HEX string
+                console.log(color.hexString);
+                document.getElementById('boxColor4').style.backgroundColor = color.hexString;
+                document.getElementById('config_buttonTextColor').value = color.hexString;
+                document.getElementById('hexaText4').innerHTML = color.hexString;
+                document.getElementById('rgbText4').innerHTML = color.rgbString;
+            });
+        }
+
+	</script>
+{% endblock javascripts %}

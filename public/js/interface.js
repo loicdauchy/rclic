@@ -1,6 +1,7 @@
   ////////////////////// ON PAGE LOAD //////////////////////
   window.onload = () => {
 
+    callConfig();
     callPrestations();
     callCollaborateur();
 
@@ -15,6 +16,7 @@ var agendaEvents = [];
 var selectedPrestaArray = [];
 var selectedCollaborateurArray = [];
 var creneaux = [];
+var config = [];
 
 ////////////////////// VARIABLE PART //////////////////////
 var userId = document.getElementById('userId').value;
@@ -59,6 +61,66 @@ function callCategory (){
     }
     xhr.setRequestHeader("Content-Type", "application/json");
     xhr.send();
+}
+
+function callConfig(){
+    var xhr = new XMLHttpRequest();
+    xhr.open("GET", "/api/config/get/"+userId);
+    xhr.onload = () => {
+
+        var response = JSON.parse(xhr.response)['hydra:member'][0];
+        config = response;
+    
+        console.log({
+            type: "CONSOLE CONFIG",
+            data: config
+        })
+
+    }
+    xhr.setRequestHeader("Content-Type", "application/json");
+    xhr.send();
+}
+
+function setConfigInterface(interfaceBg, interfaceColor, buttonBg, buttonColor){
+
+    var body = document.getElementsByTagName('body');
+    for(var i = 0; i < body.length; i++){
+        console.log(body[i]);
+        body[i].style.backgroundColor = interfaceBg;
+        body[i].style.color = interfaceColor;
+    }
+
+    var btn = document.getElementsByTagName('input');
+    for(var i = 0; i < btn.length; i++){
+        if(btn[i].type === "submit"){
+
+            console.log(btn[i]);
+            btn[i].style.backgroundColor = buttonBg;
+            btn[i].style.color = buttonColor;
+
+        }
+    }
+
+    if(cal){
+
+        var title = document.getElementsByClassName('fc-toolbar-title');
+        for(var i = 0; i < title.length; i++){
+            title[i].style.color = config.textColor;
+        }
+        
+        var calendarBtn = document.getElementsByTagName('button');
+        for(var i = 0; i < calendarBtn.length; i++){
+            calendarBtn[i].style.color = config.buttonTextColor;
+            calendarBtn[i].style.backgroundColor = config.buttonBackgroundColor;
+        }
+
+        var fcIcon = document.getElementsByClassName('fc-icon');
+        for(var i = 0; i < fcIcon.length; i++){
+            fcIcon[i].style.color = config.buttonTextColor;
+        }
+
+    }
+
 }
 
 function callPrestations (){
@@ -180,6 +242,8 @@ function showCategorie(){
     if(prestations.length > 0){
         generateCards(prestations, null, interface, false, "http://127.0.0.1:8000/logo/more.svg", 1, "btn-category", "image", "Autre", null, true, false, false, true);
     }
+
+    setConfigInterface(config.interfaceBackgroundColor, config.textColor, config.buttonBackgroundColor, config.buttonTextColor);
 }
 
 function categoryChoice(event){
@@ -195,6 +259,7 @@ function categoryChoice(event){
 
                 var backButton = document.createElement("i");
                     backButton.classList.add("fas", "fa-arrow-left", "backButton");
+                    backButton.style.color = config.textColor;
                     backButton.addEventListener("click", function(){
                         window.location.reload();
                     });
@@ -203,12 +268,13 @@ function categoryChoice(event){
 
             }
 
-            if(element.value === "AUTRE"){
+            if(element.value === "Autre"){
 
                 generateCards(prestations, null, interface, true, "http://127.0.0.1:8000/images/", 1, "btn-prestations", "image", "name", null, true, false, false, true);
 
                 var backButton = document.createElement("i");
                     backButton.classList.add("fas", "fa-arrow-left", "backButton");
+                    backButton.style.color = config.textColor;
                     backButton.addEventListener("click", function(){
                         window.location.reload();
                     });
@@ -218,6 +284,8 @@ function categoryChoice(event){
             }
 
         }
+
+        setConfigInterface(config.interfaceBackgroundColor, config.textColor, config.buttonBackgroundColor, config.buttonTextColor);
 
     }
 
@@ -251,6 +319,7 @@ function prestationsChoice(event){
 
         var backButton = document.createElement("i");
             backButton.classList.add("fas", "fa-arrow-left", "backButton");
+            backButton.style.color = config.textColor;
             backButton.addEventListener("click", function(){
                 window.location.reload();
             });
@@ -296,51 +365,60 @@ function prestationsChoice(event){
 
         }
 
+        setConfigInterface(config.interfaceBackgroundColor, config.textColor, config.buttonBackgroundColor, config.buttonTextColor);
+
     }
 
 }
 
 function createForm(){
     var formGroup1 = document.createElement('div');
-        formGroup1.classList.add('form-group', 'd-flex', 'justify-content-center', 'align-items-center');
+        formGroup1.classList.add('form-group', 'd-flex', 'justify-content-start', 'align-items-center', 'w-100');
 
     var nom = document.createElement('input');
         nom.classList.add("form-control");
+        nom.style.margin = "5px 10px";
         nom.id = "formNom";
         nom.type = "text";
         nom.setAttribute('placeholder', 'Nom');
 
     var prenom = document.createElement('input');
         prenom.classList.add('form-control');
+        prenom.style.margin = "5px 10px";
         prenom.id = "formPrenom";
         prenom.type = "text";
         prenom.setAttribute('placeholder', 'Prénom');
 
     var formGroup2 = document.createElement('div');
-        formGroup2.classList.add('form-group', 'd-flex', 'justify-content-center', 'align-items-center');
+        formGroup2.classList.add('form-group', 'd-flex', 'justify-content-start', 'align-items-center', 'w-100');
 
     var mail = document.createElement('input');
         mail.classList.add('form-control');
+        mail.style.margin = "5px 10px";
         mail.id = "formMail";
         mail.type = "email";
         mail.setAttribute('placeholder', 'E-mail');
 
     var tel = document.createElement('input');
         tel.classList.add('form-control');
+        tel.style.margin = "5px 10px";
         tel.id = "formTel";
         tel.type = "tel";
         tel.setAttribute('placeholder', 'Tél');
 
     var formGroup3 = document.createElement('div');
-        formGroup3.classList.add('form-group');
+        formGroup3.classList.add('form-group', 'w-100');
 
     var note = document.createElement('textarea');
         note.classList.add('form-control');
+        note.style.margin = "5px 10px";
+        note.style.maxWidth = "97.3%";
         note.id = "formNote";
         note.setAttribute('placeholder', 'Nous faire parvenir une note...');
 
     var submit = document.createElement('input');
         submit.classList.add("btn", "btn-primary", "btn-submit");
+        submit.style.margin = "20px 0px 0px 10px";
         submit.type = "submit";
         submit.value = "Prendre rdv";
 
@@ -355,6 +433,8 @@ function createForm(){
     formGroup2.appendChild(mail);
     formGroup3.appendChild(note);
     formGroup3.appendChild(submit);
+
+    setConfigInterface(config.interfaceBackgroundColor, config.textColor, config.buttonBackgroundColor, config.buttonTextColor);
 
     
 }
@@ -617,7 +697,8 @@ function changeCalendarAppearance(currentDate){
 
             var dateText = document.createElement('input');
                 dateText.type = "submit";
-                dateText.classList.add('text-center', 'btn', 'btn-primary', 'btn-select-date', 'm-auto');
+                dateText.classList.add('text-center', 'btn', 'btn-primary', 'btn-select-date', 'rounded');
+                dateText.style.margin = "5px";
                 dateText.value = date.toString().substring(0, 5);
 
             creneaux.push(dateText);
@@ -630,11 +711,14 @@ function changeCalendarAppearance(currentDate){
     }
 
     var table = document.getElementsByClassName("fc-view-harness");
-    table[0].innerHTML = "";
+        table[0].classList.add('dispoView');
+        table[0].innerHTML = "";
    
     for(var i = 0; i < creneaux.length; i++){
         table[0].appendChild(creneaux[i]);
     }
+
+    setConfigInterface(config.interfaceBackgroundColor, config.textColor, config.buttonBackgroundColor, config.buttonTextColor);
 
 }
 
@@ -701,6 +785,7 @@ function showCalendar(bool){
 
     var backButton = document.createElement("i");
         backButton.classList.add("fas", "fa-arrow-left", "backButton");
+        backButton.style.color = config.textColor;
         backButton.addEventListener("click", function(){
             window.location.reload();
         });
