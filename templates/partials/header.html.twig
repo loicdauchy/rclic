@@ -111,28 +111,113 @@
 
 	  </div>
 		<ul class="list-sidebar bg-defoult" id="sideBarLeft">	
+
+		{% if app.request.attributes.get('_route') == 'home' %}
+			<li> <a href="{{ path('home') }}" class="flexNavBtnA active"><i class="fa fa-th-large mr-1 w-10"></i> <span class="nav-label">Dashboards</span> </a></li>
+			{% else %}
 			<li> <a href="{{ path('home') }}" class="flexNavBtnA"><i class="fa fa-th-large mr-1 w-10"></i> <span class="nav-label">Dashboards</span> </a></li>
+		{% endif %}
+
+		{% if app.request.attributes.get('_route') == 'userInfos' %}
+			<li> <a href="{{ path('userInfos', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-user mr-1 w-10"></i> <span class="nav-label">Mes infos</span></a> </li>
+		{% else %}
 			<li> <a href="{{ path('userInfos', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-user mr-1 w-10"></i> <span class="nav-label">Mes infos</span></a> </li>
-			
-			<li> <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed active flexNavBtnDropDown" > <i class="fas fa-briefcase mr-1 w-10"></i> <span class="nav-label"> Prestations </span> <span class="fa fa-chevron-left pull-right"></span> </a>
+		{% endif %}
+
+
+		{% if app.request.attributes.get('_route') == 'prestations' or app.request.attributes.get('_route') == 'showCategories' or app.request.attributes.get('_route') == 'showPrestations'%}
+			<li> <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed flexNavBtnDropDown active" > <i class="fas fa-briefcase mr-1 w-10"></i> <span class="nav-label"> Prestations </span> <span class="fa fa-chevron-left pull-right"></span> </a>
+				<ul class="sub-menu collapse" id="dashboard">
+
+				{% if app.request.attributes.get('_route') == 'prestations' %}
+				  <li><a class="active" href="{{ path('prestations', { 'id': app.user.id }) }}">Ajouts</a></li>
+				{% else %}
+				  <li><a href="{{ path('prestations', { 'id': app.user.id }) }}">Ajouts</a></li>
+				{% endif %}
+
+				{% if app.request.attributes.get('_route') == 'showCategories' %}
+				  <li><a class="active" href="{{ path('showCategories', { 'id': app.user.id }) }}">Mes catégories</a></li>
+				{% else %}
+				  <li><a href="{{ path('showCategories', { 'id': app.user.id }) }}">Mes catégories</a></li>
+				{% endif %}
+
+				{% if app.request.attributes.get('_route') == 'showPrestations' %}
+				  <li><a class="active" href="{{ path('showPrestations', { 'id': app.user.id }) }}">Mes préstations</a></li>
+				{% else %}
+				  <li><a href="{{ path('showPrestations', { 'id': app.user.id }) }}">Mes préstations</a></li>
+				{% endif %}
+
+				</ul>
+			</li>
+		{% else %}
+			<li> <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed flexNavBtnDropDown" > <i class="fas fa-briefcase mr-1 w-10"></i> <span class="nav-label"> Prestations </span> <span class="fa fa-chevron-left pull-right"></span> </a>
 				<ul class="sub-menu collapse" id="dashboard">
 				  <li class="active"><a href="{{ path('prestations', { 'id': app.user.id }) }}">Ajouts</a></li>
 				  <li><a href="{{ path('showCategories', { 'id': app.user.id }) }}">Mes catégories</a></li>
 				  <li><a href="{{ path('showPrestations', { 'id': app.user.id }) }}">Mes préstations</a></li>
 				</ul>
+			</li>
+		{% endif %}
 
-			<li> <a href="#" data-toggle="collapse" data-target="#tables" class="collapsed active flexNavBtnDropDown" ><i class="fas fa-users mr-1 w-10"></i> <span class="nav-label">Collaborateurs</span><span class="fa fa-chevron-left pull-right"></span></a>
+
+
+		{% if app.request.attributes.get('_route') == 'employes' or app.request.attributes.get('_route') == 'showEmployes'%}
+			<li> <a href="#" data-toggle="collapse" data-target="#tables" class="collapsed flexNavBtnDropDown active" ><i class="fas fa-users mr-1 w-10"></i> <span class="nav-label">Collaborateurs</span><span class="fa fa-chevron-left pull-right"></span></a>
+				<ul  class="sub-menu collapse" id="tables" >
+
+				{% if app.request.attributes.get('_route') == 'employes' %}
+					<li><a class="active" href="{{ path('employes', { 'id': app.user.id }) }}">Ajouts</a></li>
+				{% else %}
+					<li><a href="{{ path('employes', { 'id': app.user.id }) }}">Ajouts</a></li>
+				{% endif %}
+
+				{% if app.request.attributes.get('_route') == 'showEmployes' %}
+					<li><a class="active" href="{{ path('showEmployes', { 'id': app.user.id }) }}">Mes collaborateurs</a></li>
+				{% else %}
+					<li><a href="{{ path('showEmployes', { 'id': app.user.id }) }}">Mes collaborateurs</a></li>
+				{% endif %}
+
+				</ul>
+			</li>
+		{% else %}
+			<li> <a href="#" data-toggle="collapse" data-target="#tables" class="collapsed flexNavBtnDropDown" ><i class="fas fa-users mr-1 w-10"></i> <span class="nav-label">Collaborateurs</span><span class="fa fa-chevron-left pull-right"></span></a>
 				<ul  class="sub-menu collapse" id="tables" >
 					<li><a href="{{ path('employes', { 'id': app.user.id }) }}">Ajouts</a></li>
 					<li><a href="{{ path('showEmployes', { 'id': app.user.id }) }}">Mes collaborateurs</a></li>
 				</ul>
-
+			</li>
+		{% endif %}
 			
+		{% if app.request.attributes.get('_route') == 'agenda' %}
+			<li> <a href="{{ path('agenda', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-calendar-alt mr-1 w-10"></i><span class="nav-label">Mon agenda</span></a> </li>
+		{% else %}
 			<li> <a href="{{ path('agenda', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-calendar-alt mr-1 w-10"></i><span class="nav-label">Mon agenda</span></a> </li>
+		{% endif %}
+
+		{% if app.request.attributes.get('_route') == 'chiffres' %}
+			<li> <a href="{{ path('chiffres', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-chart-bar mr-1 w-10"></i><span class="nav-label">Mes chiffres</span></a> </li>
+		{% else %}
 			<li> <a href="{{ path('chiffres', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-chart-bar mr-1 w-10"></i><span class="nav-label">Mes chiffres</span></a> </li>
+		{% endif %}
+
+		{% if app.request.attributes.get('_route') == 'fichesClients' %}
+			<li> <a href="{{ path('fichesClients', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-folder mr-1 w-10"></i> <span class="nav-label">Fiches clients</span></a> </li>
+		{% else %}
 			<li> <a href="{{ path('fichesClients', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-folder mr-1 w-10"></i> <span class="nav-label">Fiches clients</span></a> </li>
+		{% endif %}
+
+		{% if app.request.attributes.get('_route') == 'interfaceRdv' %}
+			<li> <a href="{{ path('interfaceRdv', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-calendar-check mr-1 w-10"></i> <span class="nav-label">Interface de RDV</span></a> </li>
+		{% else %}
 			<li> <a href="{{ path('interfaceRdv', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-calendar-check mr-1 w-10"></i> <span class="nav-label">Interface de RDV</span></a> </li>
+		{% endif %}
+
+		{% if app.request.attributes.get('_route') == 'config' %}
+			<li> <a href="{{ path('config', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-cog mr-1 w-10"></i><span class="nav-label">Paramètres</span></a> </li>
+		{% else %}		
 			<li> <a href="{{ path('config', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-cog mr-1 w-10"></i><span class="nav-label">Paramètres</span></a> </li>
+		{% endif %}
+
 			<li> <a href="{{ path('app_logout') }}" class="flexNavBtnA"><i class="fas fa-power-off text-danger mr-1 w-10"></i> <span class="nav-label">Deconnexion</span></a> </li>
 			
 		</ul>

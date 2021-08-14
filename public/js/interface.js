@@ -642,7 +642,12 @@ function changeCalendarAppearance(currentDate){
                         parseInt(formatDateForGetHourForCompare(agendaEvents[x].start).replace(':', '')) >= parseInt(dateToCompare) &&
                         parseInt(formatDateForGetHourForCompare(agendaEvents[x].start).replace(':', '')) < parseInt(dateToCompareEndMinutes) || 
                         parseInt(formatDateForGetHourForCompare(agendaEvents[x].end).replace(':', '')) > parseInt(dateToCompare) &&
-                        parseInt(formatDateForGetHourForCompare(agendaEvents[x].end).replace(':', '')) <= parseInt(dateToCompareEndMinutes)
+                        parseInt(formatDateForGetHourForCompare(agendaEvents[x].end).replace(':', '')) <= parseInt(dateToCompareEndMinutes)||
+
+                        parseInt(dateToCompare) >= parseInt(formatDateForGetHourForCompare(agendaEvents[x].start).replace(':', '')) &&
+                        parseInt(dateToCompare) < parseInt(formatDateForGetHourForCompare(agendaEvents[x].end).replace(':', '')) || 
+                        parseInt(dateToCompareEndMinutes) > parseInt(formatDateForGetHourForCompare(agendaEvents[x].start).replace(':', '')) &&
+                        parseInt(dateToCompareEndMinutes) <= parseInt(formatDateForGetHourForCompare(agendaEvents[x].end).replace(':', ''))
                     ){
 
                             dataToSup.push(e);                      
@@ -681,6 +686,10 @@ function changeCalendarAppearance(currentDate){
         }
         
     }
+       console.log({
+            type: "CONSOLE DATATOSUP",
+            data: dataToSup
+       })
 
     for(var i = 0; i < dataToSup.length; i++){
         removeElement(dataToSup[i]);
