@@ -83,7 +83,7 @@ nav.navbar.navbar-expand-lg.navbar-light.bg-light{
     background: rgb(77, 77, 77);
 }
 .goldIcon{
-    color: rgb(193, 147, 50);
+    color: #c19332;
     font-size: 3rem;
 }
 .exemples{
@@ -178,11 +178,15 @@ footer{
     height: 100vh;
 }
 
+.active > *{
+    color: rgb(169, 120, 28) !important;
+}
+
 /** ======================  base css ==============================**/
 
 a:hover{ text-decoration: none; }
 /** ======================  header ==============================**/
-.header{ background-color: #222 }
+/* .header{ background-color: #222 } */
 .header .dropdown-menu {
     position: absolute;
     right: 0;

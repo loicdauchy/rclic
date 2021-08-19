@@ -209,7 +209,6 @@ function HttpRequest(method, url, data, id){
                     });
                 }
 
-
             };
             xhr.onerror = function () {
                 reject({

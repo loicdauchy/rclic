@@ -4,6 +4,7 @@
 {% endblock %}
 
 {% block body %}
+<input type="hidden" id="ficheClientName" value="{{ ficheClient.nom }}  {{ ficheClient.prenom }}">
 <div class="container">
     {{ form_start(ficheClientForm) }}
 
@@ -97,6 +98,8 @@
 {% block javascripts %}
     <script>
       
+        document.getElementById('titlePage').innerHTML = document.getElementById('ficheClientName').value;
+
         window.onload = () => {
             var editorAdd = null;
             ClassicEditor

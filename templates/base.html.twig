@@ -3,10 +3,30 @@
 	<head>
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/lux/bootstrap.min.css" rel="stylesheet">
-		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">
+		<meta name="description" content="">
+		<meta name="keywords" content="">
+		<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/lux/bootstrap.min.css" rel="stylesheet"> -->
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">  
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css" integrity="sha256-u40zn9KeZYpMjgYaxWJccb4HnP0i8XI17xkXrEklevE=" crossorigin="anonymous">
 		
+
+		<!-- BEGIN GLOBAL MANDATORY STYLES -->
+		<link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+		<link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
+		<link href="{{asset('assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
+		<!-- END GLOBAL MANDATORY STYLES -->
+
+		 <!-- BEGIN PAGE LEVEL STYLE -->
+		 <!-- <link href="{{asset('plugins/fullcalendar/fullcalendar.css')}}" rel="stylesheet" type="text/css" /> -->
+		 <link href="{{asset('plugins/fullcalendar/custom-fullcalendar.advance.css')}}" rel="stylesheet" type="text/css" />
+		 <link href="{{asset('plugins/flatpickr/flatpickr.css')}}" rel="stylesheet')}}" type="text/css">
+		 <link href="{{asset('plugins/flatpickr/custom-flatpickr.css')}}" rel="stylesheet" type="text/css">
+		 <link href="{{asset('assets/css/forms/theme-checkbox-radio.css')}}" rel="stylesheet" type="text/css" />
+		 <link href="{{asset('assets/css/components/cards/card.css')}}" rel="stylesheet" type="text/css" />
+		 <link href="{{asset('plugins/apex/apexcharts.css')}}" rel="stylesheet" type="text/css">
+    	 <link href="{{asset('assets/css/dashboard/dash_1.css')}}" rel="stylesheet" type="text/css" />
+		 <!-- END PAGE LEVEL STYLE -->
+
 		<link rel="apple-touch-icon" sizes="57x57" href="{{asset('logo/apple-icon-57x57.png')}}">
 		<link rel="apple-touch-icon" sizes="60x60" href="{{asset('logo/apple-icon-60x60.png')}}">
 		<link rel="apple-touch-icon" sizes="72x72" href="{{asset('logo/apple-icon-72x72.png')}}">
@@ -24,6 +44,13 @@
 		<meta name="msapplication-TileColor" content="#ffffff">
 		<meta name="msapplication-TileImage" content="{{asset('logo/ms-icon-144x144.png')}}">
 		<meta name="theme-color" content="#ffffff">
+		<meta property="og:title" content="R&Clic.. L'appli qui te permet de réserver en quelques clic" />
+		<meta property="og:type" content="siteweb" />
+		<meta property="og:image" content="http://www.votresiteweb.com/image-nom.jpg"/>
+		<meta property="og:url" content="http://www.votresitewebcom" />
+		<meta property="og:description" content="Votre super description qui décrit parfaitement ce dont vous allez parler." />
+
+
 
 		<script src="https://cdn.jsdelivr.net/npm/@jaames/iro@5"></script>
 
@@ -36,6 +63,11 @@
 		</head>
 		<body>
 
+			  <!-- BEGIN LOADER -->
+			  <div id="load_screen"> <div class="loader"> <div class="loader-content">
+				<div class="spinner-grow align-self-center"></div>
+			</div></div></div>
+			<!--  END LOADER -->
 			{% include "partials/header.html.twig" %}
 
 			{% if not app.user %}

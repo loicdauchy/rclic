@@ -48,7 +48,7 @@ window.onload = () => {
     headerToolbar: {
       left: 'prev,next today',
       center: 'title',
-      right: 'timeGridDay,timeGridWeek,listMonth',
+      right: 'timeGridDay,timeGridWeek,listDay',
     },
     buttonText: {
       today: "Aujourd'hui",
@@ -58,7 +58,7 @@ window.onload = () => {
       list: "Liste"
     },
     views: {
-      listMonth: {
+      listDay: {
         noEventsText: "Aucun rendez-vous à afficher.",        
       },
     },
@@ -87,7 +87,7 @@ window.onload = () => {
       }
     },
     datesSet: () => {
-      getTitleView();
+      // getTitleView();
     },
     select: (arg) => {
 
@@ -635,9 +635,37 @@ window.onload = () => {
     xhr.onload = () => {
         const res = JSON.parse(xhr.response);
         console.log(res);
+        var labeldiv = document.getElementById('labelCollaborateur');
+            labeldiv.style.display = "flex";
+            labeldiv.style.justifyContent = "flex-start";
+            labeldiv.style.alignItems = "center";
+            labeldiv.style.flexWrap = "wrap";
+
         for(var i = 0; i < res['hydra:member'][0].length; i++){
             var collaborateur = res['hydra:member'][0][i];
             collaborateurs.push(collaborateur);
+
+            var label = document.createElement('p');
+                label.style.marginRight = "10px";
+                label.style.display = "flex";
+                label.style.justifyContent = "space-between";
+                label.style.alignItems = "center";
+                label.style.flexDirection = "row-reverse";
+
+            var carre = document.createElement('div');
+                carre.style.height = "10px";
+                carre.style.width = "10px";
+                carre.style.backgroundColor = collaborateur.employeColor;
+                carre.style.borderRadius = "2px";
+                carre.style.content = "";
+                carre.style.padding = "0";
+                carre.style.marginRight = "5px";
+
+                label.innerHTML = collaborateur.companyName;
+                label.appendChild(carre);
+                labeldiv.appendChild(label);
+                
+
         }
         console.log({
           type: "CONSOLE COLLABORATEUR",
@@ -713,22 +741,22 @@ window.onload = () => {
     xhr.send();
   }
 
-  function getTitleView(){
-    if (window.matchMedia("(max-width: 700px)").matches) {
-      var view = cal.currentData;
-      var viewName = view.viewTitle;
-      var navBar = document.getElementById('navBarMobile');
+  // function getTitleView(){
+  //   if (window.matchMedia("(max-width: 700px)").matches) {
+  //     var view = cal.currentData;
+  //     var viewName = view.viewTitle;
+  //     var navBar = document.getElementById('navBarMobile');
       
-      if(document.getElementById('agendaTitle')){
-        document.getElementById('agendaTitle').innerHTML = viewName;
-      }else{
-        var title = document.createElement('h6');
-        title.id = 'agendaTitle';
-        title.innerHTML = viewName;
-        navBar.appendChild(title);
-      }
-    }
-  }
+  //     if(document.getElementById('agendaTitle')){
+  //       document.getElementById('agendaTitle').innerHTML = viewName;
+  //     }else{
+  //       var title = document.createElement('h6');
+  //       title.id = 'agendaTitle';
+  //       title.innerHTML = viewName;
+  //       navBar.appendChild(title);
+  //     }
+  //   }
+  // }
 
 
   ////////////////////////////////// LISTENER /////////////////////////////////////////////////////////:
@@ -918,7 +946,8 @@ window.onload = () => {
         document.getElementById('end').value = "";
         editorAdd.setData("");
         
-      }, 100)
+      }, 100) 
+
     }
     
   })  
@@ -934,7 +963,7 @@ window.onload = () => {
     if(x === 1){
 
       var xhr = new XMLHttpRequest();
-      xhr.open('DELETE', '/api/appointments/'+document.getElementById('rdvId').value);
+      xhr.open('DELETE', '/api/appointments/delete/'+document.getElementById('rdvId').value);
       xhr.onload = () => {
 
           for(var i = 0; i < agendaEvents.length; i++){
@@ -950,9 +979,14 @@ window.onload = () => {
                   deleteEvent++;
                   console.log('okokok')
                   var xhr = new XMLHttpRequest();
-                  xhr.open('DELETE', '/api/appointments/'+agendaEvents[y].id);
+                  xhr.open('DELETE', '/api/appointments/delete/'+agendaEvents[y].id);
                   agendaEvents.splice(y, 1)
                   xhr.onload = () => {
+
+                    console.log({
+                      type: "CONSOLE DELETE RDV",
+                      data: JSON.parse(xhr.response)
+                    })
 
                     if(deleteEvent === 2){
                       setTimeout(() => {
@@ -1059,4 +1093,18 @@ window.onload = () => {
 
       x = 0;
     }
+
+
+  })
+
+  document.addEventListener('mouseover', (event) => {
+
+    var element = event.target;
+    if(element.tagName = 'TD' && element.classList.contains('fc-list-event-title') || element.classList.contains('fc-list-event-graphic') || element.classList.contains('fc-list-event-time')){
+      var child = element.closest('tr').children;
+      for(var i = 0; i < child.length; i++){
+        child[i].style.backgroundColor = "rgba(0, 0, 0, 0.166)";
+      }
+    }
+
   })

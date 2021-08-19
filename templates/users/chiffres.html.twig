@@ -9,6 +9,14 @@
     <input type="hidden" id="userId" value="{{userId}}">
 {% endblock %}
 
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css" integrity="sha256-u40zn9KeZYpMjgYaxWJccb4HnP0i8XI17xkXrEklevE=" crossorigin="anonymous">
+{% endblock %}
+
 {% block javascripts %}
+    <script>
+        document.getElementById('titlePage').innerHTML = "Mes chiffres";
+    </script>
+    <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js" integrity="sha256-AOrsg7pOO9zNtKymdz4LsI+KyLEHhTccJrZVU4UFwIU=" crossorigin="anonymous"></script>
     <script src="{{ asset('js/chiffres.js') }}"></script>
 {% endblock javascripts %}

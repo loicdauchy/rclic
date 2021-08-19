@@ -1,6 +1,6 @@
 {% extends 'base.html.twig' %}
 
-{% block title %}Ajouts de presations/categories
+{% block title %}Ajouts de prestations/categories
 {% endblock %}
 
 {% block body %}
@@ -123,6 +123,8 @@
 {% block javascripts %}
 
 	<script>
+
+		document.getElementById('titlePage').innerHTML = "Ajouts de prestations/categories";
 		
 		window.onload = () => {
 			var width = 100;

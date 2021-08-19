@@ -29,6 +29,11 @@ use Symfony\Component\Serializer\Annotation\Groups;
  *          "method"="GET",
  *          "path"="/appointments/get/{id}",
  *          "controller"=App\Controller\Api\GetAppointments::class
+ *       },
+ *       "delete_Appointments"={
+ *          "method"="DELETE",
+ *          "path"="/appointments/delete/{id}",
+ *          "controller"=App\Controller\Api\DeleteAppointments::class
  *       }
  *  }
  * )

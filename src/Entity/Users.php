@@ -157,6 +157,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      */
     private $config;
 
+    /**
+     * @ORM\OneToMany(targetEntity=SmsList::class, mappedBy="commerce")
+     */
+    private $smsLists;
+
     public function __construct()
     {
         $this->category = new ArrayCollection();
@@ -165,6 +170,7 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         $this->employes = new ArrayCollection();
         $this->rdv = new ArrayCollection();
         $this->fichesClients = new ArrayCollection();
+        $this->smsLists = new ArrayCollection();
     }
 
     public function getId(): ?int
@@ -557,6 +563,36 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
         }
 
         $this->config = $config;
+
+        return $this;
+    }
+
+    /**
+     * @return Collection|SmsList[]
+     */
+    public function getSmsLists(): Collection
+    {
+        return $this->smsLists;
+    }
+
+    public function addSmsList(SmsList $smsList): self
+    {
+        if (!$this->smsLists->contains($smsList)) {
+            $this->smsLists[] = $smsList;
+            $smsList->setCommerce($this);
+        }
+
+        return $this;
+    }
+
+    public function removeSmsList(SmsList $smsList): self
+    {
+        if ($this->smsLists->removeElement($smsList)) {
+            // set the owning side to null (unless already changed)
+            if ($smsList->getCommerce() === $this) {
+                $smsList->setCommerce(null);
+            }
+        }
 
         return $this;
     }

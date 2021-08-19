@@ -3,6 +3,7 @@
 {% block title %}{{ employe.companyName }}{% endblock %}
 
 {% block body %}
+<input type="hidden" id="employeName" value="{{ employe.companyName }}">
 {{ form_start(editEmploye) }}
 
 <div class="container">
@@ -190,6 +191,8 @@
     
     {% block javascripts %}
         <script>
+
+            document.getElementById('titlePage').innerHTML = document.getElementById('employeName').value;
 
             var userId = document.getElementById('userId').value;
     

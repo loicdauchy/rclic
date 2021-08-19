@@ -128,7 +128,9 @@ class UsersController extends AbstractController
 
                 $this->addFlash('success', "Vos informations sont à jour!");
 
-                return $this->redirectToRoute('home');
+                return $this->redirectToRoute('userInfos', [
+                    'id' => $id
+                ]);
             }
             return $this->render("users/infos.html.twig", [
                 'user' => $form->createView(),

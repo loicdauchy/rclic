@@ -10,18 +10,18 @@
 		<div class="row">
 
 			{% for p in presta %}
-				<div class="col-lg-3 col-md-4 col-12 mt-5 mb-5">
-					<div class="card arrondi shadow bg-white">
+				<div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
+					<div class="card component-card_2">
+						<img src="{{ asset('images/'~p.image) }}" class="card-img-top mr-3" alt="widget-card-2" style="width: 100%; height: 220px;">
 						<div class="card-body">
-							<h5 class="card-title ">{{ p.name }}</h5>
-							<img class="card-img-top" src="{{ asset('images/'~p.image) }}" width="150" height="150" alt="Card image cap">
-							<p class="card-text">
-								{{ p.prestaTime }} min</p>
+							<h5 class="card-title">{{ p.name }}</h5>
+							<p class="card-text">{{ p.prestaTime }} min | {{ p.price }} euros </p>
 							{% if p.category %}
-								<p class="card-text">
-									{{ p.category.name }}</p>
+								<p class="card-text">{{ p.category.name }}</p>
+								{% else %}
+								<p class="card-text">Sans catégorie</p>
 							{% endif %}
-							<a href="{{path('prestation_edit', { 'id': p.id })}}" class="btn btn-warning">Mise à jour</a>
+							<a href="{{path('prestation_edit', { 'id': p.id })}}" class="btn btn-secondary">Mise à jour</a>
 						</div>
 					</div>
 				</div>
@@ -34,6 +34,8 @@
 {% block javascripts %}
 
 	<script>
+
+		document.getElementById('titlePage').innerHTML = "Mes prestations";
 		
 		window.onload = () => {
 			document.querySelector('.button-left').addEventListener('click', function() {

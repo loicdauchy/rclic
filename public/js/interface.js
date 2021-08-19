@@ -443,7 +443,7 @@ function createForm(){
 function showSuccess(){
     var alert = document.createElement('div');
         alert.classList.add('alert', 'alert-success', 'text-center');
-        alert.innerHTML = "Votre Rendez-vous à était enregistré avec succès, vous recevrez un sms de rappel 24h avant votre rendez-vous.";
+        alert.innerHTML = "Votre Rendez-vous à était enregistré avec succès, vous recevrez un sms de rappel 2h avant votre rendez-vous.";
 
     interface.innerHTML = "";
     interface.appendChild(alert);

@@ -11,17 +11,26 @@
         <div class="row justify-content-center align-items-center">
 
                 {% for c in collaborateur %}
-                    <div class="card shadow arrondi col-12 col-sm-6 col-md-4 col-lg-3 bg-white mx-2 my-2" style="height: 250px;">
-                        <i class="fas fa-user-circle card-user-top mt-2" style="color:{{c.employeColor}};"></i>
-                        <div class="card-body card-center">
-                        <h5 class="card-title text-center">{{ c.companyName }}</h5>
-                        <a href="{{ path('editEmploye', { 'id': c.id }) }}" class="btn btn-primary" style="background:{{c.employeColor}};">Voir la fiche</a>
+                    <div class="col-12 col-sm-6 col-md-6 col-lg-4 mb-4">
+                        <div class="card component-card_2">
+                            <i class="fas fa-user-circle card-user-top mt-2" style="color:{{c.employeColor}};"></i>
+                            <div class="card-body card-center">
+                                <h5 class="card-title text-center">{{ c.companyName }}</h5>
+                                <br>
+                                <a href="{{ path('editEmploye', { 'id': c.id }) }}" class="btn btn-secondary">Voir la fiche</a>
+                            </div>
                         </div>
                     </div>
                 {% endfor %}
         </div>
     </div>
           
+{% endblock %}
+
+{% block javascripts %}
+    <script>
+        document.getElementById('titlePage').innerHTML = "Mes collaborateurs";
+    </script>
 {% endblock %}
 
     

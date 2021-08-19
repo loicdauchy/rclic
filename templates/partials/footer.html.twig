@@ -1,41 +1,59 @@
-{% if not app.user %}
-<footer
-	class="bg-light text-center text-white">
+{% if app.request.attributes.get('_route') != "interfaceRdv" %}
+	{% if not app.user %}
+	<footer
+		class="bg-light text-center text-white">
 
-	<!-- Grid container -->
-	<div
-		class="container-fluid p-4 pb-0">
-		<!-- Section: Social media -->
-		<section
-			class="mb-4">
-			<!-- Facebook -->
-			<a class="btn btn-primary btn-floating m-1 rounded" style="background-color: #3b5998;" href="#!" role="button">
-				<i class="fab fa-facebook-f"></i>
-			</a>
+		<!-- Grid container -->
+		<div
+			class="container-fluid p-4 pb-0">
+			<!-- Section: Social media -->
+			<section
+				class="mb-4">
+				<!-- Facebook -->
+				<a class="btn btn-primary btn-floating m-1 rounded" style="background-color: #3b5998;" href="#!" role="button">
+					<i class="fab fa-facebook-f"></i>
+				</a>
 
-			<!-- Twitter -->
-			<a class="btn btn-primary btn-floating m-1 rounded" style="background-color: #55acee;" href="#!" role="button">
-				<i class="fab fa-twitter"></i>
-			</a>
+				<!-- Twitter -->
+				<a class="btn btn-primary btn-floating m-1 rounded" style="background-color: #55acee;" href="#!" role="button">
+					<i class="fab fa-twitter"></i>
+				</a>
 
-			<!-- Instagram -->
-			<a class="btn btn-primary btn-floating m-1 rounded" style="background-color: #ac2bac;" href="#!" role="button">
-				<i class="fab fa-instagram"></i>
-			</a>
+				<!-- Instagram -->
+				<a class="btn btn-primary btn-floating m-1 rounded" style="background-color: #ac2bac;" href="#!" role="button">
+					<i class="fab fa-instagram"></i>
+				</a>
 
-		</section>
-		<!-- Section: Social media -->
-	</div>
-	<!-- Grid container -->
+			</section>
+			<!-- Section: Social media -->
+		</div>
+		<!-- Grid container -->
 
-	<!-- Copyright -->
-	<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-		©
-		{{ "now"|date("Y") }}
-		Copyright:
-		<a class="text-white" href="https://rdv.com/">R & Clic</a>
-	</div>
-	<!-- Copyright -->
-</footer>
+		<!-- Copyright -->
+		<div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+			©
+			{{ "now"|date("Y") }}
+			Copyright:
+			<a class="text-white" href="https://rdv.com/">R & Clic</a>
+		</div>
+		<!-- Copyright -->
+	</footer>
 
+	{% else %}
+
+		<div class="footer-wrapper">
+			<div class="footer-section f-section-1">
+				<p class="">Copyright © 2021 <a target="_blank" href="https://www.webantek.com">WebAntek</a>, Tous droits réservés.</p>
+			</div>
+			<div class="footer-section f-section-2">
+				<p class=""><a href="" target="_blank">Mentions légales</a></p>
+			</div>
+		</div>
+
+		</div>
+		<!--  END CONTENT AREA  -->
+
+		</div>
+
+	{% endif %}
 {% endif %}

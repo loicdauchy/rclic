@@ -92,144 +92,195 @@
 {% if app.user %}
 <input type="hidden" id="companyName" value="{{app.user.companyName}}">
 
-<div class="main row">
-  <aside class="col-lg-2 col-md-3 col-sm-4 position-fixed asideBar" id="asideBar">
-	<div class="sidebar left">
+      <!--  BEGIN NAVBAR  -->
+	<div class="header-container fixed-top">
+        <header class="header navbar navbar-expand-sm">
 
-	  <div class="user-panel">
+            <ul class="navbar-item theme-brand flex-row  text-center">
+                <li class="nav-item theme-logo">
+                    <a href="{{ path('home') }}">
+                        <img src="{{ asset('logo/logoAppSingle.png') }}" class="navbar-logo" alt="logo">
+                    </a>
+                </li>
+                <li class="nav-item theme-text">
+                    <a href="{{ path('home') }}" class="nav-link"> R&Clic </a>
+                </li>
+            </ul>
 
-		<div class="pull-left image" id="userMenu">
-		</div>
+            <ul class="navbar-item flex-row ml-md-auto">
 
-		<div class="pull-left info">
-		  {% if app.user.companyName %}
-			<p>{{ app.user.companyName }}</p>
-			{% else %}
-			<p>{{ app.user.email }}</p>
-		  {% endif %}
-		</div>
+                <li class="nav-item dropdown user-profile-dropdown">
+                    <a href="javascript:void(0);" class="nav-link dropdown-toggle user" id="userProfileDropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+                        <!-- <img src="assets/img/90x90.jpg" alt="avatar"> -->
+                    </a>
+                    <div class="dropdown-menu position-absolute" aria-labelledby="userProfileDropdown">
+                        <div class="">
+                            <div class="dropdown-item">
+                                <a class="" href="{{ path('userInfos', { 'id': app.user.id }) }}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-user"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg> Profile</a>
+                            </div>
+                            <!-- <div class="dropdown-item">
+                                <a class="" href="apps_mailbox.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-inbox"><polyline points="22 12 16 12 14 15 10 15 8 12 2 12"></polyline><path d="M5.45 5.11L2 12v6a2 2 0 0 0 2 2h16a2 2 0 0 0 2-2v-6l-3.45-6.89A2 2 0 0 0 16.76 4H7.24a2 2 0 0 0-1.79 1.11z"></path></svg> Inbox</a>
+                            </div> -->
+                            <!-- <div class="dropdown-item">
+                                <a class="" href="auth_lockscreen.html"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-lock"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect><path d="M7 11V7a5 5 0 0 1 10 0v4"></path></svg> Lock Screen</a>
+                            </div> -->
+                            <div class="dropdown-item">
+                                <a class="" href="{{ path('app_logout') }}"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-log-out"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"></path><polyline points="16 17 21 12 16 7"></polyline><line x1="21" y1="12" x2="9" y2="12"></line></svg> Sign Out</a>
+                            </div>
+                        </div>
+                    </div>
+                </li>
 
-	  </div>
-		<ul class="list-sidebar bg-defoult" id="sideBarLeft">	
-
-		{% if app.request.attributes.get('_route') == 'home' %}
-			<li> <a href="{{ path('home') }}" class="flexNavBtnA active"><i class="fa fa-th-large mr-1 w-10"></i> <span class="nav-label">Dashboards</span> </a></li>
-			{% else %}
-			<li> <a href="{{ path('home') }}" class="flexNavBtnA"><i class="fa fa-th-large mr-1 w-10"></i> <span class="nav-label">Dashboards</span> </a></li>
-		{% endif %}
-
-		{% if app.request.attributes.get('_route') == 'userInfos' %}
-			<li> <a href="{{ path('userInfos', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-user mr-1 w-10"></i> <span class="nav-label">Mes infos</span></a> </li>
-		{% else %}
-			<li> <a href="{{ path('userInfos', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-user mr-1 w-10"></i> <span class="nav-label">Mes infos</span></a> </li>
-		{% endif %}
-
-
-		{% if app.request.attributes.get('_route') == 'prestations' or app.request.attributes.get('_route') == 'showCategories' or app.request.attributes.get('_route') == 'showPrestations'%}
-			<li> <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed flexNavBtnDropDown active" > <i class="fas fa-briefcase mr-1 w-10"></i> <span class="nav-label"> Prestations </span> <span class="fa fa-chevron-left pull-right"></span> </a>
-				<ul class="sub-menu collapse" id="dashboard">
-
-				{% if app.request.attributes.get('_route') == 'prestations' %}
-				  <li><a class="active" href="{{ path('prestations', { 'id': app.user.id }) }}">Ajouts</a></li>
-				{% else %}
-				  <li><a href="{{ path('prestations', { 'id': app.user.id }) }}">Ajouts</a></li>
-				{% endif %}
-
-				{% if app.request.attributes.get('_route') == 'showCategories' %}
-				  <li><a class="active" href="{{ path('showCategories', { 'id': app.user.id }) }}">Mes catégories</a></li>
-				{% else %}
-				  <li><a href="{{ path('showCategories', { 'id': app.user.id }) }}">Mes catégories</a></li>
-				{% endif %}
-
-				{% if app.request.attributes.get('_route') == 'showPrestations' %}
-				  <li><a class="active" href="{{ path('showPrestations', { 'id': app.user.id }) }}">Mes préstations</a></li>
-				{% else %}
-				  <li><a href="{{ path('showPrestations', { 'id': app.user.id }) }}">Mes préstations</a></li>
-				{% endif %}
-
-				</ul>
-			</li>
-		{% else %}
-			<li> <a href="#" data-toggle="collapse" data-target="#dashboard" class="collapsed flexNavBtnDropDown" > <i class="fas fa-briefcase mr-1 w-10"></i> <span class="nav-label"> Prestations </span> <span class="fa fa-chevron-left pull-right"></span> </a>
-				<ul class="sub-menu collapse" id="dashboard">
-				  <li class="active"><a href="{{ path('prestations', { 'id': app.user.id }) }}">Ajouts</a></li>
-				  <li><a href="{{ path('showCategories', { 'id': app.user.id }) }}">Mes catégories</a></li>
-				  <li><a href="{{ path('showPrestations', { 'id': app.user.id }) }}">Mes préstations</a></li>
-				</ul>
-			</li>
-		{% endif %}
+            </ul>
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
 
 
+	 <!--  BEGIN NAVBAR  -->
+	 <div class="sub-header-container">
+        <header class="header navbar navbar-expand-sm">
+            <a href="javascript:void(0);" class="sidebarCollapse" data-placement="bottom"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-menu"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg></a>
 
-		{% if app.request.attributes.get('_route') == 'employes' or app.request.attributes.get('_route') == 'showEmployes'%}
-			<li> <a href="#" data-toggle="collapse" data-target="#tables" class="collapsed flexNavBtnDropDown active" ><i class="fas fa-users mr-1 w-10"></i> <span class="nav-label">Collaborateurs</span><span class="fa fa-chevron-left pull-right"></span></a>
-				<ul  class="sub-menu collapse" id="tables" >
+            <ul class="navbar-nav flex-row">
+                <li>
+                    <div class="page-header">
 
-				{% if app.request.attributes.get('_route') == 'employes' %}
-					<li><a class="active" href="{{ path('employes', { 'id': app.user.id }) }}">Ajouts</a></li>
-				{% else %}
-					<li><a href="{{ path('employes', { 'id': app.user.id }) }}">Ajouts</a></li>
-				{% endif %}
+                        <nav class="breadcrumb-one" aria-label="breadcrumb">
+                            <ol class="breadcrumb">
+                                <li class="breadcrumb-item"><a href="javascript:void(0);">R&Clic</a></li>
+                                <li class="breadcrumb-item active" aria-current="page"><span id="titlePage"></span></li>
+                            </ol>
+                        </nav>
 
-				{% if app.request.attributes.get('_route') == 'showEmployes' %}
-					<li><a class="active" href="{{ path('showEmployes', { 'id': app.user.id }) }}">Mes collaborateurs</a></li>
-				{% else %}
-					<li><a href="{{ path('showEmployes', { 'id': app.user.id }) }}">Mes collaborateurs</a></li>
-				{% endif %}
+                    </div>
+                </li>
+            </ul>
+        </header>
+    </div>
+    <!--  END NAVBAR  -->
 
-				</ul>
-			</li>
-		{% else %}
-			<li> <a href="#" data-toggle="collapse" data-target="#tables" class="collapsed flexNavBtnDropDown" ><i class="fas fa-users mr-1 w-10"></i> <span class="nav-label">Collaborateurs</span><span class="fa fa-chevron-left pull-right"></span></a>
-				<ul  class="sub-menu collapse" id="tables" >
-					<li><a href="{{ path('employes', { 'id': app.user.id }) }}">Ajouts</a></li>
-					<li><a href="{{ path('showEmployes', { 'id': app.user.id }) }}">Mes collaborateurs</a></li>
-				</ul>
-			</li>
-		{% endif %}
-			
-		{% if app.request.attributes.get('_route') == 'agenda' %}
-			<li> <a href="{{ path('agenda', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-calendar-alt mr-1 w-10"></i><span class="nav-label">Mon agenda</span></a> </li>
-		{% else %}
-			<li> <a href="{{ path('agenda', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-calendar-alt mr-1 w-10"></i><span class="nav-label">Mon agenda</span></a> </li>
-		{% endif %}
 
-		{% if app.request.attributes.get('_route') == 'chiffres' %}
-			<li> <a href="{{ path('chiffres', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-chart-bar mr-1 w-10"></i><span class="nav-label">Mes chiffres</span></a> </li>
-		{% else %}
-			<li> <a href="{{ path('chiffres', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-chart-bar mr-1 w-10"></i><span class="nav-label">Mes chiffres</span></a> </li>
-		{% endif %}
+	 <!--  BEGIN MAIN CONTAINER  -->
+	 <div class="main-container" id="container">
 
-		{% if app.request.attributes.get('_route') == 'fichesClients' %}
-			<li> <a href="{{ path('fichesClients', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-folder mr-1 w-10"></i> <span class="nav-label">Fiches clients</span></a> </li>
-		{% else %}
-			<li> <a href="{{ path('fichesClients', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-folder mr-1 w-10"></i> <span class="nav-label">Fiches clients</span></a> </li>
-		{% endif %}
+        <div class="overlay"></div>
+        <div class="search-overlay"></div>
 
-		{% if app.request.attributes.get('_route') == 'interfaceRdv' %}
-			<li> <a href="{{ path('interfaceRdv', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-calendar-check mr-1 w-10"></i> <span class="nav-label">Interface de RDV</span></a> </li>
-		{% else %}
-			<li> <a href="{{ path('interfaceRdv', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-calendar-check mr-1 w-10"></i> <span class="nav-label">Interface de RDV</span></a> </li>
-		{% endif %}
 
-		{% if app.request.attributes.get('_route') == 'config' %}
-			<li> <a href="{{ path('config', { 'id': app.user.id }) }}" class="flexNavBtnA active"><i class="fas fa-cog mr-1 w-10"></i><span class="nav-label">Paramètres</span></a> </li>
-		{% else %}		
-			<li> <a href="{{ path('config', { 'id': app.user.id }) }}" class="flexNavBtnA"><i class="fas fa-cog mr-1 w-10"></i><span class="nav-label">Paramètres</span></a> </li>
-		{% endif %}
+		<!--  BEGIN SIDEBAR  -->
+        <div class="sidebar-wrapper sidebar-theme">
+            
+            <nav id="sidebar">
+                <div class="shadow-bottom"></div>
 
-			<li> <a href="{{ path('app_logout') }}" class="flexNavBtnA"><i class="fas fa-power-off text-danger mr-1 w-10"></i> <span class="nav-label">Deconnexion</span></a> </li>
-			
-		</ul>
-	</div>
-  </aside>
+                <ul class="list-unstyled menu-categories" id="accordionExample">
 
-  <section class="contentRight col-lg-10 col-md-9 col-sm-8 px-5" id="mainContent">
+                    <li class="menu">
+                        <a href="{{ path('home') }}" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-grid"><rect x="3" y="3" width="7" height="7"></rect><rect x="14" y="3" width="7" height="7"></rect><rect x="14" y="14" width="7" height="7"></rect><rect x="3" y="14" width="7" height="7"></rect></svg>
+                                <span>Tableau de bord</span>
+                            </div>
+                        </a>
+                    </li>
 
-  <div id="navBarMobile">
-	<i class="fas fa-bars burgerMenu" id="burgerMenu"></i>
-	<i class="fas fa-times burgerMenu none" id="closeBurgerMenu"></i>
-  </div>
+                    <li class="menu">
+                        <a href="#prestationsDropDown" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase"><rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect><path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path></svg>
+                                <span>Prestations</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="prestationsDropDown" data-parent="#accordionExample">
+                            <li>
+                                <a href="{{ path('prestations', { 'id': app.user.id }) }}"> Ajouts </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('showCategories', { 'id': app.user.id }) }}"> Mes catégories </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('showPrestations', { 'id': app.user.id }) }}"> Mes prestations </a>
+                            </li>
+                        </ul>
+                    </li>
+
+                    <li class="menu">
+                        <a href="#collaborateurDropDown" data-toggle="collapse" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-users"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"></path><circle cx="9" cy="7" r="4"></circle><path d="M23 21v-2a4 4 0 0 0-3-3.87"></path><path d="M16 3.13a4 4 0 0 1 0 7.75"></path></svg>
+                                <span>Collaborateurs</span>
+                            </div>
+                            <div>
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-right"><polyline points="9 18 15 12 9 6"></polyline></svg>
+                            </div>
+                        </a>
+                        <ul class="collapse submenu list-unstyled" id="collaborateurDropDown" data-parent="#accordionExample">
+                            <li>
+                                <a href="{{ path('employes', { 'id': app.user.id }) }}"> Ajouts </a>
+                            </li>
+                            <li>
+                                <a href="{{ path('showEmployes', { 'id': app.user.id }) }}"> Mes collaborateurs </a>
+                            </li>
+                        </ul>
+                    </li>
+                    
+                    <li class="menu">
+                        <a href="{{ path('agenda', { 'id': app.user.id }) }}" aria-expanded="false" class="dropdown-toggle">
+                            <div class="active">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+                                <span>Mon agenda</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu">
+                        <a href="{{ path('chiffres', { 'id': app.user.id }) }}" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-pie-chart"><path d="M21.21 15.89A10 10 0 1 1 8 2.83"></path><path d="M22 12A10 10 0 0 0 12 2v10z"></path></svg>
+                                <span>Mes chiffres</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu">
+                        <a href="{{ path('fichesClients', { 'id': app.user.id }) }}" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-list"><line x1="8" y1="6" x2="21" y2="6"></line><line x1="8" y1="12" x2="21" y2="12"></line><line x1="8" y1="18" x2="21" y2="18"></line><line x1="3" y1="6" x2="3.01" y2="6"></line><line x1="3" y1="12" x2="3.01" y2="12"></line><line x1="3" y1="18" x2="3.01" y2="18"></line></svg>
+                                <span>Fiches clients</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu">
+                        <a href="{{ path('interfaceRdv', { 'id': app.user.id }) }}" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-layout"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="3" y1="9" x2="21" y2="9"></line><line x1="9" y1="21" x2="9" y2="9"></line></svg>
+                                <span>Interface de RDV</span>
+                            </div>
+                        </a>
+                    </li>
+
+                    <li class="menu">
+                        <a href="{{ path('config', { 'id': app.user.id }) }}" aria-expanded="false" class="dropdown-toggle">
+                            <div class="">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-settings"><circle cx="12" cy="12" r="3"></circle><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-2 2 2 2 0 0 1-2-2v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83 0 2 2 0 0 1 0-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1-2-2 2 2 0 0 1 2-2h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 0-2.83 2 2 0 0 1 2.83 0l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 2-2 2 2 0 0 1 2 2v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 0 2 2 0 0 1 0 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 2 2 2 2 0 0 1-2 2h-.09a1.65 1.65 0 0 0-1.51 1z"></path></svg>
+                                <span>Paramètres</span>
+                            </div>
+                        </a>
+                    </li>
+                    
+                </ul>
+                
+            </nav>
+
+        </div>
+        <!--  END SIDEBAR  -->
+
+		<div id="content" class="main-content">
 
 {% endif %}
 
