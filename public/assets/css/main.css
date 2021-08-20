@@ -220,7 +220,7 @@ span.red {
 .form-control {
   height: auto;
   border: 1px solid #1b2e4b;
-  color: #009688;
+  color: rgb(169, 120, 28) !important;
   font-size: 15px;
   padding: 8px 10px;
   letter-spacing: 1px;
@@ -233,7 +233,7 @@ span.red {
   .form-control:focus {
     box-shadow: none;
     border-color: #3b3f5c;
-    color: #25d5e4;
+    color: rgb(181, 143, 74) !important;
     background-color: #1b2e4b; }
   .form-control::-webkit-input-placeholder, .form-control::-ms-input-placeholder, .form-control::-moz-placeholder {
     color: #e3e4eb;

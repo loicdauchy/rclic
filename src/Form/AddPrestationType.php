@@ -64,7 +64,7 @@ class AddPrestationType extends AbstractType
                 'required' => false
             ])
             ->add('prestaTime2', IntegerType::class, [
-                'label' => 'Durée de la seconde parti de la prestation',
+                'label' => 'Durée de la seconde partie',
                 'required' => false
             ]);
     }

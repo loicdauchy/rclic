@@ -9,7 +9,7 @@
 <br>
 <br>
 <div class="container">
-<div class="mb-5 p-2 mt-3" id="infosSection">
+<div class="mb-5 p-4 mt-3 widget" id="infosSection">
 
           
             <div class="row">
@@ -17,155 +17,176 @@
                 <div class="col-12">
                     <h4>Gérez vos informations</h4>
                 </div>
-                <div class="col-12 col-lg-4">
+                <div class="col-12 col-md-6">
                     {{ form_row(user.timeLapse, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
-                <div class="col-12 col-lg-2">
+                <div class="col-12 col-md-6">
                     {{ form_row(user.employeesNbr, {'attr': {'class': 'form-control'}}) }}
                 </div>
 
-                <div class="col-12 col-lg-6 form-check">
+                <div class="col-12 form-check">
                     {{ form_row(user.showPreta, {'attr': {'class': 'form-check-input'}}) }}
                 </div>
             </div>
 
-                <div class="row my-3 pl-2 text-center">
-                    <h6>Renseigner vos horaires d'ouverture hebdomadaire</h6>
-                </div>
-
+              
                 <div class="row">
 
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
-                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
-                            <input type="checkbox" aria-label="Checkbox for following text input" name="lundiCheck" id="lundiCheck">
-                            Lundi
-                            <i class="fas fa-sort-down pointer" id="lundiDropdownBtn"></i>
-                        </div>
-                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="lundiDropdown" style="background:#eceeef;">
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Début de journée</label>
-                                <input type="time" class="form-control" name="lundiStart" value="08:00" id="lundiStart">
-                            </div>
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Fin de journée</label>
-                                <input type="time" class="form-control" name="lundiEnd" value="19:00" id="lundiEnd">
-                            </div>
-                        </div> 
-                    </div>  
+                    <div class="col-12">
+                        <h6>Renseigner vos horaires d'ouverture hebdomadaire</h6>
+                    </div>
+    
 
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
-                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
-                            <input type="checkbox" aria-label="Checkbox for following text input" name="mardiCheck" id="mardiCheck">
-                            Mardi
-                            <i class="fas fa-sort-down pointer" id="mardiDropdownBtn"></i>
-                        </div>
-                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="mardiDropdown" style="background:#eceeef;">
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Début de journée</label>
-                                <input type="time" class="form-control" name="mardiStart" value="08:00" id="mardiStart">
-                            </div>
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Fin de journée</label>
-                                <input type="time" class="form-control" name="mardiEnd" value="19:00" id="mardiEnd">
-                            </div>
-                        </div>
-                    </div>  
-                         
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
-                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
-                            <input type="checkbox" aria-label="Checkbox for following text input" name="mercrediCheck" id="mercrediCheck">
-                            Mercredi
-                            <i class="fas fa-sort-down pointer" id="mercrediDropdownBtn"></i>
-                        </div>
-                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="mercrediDropdown" style="background:#eceeef;">
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Début de journée</label>
-                                <input type="time" class="form-control" name="mercrediStart" value="08:00" id="mercrediStart">
-                            </div>
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Fin de journée</label>
-                                <input type="time" class="form-control" name="mercrediEnd" value="19:00" id="mercrediEnd">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="btn-group  mb-4 mr-2" role="group" aria-label="Button group with nested dropdown">
+                            <button type="button" class="btn btn-secondary">
+                                <input type="checkbox" aria-label="Checkbox for following text input"  name="lundiCheck" id="lundiCheck">
+                            </button>
+                            
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDefault" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Lundi <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDefault">
+                                    <h6 class="dropdown-header">Début de journée</h6>
+                                    <input type="time" class="form-control" name="lundiStart" value="08:00" id="lundiStart">
+                                    <h6 class="dropdown-header">Fin de journée</h6>
+                                    <input type="time" class="form-control" name="lundiEnd" value="19:00" id="lundiEnd">
+                                </div>
                             </div>
                         </div>
-                    </div>      
+                    </div>
 
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
-                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
-                            <input type="checkbox" aria-label="Checkbox for following text input" name="jeudiCheck" id="jeudiCheck">
-                            Jeudi
-                            <i class="fas fa-sort-down pointer" id="jeudiDropdownBtn"></i>
-                        </div>
-                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="jeudiDropdown" style="background:#eceeef;">
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Début de journée</label>
-                                <input type="time" class="form-control" name="jeudiStart" value="08:00" id="jeudiStart">
-                            </div>
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Fin de journée</label>
-                                <input type="time" class="form-control" name="jeudiEnd" value="19:00" id="jeudiEnd">
-                            </div>
-                        </div>
-                    </div>   
 
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
-                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
-                            <input type="checkbox" aria-label="Checkbox for following text input" name="vendrediCheck" id="vendrediCheck">
-                            Vendredi
-                            <i class="fas fa-sort-down pointer" id="vendrediDropdownBtn"></i>
-                        </div>
-                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="vendrediDropdown" style="background:#eceeef;">
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Début de journée</label>
-                                <input type="time" class="form-control" name="vendrediStart" value="08:00" id="vendrediStart">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="btn-group  mb-4 mr-2" role="group" aria-label="Button group with nested dropdown">
+                            <button type="button" class="btn btn-secondary">
+                               <input type="checkbox" aria-label="Checkbox for following text input" name="mardiCheck" id="mardiCheck">
+                            </button>
+                            
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDefault" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Mardi <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDefault">
+                                    <h6 class="dropdown-header">Début de journée</h6>
+                                    <input type="time" class="form-control" name="mardiStart" value="08:00" id="mardiStart">
+                                    <h6 class="dropdown-header">Fin de journée</h6>
+                                    <input type="time" class="form-control" name="mardiEnd" value="19:00" id="mardiEnd">
+                                </div>
                             </div>
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Fin de journée</label>
-                                <input type="time" class="form-control" name="vendrediEnd" value="19:00" id="vendrediEnd">
-                            </div>
                         </div>
-                    </div>      
+                    </div>
 
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
-                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
-                            <input type="checkbox" aria-label="Checkbox for following text input" name="samediCheck" id="samediCheck">
-                            Samedi
-                            <i class="fas fa-sort-down pointer" id="samediDropdownBtn"></i>
-                        </div>
-                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="samediDropdown" style="background:#eceeef;">
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Début de journée</label>
-                                <input type="time" class="form-control" name="samediStart" value="08:00" id="samediStart">
-                            </div>
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Fin de journée</label>
-                                <input type="time" class="form-control" name="samediEnd" value="19:00" id="samediEnd">
-                            </div>
-                        </div>
-                    </div> 
 
-                    <div class="col-12 col-sm-6 col-md-4 col-lg-3 d-flex justify-content-center align-items-center flex-column my-2">
-                        <div class="d-flex justify-content-between align-items-center px-2 w-75" style="background:#eceeef;">
-                            <input type="checkbox" aria-label="Checkbox for following text input" name="dimancheCheck" id="dimancheCheck">
-                            Dimanche
-                            <i class="fas fa-sort-down pointer" id="dimancheDropdownBtn"></i>
-                        </div>
-                        <div class="close d-flex justify-content-between align-items-center flex-column w-75" id="dimancheDropdown" style="background:#eceeef;">
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Début de journée</label>
-                                <input type="time" class="form-control" name="dimancheStart" value="08:00" id="dimancheStart">
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="btn-group  mb-4 mr-2" role="group" aria-label="Button group with nested dropdown">
+                            <button type="button" class="btn btn-secondary">
+                              <input type="checkbox" aria-label="Checkbox for following text input" name="mercrediCheck" id="mercrediCheck">
+                            </button>
+                            
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDefault" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Mercredi <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDefault">
+                                    <h6 class="dropdown-header">Début de journée</h6>
+                                    <input type="time" class="form-control" name="mercrediStart" value="08:00" id="mercrediStart">
+                                    <h6 class="dropdown-header">Fin de journée</h6>
+                                    <input type="time" class="form-control" name="mercrediEnd" value="19:00" id="mercrediEnd">
+                                </div>
                             </div>
-                            <div class="form-group fontOne">
-                                <label class="fontOne">Fin de journée</label>
-                                <input type="time" class="form-control" name="dimancheEnd" value="19:00" id="dimancheEnd">
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="btn-group  mb-4 mr-2" role="group" aria-label="Button group with nested dropdown">
+                            <button type="button" class="btn btn-secondary">
+                                <input type="checkbox" aria-label="Checkbox for following text input" name="jeudiCheck" id="jeudiCheck">
+                            </button>
+                            
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDefault" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Jeudi <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDefault">
+                                    <h6 class="dropdown-header">Début de journée</h6>
+                                    <input type="time" class="form-control" name="jeudiStart" value="08:00" id="jeudiStart">
+                                    <h6 class="dropdown-header">Fin de journée</h6>
+                                    <input type="time" class="form-control" name="jeudiEnd" value="19:00" id="jeudiEnd">
+                                </div>
                             </div>
                         </div>
-                    </div>  
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="btn-group  mb-4 mr-2" role="group" aria-label="Button group with nested dropdown">
+                            <button type="button" class="btn btn-secondary">
+                                <input type="checkbox" aria-label="Checkbox for following text input" name="vendrediCheck" id="vendrediCheck">
+                            </button>
+                            
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDefault" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Vendredi <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDefault">
+                                    <h6 class="dropdown-header">Début de journée</h6>
+                                    <input type="time" class="form-control" name="vendrediStart" value="08:00" id="vendrediStart">
+                                    <h6 class="dropdown-header">Fin de journée</h6>
+                                    <input type="time" class="form-control" name="vendrediEnd" value="19:00" id="vendrediEnd">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="btn-group  mb-4 mr-2" role="group" aria-label="Button group with nested dropdown">
+                            <button type="button" class="btn btn-secondary">
+                                <input type="checkbox" aria-label="Checkbox for following text input" name="samediCheck" id="samediCheck">
+                            </button>
+                            
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDefault" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Samedi <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDefault">
+                                    <h6 class="dropdown-header">Début de journée</h6>
+                                    <input type="time" class="form-control" name="samediStart" value="08:00" id="samediStart">
+                                    <h6 class="dropdown-header">Fin de journée</h6>
+                                    <input type="time" class="form-control" name="samediEnd" value="19:00" id="samediEnd">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="col-12 col-sm-6 col-md-4 col-lg-3">
+                        <div class="btn-group  mb-4 mr-2" role="group" aria-label="Button group with nested dropdown">
+                            <button type="button" class="btn btn-secondary">
+                                <input type="checkbox" aria-label="Checkbox for following text input" name="dimancheCheck" id="dimancheCheck">
+                            </button>
+                            
+                            <div class="btn-group" role="group">
+                                <button id="btnGroupDefault" type="button" class="btn btn-secondary dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                Dimanche <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-chevron-down"><polyline points="6 9 12 15 18 9"></polyline></svg>
+                                </button>
+                                <div class="dropdown-menu" aria-labelledby="btnGroupDefault">
+                                    <h6 class="dropdown-header">Début de journée</h6>
+                                    <input type="time" class="form-control" name="dimancheStart" value="08:00" id="dimancheStart">
+                                    <h6 class="dropdown-header">Fin de journée</h6>
+                                    <input type="time" class="form-control" name="dimancheEnd" value="19:00" id="dimancheEnd">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             <br>
-            <div class="col-3">
-            <br>
-                <button type="submit" class="btn btn-dark">Confirmer</button>
+            <div class="col-3 pl-0">
+                <button type="submit" class="btn btn-warning">Confirmer</button>
             </div>
                 <br>
 
@@ -186,27 +207,18 @@
 
         var userId = document.getElementById('userId').value;
 
-        document.getElementById('dimancheDropdownBtn').addEventListener('click', function(){
-            document.getElementById('dimancheDropdown').classList.toggle('open');
-        })
-        document.getElementById('samediDropdownBtn').addEventListener('click', function(){
-            document.getElementById('samediDropdown').classList.toggle('open');
-        })
-        document.getElementById('vendrediDropdownBtn').addEventListener('click', function(){
-            document.getElementById('vendrediDropdown').classList.toggle('open');
-        })
-        document.getElementById('jeudiDropdownBtn').addEventListener('click', function(){
-            document.getElementById('jeudiDropdown').classList.toggle('open');
-        })
-        document.getElementById('mercrediDropdownBtn').addEventListener('click', function(){
-            document.getElementById('mercrediDropdown').classList.toggle('open');
-        })
-        document.getElementById('mardiDropdownBtn').addEventListener('click', function(){
-            document.getElementById('mardiDropdown').classList.toggle('open');
-        })
-        document.getElementById('lundiDropdownBtn').addEventListener('click', function(){
-            document.getElementById('lundiDropdown').classList.toggle('open');
-        })
+        $("input[name='add_user_infos[timeLapse]']").TouchSpin({
+			buttondown_class: "btn btn-classic btn-warning",
+			buttonup_class: "btn btn-classic btn-secondary",
+			max: 10000,
+			postfix: 'min'
+		});
+
+        $("input[name='add_user_infos[employeesNbr]']").TouchSpin({
+			buttondown_class: "btn btn-classic btn-warning",
+			buttonup_class: "btn btn-classic btn-secondary",
+			max: 10000,
+		});
 
         function callUserInfos(){
             var xhr = new XMLHttpRequest();
@@ -264,3 +276,13 @@
 
     </script>
 {% endblock javascripts %}
+
+{% block stylesheets %}
+    <style>
+        input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+		}
+    </style>
+{% endblock stylesheets %}

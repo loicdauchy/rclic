@@ -8,29 +8,52 @@
 <br>
 	<div class="container">
 
+			<div id="navSection" data-spy="affix" class="nav  sidenav">
+				<div class="sidenav-content">
+					<a href="#categoriFormAdd" id="categoriFormAddBtn" class="active nav-link">Catégorie</a>
+					<a href="#prestationFormAdd" id="prestationFormAddBtn" class="nav-link">Presation</a>
+				</div>
+			</div>
+
 			{{ form_start(addCategory) }}
 
-				<div class="mb-5 p-5 shadow arrondi bg-light">
+				<div class="mb-5 p-5">
 
-					<div class="row mt-3 ml-1 mb-4">
-						<h4>Ajoutez une catégorie</h4>
-					</div>
+					<div class="widget" id="categoriFormAdd">
 
-					<div class="row">
-						<div class="col-lg-6 col-12">
-							{{ form_row(addCategory.name, {'attr': {'class': 'form-control'}}) }}
+						<div class="row mt-3 ml-1 mb-4">
+							<h4>Ajoutez une catégorie</h4>
 						</div>
 
-						<div class="col-lg-6 col-12">
-							{{ form_row(addCategory.image, {'attr': {'class': 'form-control-file'}}) }}
-							<p>
-								<i id="nameFileCategory"></i>
-							</p>
-						</div>
-					</div>
+						<div class="row">
+							<div class="col-lg-6 col-12">
+								{{ form_row(addCategory.name, {'attr': {'class': 'form-control'}}) }}
+							</div>
 
-					<div class="col-12 mb-3 pl-0">
-						<button type="submit" class="btn btn-dark">Ajouter</button>
+							{# <div class="col-lg-6 col-12">
+								{{ form_row(addCategory.image, {'attr': {'class': 'form-control-file'}}) }}
+								<p>
+									<i id="nameFileCategory"></i>
+								</p>
+							</div> #}
+
+							<div class="custom-file-container col-12" data-upload-id="mySecondImage">
+								<label class="labelUpload">Télécharger  <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+								<label class="custom-file-container__custom-file" >
+									{{ form_row(addCategory.image, {'attr': {'class': 'custom-file-container__custom-file__custom-file-input', 'accept': 'image/*'}}) }} 
+									{# <input type="file" class="custom-file-container__custom-file__custom-file-input" accept="image/*"> #}
+									<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+									<span class="custom-file-container__custom-file__custom-file-control"></span>
+								</label>
+								<div class="custom-file-container__image-preview"></div>
+							</div>
+
+						</div>
+
+						<div class="col-12 mb-3 pl-0">
+							<button type="submit" class="btn btn-success">Ajouter</button>
+						</div>
+
 					</div>
 
 				</div>
@@ -43,75 +66,89 @@
 
 		{{ form_start(addPresta) }}
 
-			<div class="mb-5 p-5 shadow arrondi bg-light">
+			<div class="mb-5 p-5">
 
-				<div class="row mt-3 ml-1 mb-4">
-					<h4>Ajoutez une prestation</h4>
-				</div>
-
-				<div class="row">
-
-					<div class="col-lg-6 col-12">
-						{{ form_row(addPresta.name, {'attr': {'class': 'form-control'}}) }}
-					</div>
-					<div class="col-lg-6 col-12">
-						{{ form_row(addPresta.category, {'attr': {'class': 'form-control'}}) }}
-					</div>
-					<div class="col-lg-6 col-12">
-						{{ form_row(addPresta.price, {'attr': {'class': 'form-control'}}) }}
+				<div class="widget" id="prestationFormAdd">
+					<div class="row mt-3 ml-1 mb-4">
+						<h4>Ajoutez une prestation</h4>
 					</div>
 
-				</div>
+					<div class="row">
 
-				<div class="row">
-
-					<div class="col-6 form-group">
-						{{ form_row(addPresta.image, {'attr': {'class': 'form-control-file'}}) }} 
-						<p>
-							<i id="nameFile"></i>
-						</p>
-					</div>
-
-					<div class="col-6">
-						{{ form_row(addPresta.prestaTime, {'attr': {'class': 'form-control'}}) }}
-					</div>
-				
-					{{ form_row(addPresta.agendaColor, {'attr': {'class': 'form-control'}}) }}
-
-				</div>
-
-				<div class="row mt-2 mb-4">
-
-					<div class="col-lg-5 col-12 d-flex justify-content-around align-items-start shadow rounded bg-white px-3 pt-3" style="padding-right:15px;">
-						<div class="d-flex flex-column">
-							<h6 class="w-100">Séléctionner votre couleur</h6>
-							<div id="boxColor" class="boxColor"></div>
-							<p class="mt-2"><b id="hexaText"></b></p>
-							<p><b id="rgbText"></b></p>
+						<div class="col-lg-6 col-12">
+							{{ form_row(addPresta.name, {'attr': {'class': 'form-control'}}) }}
 						</div>
-						<div id="picker" class="col-4"></div>
+						<div class="col-lg-6 col-12">
+							{{ form_row(addPresta.category, {'attr': {'class': 'form-control'}}) }}
+						</div>
+						<div class="col-lg-6 col-12">
+							{{ form_row(addPresta.price, {'attr': {'class': 'form-control'}}) }}
+						</div>
+
+						<div class="col-lg-6 col-12">
+							{{ form_row(addPresta.prestaTime, {'attr': {'class': 'form-control'}}) }}
+						</div>
+
+					</div>
+
+					<div class="row">
+{# 
+						<div class="col-6 form-group">
+							{{ form_row(addPresta.image, {'attr': {'class': 'form-control-file'}}) }} 
+							<p>
+								<i id="nameFile"></i>
+							</p>
+						</div> #}
+
+						<div class="custom-file-container col-12" data-upload-id="myFirstImage">
+							<label class="labelUpload">Télécharger  <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+							<label class="custom-file-container__custom-file" >
+								{{ form_row(addPresta.image, {'attr': {'class': 'custom-file-container__custom-file__custom-file-input', 'accept': 'image/*'}}) }} 
+								{# <input type="file" class="custom-file-container__custom-file__custom-file-input" accept="image/*"> #}
+								<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+								<span class="custom-file-container__custom-file__custom-file-control"></span>
+							</label>
+							<div class="custom-file-container__image-preview"></div>
+						</div>
+					
+						{{ form_row(addPresta.agendaColor, {'attr': {'class': 'form-control'}}) }}
+
+					</div>
+
+					<div class="row mt-2 mb-4">
+
+						<div class="col-lg-8 col-12 d-flex justify-content-start align-items-start pr-3 pt-3 ml-0" style="padding-right:15px;">
+							<div class="d-flex flex-column">
+								<h6 class="w-100">Séléctionner votre couleur</h6>
+								<div id="boxColor" class="boxColor"></div>
+								<p class="mt-2"><b id="hexaText"></b></p>
+								<p><b id="rgbText"></b></p>
+							</div>
+							<div id="picker" class="col-4"></div>
+						</div>
+
+					</div>
+
+				<div class="row">
+
+					<div class="col-lg-6 col-12" id="addBreakTimeBtn">
+						<div class="btn btn-outline btn-primary mb-3" id="addBreakTimeBtn">Ajouter un temps de pause</div>
+					</div>
+
+					<div id="breaktime" style="display:none;" class="col-lg-6 col-12">
+						{{ form_row(addPresta.breakTime, {'attr': {'class': 'form-control'}}) }}
+					</div>
+
+					<div id="prestaTime2" style="display:none;" class="col-lg-6 col-12">
+						{{ form_row(addPresta.prestaTime2, {'attr': {'class': 'form-control'}}) }}
 					</div>
 
 				</div>
 
-			<div class="row">
-
-				<div class="col-lg-6 col-12" id="addBreakTimeBtn">
-					<div class="btn btn-outline btn-primary mb-3" id="addBreakTimeBtn">Ajouter un temps de pause</div>
+				<div class="col-3 mb-3 mt-2 pl-0">
+					<button type="submit" class="btn btn-success">Ajouter</button>
 				</div>
 
-				<div id="breaktime" style="display:none;" class="col-lg-6 col-12">
-					{{ form_row(addPresta.breakTime, {'attr': {'class': 'form-control'}}) }}
-				</div>
-
-				<div id="prestaTime2" style="display:none;" class="col-lg-6 col-12">
-					{{ form_row(addPresta.prestaTime2, {'attr': {'class': 'form-control'}}) }}
-				</div>
-
-			</div>
-
-			<div class="col-3 mb-3 mt-2 pl-0">
-				<button type="submit" class="btn btn-dark">Ajouter</button>
 			</div>
 		</div>
 	</div>
@@ -124,7 +161,44 @@
 
 	<script>
 
-		document.getElementById('titlePage').innerHTML = "Ajouts de prestations/categories";
+		document.getElementById('titlePage').innerHTML = "Ajouts de prestations / categories";
+		var firstUpload = new FileUploadWithPreview('myFirstImage');
+		var firstUpload2 = new FileUploadWithPreview('mySecondImage');
+
+		$("input[name='add_prestation[price]']").TouchSpin({
+			buttondown_class: "btn btn-classic btn-warning",
+			buttonup_class: "btn btn-classic btn-secondary",
+			max: 10000,
+			postfix: '€'
+		});
+		$("input[name='add_prestation[prestaTime]']").TouchSpin({
+			buttondown_class: "btn btn-classic btn-warning",
+			buttonup_class: "btn btn-classic btn-secondary",
+			max: 10000,
+			postfix: 'min'
+		});
+		$("input[name='add_prestation[breakTime]']").TouchSpin({
+			buttondown_class: "btn btn-classic btn-warning",
+			buttonup_class: "btn btn-classic btn-secondary",
+			max: 10000,
+			postfix: 'min'
+		});
+		$("input[name='add_prestation[prestaTime2]']").TouchSpin({
+			buttondown_class: "btn btn-classic btn-warning",
+			buttonup_class: "btn btn-classic btn-secondary",
+			max: 10000,
+			postfix: 'min'
+		});
+
+		document.getElementById('categoriFormAddBtn').addEventListener('click', function(){
+			document.getElementById('categoriFormAddBtn').classList.add('active');
+			document.getElementById('prestationFormAddBtn').classList.remove('active');
+		})
+
+		document.getElementById('prestationFormAddBtn').addEventListener('click', function(){
+			document.getElementById('prestationFormAddBtn').classList.add('active');
+			document.getElementById('categoriFormAddBtn').classList.remove('active');
+		})
 		
 		window.onload = () => {
 			var width = 100;
@@ -183,3 +257,36 @@
 	</script>
 
 {% endblock javascripts %}
+
+{% block stylesheets %}
+	<style>
+		.custom-file{
+			display: none;
+		}
+		span.custom-file-container__custom-file__custom-file-control{
+			color: rgb(169, 120, 28) !important;
+		}
+		span.custom-file-container__custom-file__custom-file-control__button{
+			color: rgb(169, 120, 28) !important;
+		}
+		.labelUpload{
+			color: rgb(169, 120, 28) !important;
+		}
+		.invalid-feedback{
+			margin-top: 30px;
+		}
+		.sidenav .sidenav-content a{
+			color: rgb(169, 120, 28) !important;
+		}
+		.sidenav .sidenav-content a.active, .sidenav .sidenav-content a:hover{
+			color: rgb(169, 120, 28) !important;
+			font-weight: 700;
+			border-left: 1px solid rgb(169, 120, 28) !important;
+		}
+		input::-webkit-outer-spin-button,
+		input::-webkit-inner-spin-button {
+		-webkit-appearance: none;
+		margin: 0;
+		}
+	</style>
+{% endblock %}

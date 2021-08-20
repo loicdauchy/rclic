@@ -8,7 +8,7 @@
 <br>
 	<div class="container">
 		{{ form_start(addCategory) }}
-		<div class="mb-5 p-2">
+		<div class="mb-5 p-2 widget px-5">
 			<div class="row mt-3 ml-0 mb-4">
                 <h4>Modifier la catégorie</h4>
             </div>
@@ -17,16 +17,27 @@
 					{{ form_row(addCategory.name, {'attr': {'class': 'form-control'}}) }}
 				</div>
 
-				<div class="col-lg-6 col-12">
+				{# <div class="col-lg-6 col-12">
 					{{ form_row(addCategory.image, {'attr': {'class': 'form-control'}}) }}
 					<p>
 						<i id="nameFileCat"></i>
 					</p>
+				</div> #}
+
+				<div class="custom-file-container col-12" data-upload-id="mySecondImage">
+					<label class="labelUpload">Télécharger  <a href="javascript:void(0)" class="custom-file-container__image-clear" title="Clear Image">x</a></label>
+					<label class="custom-file-container__custom-file" >
+						{{ form_row(addCategory.image, {'attr': {'class': 'custom-file-container__custom-file__custom-file-input', 'accept': 'image/*'}}) }} 
+						{# <input type="file" class="custom-file-container__custom-file__custom-file-input" accept="image/*"> #}
+						<input type="hidden" name="MAX_FILE_SIZE" value="10485760" />
+						<span class="custom-file-container__custom-file__custom-file-control"></span>
+					</label>
+					<div class="custom-file-container__image-preview"></div>
 				</div>
 			</div>
 
 			<div class="col-3 mb-3 pl-0">
-				<button type="submit" class="btn btn-dark">Modifier</button>
+				<button type="submit" class="btn btn-warning">Modifier</button>
 			</div>
 			<br>
 			{{ form_end(addCategory) }}
@@ -42,6 +53,8 @@
 
 		document.getElementById('titlePage').innerHTML = "Modifier mes catégories";
 
+		var firstUpload2 = new FileUploadWithPreview('mySecondImage');
+
 		document.getElementById('add_category_image').addEventListener('input', function (evt) {
 
 		document.getElementById('nameFileCat').innerHTML = this.value;
@@ -54,3 +67,32 @@
 		});
 	</script>
 {% endblock javascripts %}
+
+
+{% block stylesheets %}
+	<style>
+		.custom-file{
+			display: none;
+		}
+		span.custom-file-container__custom-file__custom-file-control{
+			color: rgb(169, 120, 28) !important;
+		}
+		span.custom-file-container__custom-file__custom-file-control__button{
+			color: rgb(169, 120, 28) !important;
+		}
+		.labelUpload{
+			color: rgb(169, 120, 28) !important;
+		}
+		.invalid-feedback{
+			margin-top: 30px;
+		}
+		.sidenav .sidenav-content a{
+			color: rgb(169, 120, 28) !important;
+		}
+		.sidenav .sidenav-content a.active, .sidenav .sidenav-content a:hover{
+			color: rgb(169, 120, 28) !important;
+			font-weight: 700;
+			border-left: 1px solid rgb(169, 120, 28) !important;
+		}
+	</style>
+{% endblock %}

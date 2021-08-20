@@ -35,15 +35,14 @@
         </div>
 
   <!-- Modal for adding rdv -->
-  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal animated fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modalHeight modalHeight1" role="document">
       <div class="modal-content">
-        <div class="modal-header">
-        <div class="row mt-3 ml-3">
+        <div class="modal-header">     
           <h5 class="modal-title" id="exampleModalLabel">Ajout d'un RDV</h5>
-          </div>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="overflow: visible;">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         </div>
         <div class="modal-body">
@@ -111,13 +110,13 @@
 
 
   <!-- Modal for edit rdv -->
-  <div class="modal fade" id="editRdvModal" tabindex="-1" role="dialog" aria-labelledby="editRdvModal" aria-hidden="true">
-    <div class="modal-dialog" role="document">
+  <div class="modal animated fade" id="editRdvModal" tabindex="-1" role="dialog" aria-labelledby="editRdvModal" aria-hidden="true">
+    <div class="modal-dialog modalHeight modalHeight2" role="document">
       <div class="modal-content">
         <div class="modal-header">
           <h5 class="modal-title" id="exampleModalLabel">Modification d'un RDV</h5>
-          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close" style="overflow: visible;">
+            <svg aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-x"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
           </button>
         </div>
         <div class="modal-body">
@@ -189,6 +188,13 @@
 
     <script>
       document.getElementById('titlePage').innerHTML = "Mon agenda";
+      const mailScroll = new PerfectScrollbar('.modalHeight1', {
+        suppressScrollX : true
+      });
+      const mailScroll2 = new PerfectScrollbar('.modalHeight2', {
+        suppressScrollX : true
+      });
+    
     </script>
 
     <script src="{{ asset('plugins/fullcalendar/locale-all.js') }}"></script>
@@ -199,10 +205,6 @@
 
 {% block stylesheets %}
   <style>
-    .widget-content-area { border-radius: 6px;
-      -webkit-box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2);
-      -moz-box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2);
-      box-shadow: 0 6px 10px 0 rgba(0,0,0,.14), 0 1px 18px 0 rgba(0,0,0,.12), 0 3px 5px -1px rgba(0,0,0,.2); margin-bottom: 10px; }
     .daterangepicker.dropdown-menu {
         z-index: 1059;
     }
@@ -300,11 +302,11 @@
     }
 
     .fc-button-active{
-      background: #009688 !important;
+      background: rgb(169, 120, 28) !important;
       box-shadow: none !important;
     }
     .fc-button-active:hover{
-      background: #009688 !important;
+      background: rgb(169, 120, 28) !important;
       box-shadow: none !important;
     }
 

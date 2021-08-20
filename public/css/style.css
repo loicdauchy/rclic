@@ -182,6 +182,13 @@ footer{
     color: rgb(169, 120, 28) !important;
 }
 
+.modalHeight{
+    height: 90vh;
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+
 /** ======================  base css ==============================**/
 
 a:hover{ text-decoration: none; }
