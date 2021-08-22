@@ -5,16 +5,24 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<meta name="description" content="">
 		<meta name="keywords" content="">
-		<!-- <link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/lux/bootstrap.min.css" rel="stylesheet"> -->
+
+		{% if app.request.attributes.get('_route') == "interfaceRdv" %}
+		<link href="https://cdnjs.cloudflare.com/ajax/libs/bootswatch/4.6.0/lux/bootstrap.min.css" rel="stylesheet">
+
+		{% endif %}
 		<link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.13.1/css/all.min.css" rel="stylesheet">  
 		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css" integrity="sha256-u40zn9KeZYpMjgYaxWJccb4HnP0i8XI17xkXrEklevE=" crossorigin="anonymous">
 		
 
 		<!-- BEGIN GLOBAL MANDATORY STYLES -->
 		<link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
+
+		{% if app.request.attributes.get('_route') != "interfaceRdv" %}
 		<link href="{{asset('bootstrap/css/bootstrap.min.css')}}" rel="stylesheet" type="text/css" />
 		<link href="{{asset('assets/css/plugins.css')}}" rel="stylesheet" type="text/css" />
 		<!-- END GLOBAL MANDATORY STYLES -->
+
+
 
 		 <!-- BEGIN PAGE LEVEL STYLE -->
 		 <!-- <link href="{{asset('plugins/fullcalendar/fullcalendar.css')}}" rel="stylesheet" type="text/css" /> -->
@@ -31,6 +39,8 @@
 		 <link rel="stylesheet" type="text/css" href="{{asset('plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.css')}}">
 		 <link href="{{asset('assets/css/elements/miscellaneous.css')}}" rel="stylesheet" type="text/css" />
 		 <link rel="stylesheet" type="text/css" href="{{asset('assets/css/forms/theme-checkbox-radio.css')}}">
+
+		 {% endif %}
 		 <!-- END PAGE LEVEL STYLE -->
 
 		<link rel="apple-touch-icon" sizes="57x57" href="{{asset('logo/apple-icon-57x57.png')}}">
