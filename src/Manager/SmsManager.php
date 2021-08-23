@@ -8,6 +8,7 @@ const ERROR_API = "Error during API call\n";
 const ERROR_FILE = "The specified file does not exist\n";
 const URL = "https://api.smsmode.com/http/1.6/";
 const PATH_SEND_SMS = "sendSMS.do";
+const PATH_DELETE_SMS = "deleteSMS.do";
 const PATH_SEND_SMS_BATCH = "sendSMSBatch.do";
  
 /**
@@ -78,6 +79,22 @@ class SmsManager
         curl_setopt($ch,CURLOPT_POSTFIELDS, $data);
         $result = curl_exec($ch);
         curl_close($ch);
+        if (!$result) {
+            return ERROR_API;
+        }
+        return $result;
+    }
+
+    public function deleteSms($accessToken, $smsId){
+       
+        $fields_string = '?accessToken='.$accessToken.'&smsID='.$smsId;
+    
+        $ch = curl_init();
+        curl_setopt($ch,CURLOPT_RETURNTRANSFER, true);
+        curl_setopt($ch,CURLOPT_URL, URL.PATH_DELETE_SMS.$fields_string);
+        $result = curl_exec($ch);
+        curl_close($ch);
+        
         if (!$result) {
             return ERROR_API;
         }

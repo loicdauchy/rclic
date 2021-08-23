@@ -13,35 +13,35 @@
 {% if app.request.attributes.get('_route') != "interfaceRdv" %}
 
  <!-- START GLOBAL MANDATORY SCRIPTS -->
- <script src="{{ asset('assets/js/libs/jquery-3.1.1.min.js') }}"></script>
- <script src="{{ asset('plugins/jquery-ui/jquery-ui.min.js') }}"></script>
- <script src="{{ asset('bootstrap/js/popper.min.js') }}"></script>
- <script src="{{ asset('bootstrap/js/bootstrap.min.js') }}"></script>
- <script src="{{ asset('plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
- <script src="{{ asset('assets/js/app.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/assets/js/libs/jquery-3.1.1.min.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/bootstrap/js/popper.min.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/bootstrap/js/bootstrap.min.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/plugins/perfect-scrollbar/perfect-scrollbar.min.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/assets/js/app.js') }}"></script>
  
  <script>
      $(document).ready(function() {
          App.init();
      });
  </script>
- <script src="{{ asset('assets/js/custom.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/assets/js/custom.js') }}"></script>
  <!-- END GLOBAL MANDATORY SCRIPTS -->
 
  <!-- BEGIN PAGE LEVEL SCRIPTS -->
- <script src="{{ asset('plugins/fullcalendar/moment.min.js') }}"></script>
- <script src="{{ asset('plugins/flatpickr/flatpickr.js') }}"></script>
- <script src="{{ asset('plugins/fullcalendar/fullcalendar.min.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/plugins/fullcalendar/moment.min.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/plugins/flatpickr/flatpickr.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/plugins/fullcalendar/fullcalendar.min.js') }}"></script>
 
- <script src="{{ asset('plugins/apex/apexcharts.min.js') }}"></script>
- <script src="{{ asset('assets/js/dashboard/dash_1.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/plugins/apex/apexcharts.min.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/assets/js/dashboard/dash_1.js') }}"></script>
 
- <script src="{{ asset('assets/js/scrollspyNav.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/assets/js/scrollspyNav.js') }}"></script>
 
- <script src="{{ asset('plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/plugins/file-upload/file-upload-with-preview.min.js') }}"></script>
 
- <script src="{{ asset('plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
- <script src="{{ asset('plugins/bootstrap-touchspin/custom-bootstrap-touchspin.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/plugins/bootstrap-touchspin/jquery.bootstrap-touchspin.min.js') }}"></script>
+ <script src="{{ asset( app.user.theme ~'/plugins/bootstrap-touchspin/custom-bootstrap-touchspin.js') }}"></script>
 
  <!-- END GLOBAL MANDATORY SCRIPTS -->
 

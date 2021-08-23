@@ -47,6 +47,22 @@ class AppointmentsRepository extends ServiceEntityRepository
         ;
     }
 
+    /**
+    * @return Appointments[] Returns an array of Appointments objects
+    */  
+    public function findAppointmentByGroupeId($users, $groupeId)
+    {
+        return $this->createQueryBuilder('a')
+            ->andWhere('a.groupeId = :val')
+            ->setParameter('val', $groupeId)
+            ->andWhere('a.users = :user')
+            ->setParameter('user', $users)
+            ->orderBy('a.id', 'ASC')
+            ->getQuery()
+            ->getResult()
+        ;
+    }
+
     /*
     public function findOneBySomeField($value): ?Appointments
     {

@@ -22,11 +22,11 @@
                                     <p class="label label-danger">Important</p> #}
                                 </div>
                             </div>                                                
-                            <div class="col-md-4 col-12">
+                            {# <div class="col-md-4 col-12">
                                 <form action="javascript:void(0);" class="form-horizontal mt-md-0 mt-3 text-md-right text-center">
                                     <button id="myBtn" class="btn btn-primary"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-calendar mr-2"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg> Add Event</button>
                                 </form>
-                            </div>
+                            </div> #}
                         </div>
                     </div>
                     <div id="calendar"></div>
@@ -197,119 +197,255 @@
     
     </script>
 
-    <script src="{{ asset('plugins/fullcalendar/locale-all.js') }}"></script>
+    <script src="{{ asset(app.user.theme ~'/plugins/fullcalendar/locale-all.js') }}"></script>
 
     <script src="{{asset('js/agenda.js')}}"></script>
 
 {% endblock %}
 
 {% block stylesheets %}
-  <style>
-    .daterangepicker.dropdown-menu {
-        z-index: 1059;
-    }
-    .fc-row.fc-week.fc-widget-content{
-      margin-right: 0 !important;
-    }
-    .fc-button-group > button {
-      float: left !important;
-      margin: 0 0 0 4px !important;
-      border-radius: 6px !important;
-    }
+  {% if app.user.theme == "dark" %}
+  
+    <style>
+      .daterangepicker.dropdown-menu {
+          z-index: 1059;
+      }
+      .fc-row.fc-week.fc-widget-content{
+        margin-right: 0 !important;
+      }
+      .fc-button-group > button {
+        float: left !important;
+        margin: 0 0 0 4px !important;
+        border-radius: 6px !important;
+      }
 
-    /* BORDER COLOR */
-    tbody > *{
-      border-color: #3b3f5c !important;
-    }
-    .fc-scrollgrid {
-      border-color: #3b3f5c !important;
-    }
-    tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td {
-      border-color: #3b3f5c !important;
-    }
+      /* BORDER COLOR */
+      tbody > *{
+        border-color: #3b3f5c !important;
+      }
+      .fc-scrollgrid {
+        border-color: #3b3f5c !important;
+      }
+      tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td {
+        border-color: #3b3f5c !important;
+      }
 
-    .fc .fc-scrollgrid-section-sticky>*{
-      background: transparent !important;
-      border-color: #3b3f5c !important;
-    }
+      .fc .fc-scrollgrid-section-sticky>*{
+        background: transparent !important;
+        border-color: #3b3f5c !important;
+      }
 
-    /* BACKGROUND COLOR */
-    tr.fc-list-day.fc-day.fc-day-tue.fc-day-past > th {
-      background: transparent !important;
-    }
-    .fc-list-day-cushion.fc-cell-shaded{
-      background: transparent !important;
-    }
-    .fc .fc-list-sticky .fc-list-day>*{
-      background: transparent !important;
-      position:  relative!important;
-    }
-    tr.fc-list-event.fc-event.fc-event-start.fc-event-end.fc-event-today.fc-event-future:hover{
-      cursor: pointer !important;
-    }
-    td.fc-list-event-title{
-      border-color: #3b3f5c !important;
-    }
-    td.fc-list-event-graphic{
-      border-color: #3b3f5c !important;
-    }
-    td.fc-list-event-time{
-      border-color: #3b3f5c !important;
-    }
+      /* BACKGROUND COLOR */
+      tr.fc-list-day.fc-day.fc-day-tue.fc-day-past > th {
+        background: transparent !important;
+      }
+      .fc-list-day-cushion.fc-cell-shaded{
+        background: transparent !important;
+      }
+      .fc .fc-list-sticky .fc-list-day>*{
+        background: transparent !important;
+        position:  relative!important;
+      }
+      tr.fc-list-event.fc-event.fc-event-start.fc-event-end.fc-event-today.fc-event-future:hover{
+        cursor: pointer !important;
+      }
+      td.fc-list-event-title{
+        border-color: #3b3f5c !important;
+      }
+      td.fc-list-event-graphic{
+        border-color: #3b3f5c !important;
+      }
+      td.fc-list-event-time{
+        border-color: #3b3f5c !important;
+      }
 
-    /* HEIGHT AND SCROLL */
-    tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td > .fc-scroller-harness > .fc-scroller{
-      height: 400px !important;
-      overflow-y: scroll !important;
-      overflow-x: hidden !important;
-    }
-    .fc-list{
-      height: 400px !important;
-      border-color: #3b3f5c !important;
-    }
-    .fc-list > .fc-scroller{
-      height: 400px !important;
-      overflow-y: scroll !important;
-      overflow-x: hidden !important;
-    }
-    tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td > .fc-scroller-harness > .fc-scroller::-webkit-scrollbar, .fc-list > .fc-scroller::-webkit-scrollbar{
-      background: transparent !important;
-      width: 4px;
-      transition: 0.2 ease-in-out;
-    }
-    tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td > .fc-scroller-harness > .fc-scroller::-webkit-scrollbar-thumb, .fc-list > .fc-scroller::-webkit-scrollbar-thumb{
-      background: #888ea888 !important;
-      border-radius: 2px !important;
-    }
+      /* HEIGHT AND SCROLL */
+      tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td > .fc-scroller-harness > .fc-scroller{
+        height: 400px !important;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+      }
+      .fc-list{
+        height: 400px !important;
+        border-color: #3b3f5c !important;
+      }
+      .fc-list > .fc-scroller{
+        height: 400px !important;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+      }
+      tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td > .fc-scroller-harness > .fc-scroller::-webkit-scrollbar, .fc-list > .fc-scroller::-webkit-scrollbar{
+        background: transparent !important;
+        width: 4px;
+        transition: 0.2 ease-in-out;
+      }
+      tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td > .fc-scroller-harness > .fc-scroller::-webkit-scrollbar-thumb, .fc-list > .fc-scroller::-webkit-scrollbar-thumb{
+        background: #888ea888 !important;
+        border-radius: 2px !important;
+      }
 
-    .fc-day-today { 
-      background: transparent !important; 
-    }
+      .fc-day-today { 
+        background: transparent !important; 
+      }
 
-    .fc-theme-standard td, .fc-theme-standard th{
-      border-color: #3b3f5c !important;
-    }
+      .fc-theme-standard td, .fc-theme-standard th{
+        border-color: #3b3f5c !important;
+      }
 
-    .fc-timegrid-event-harness-inset .fc-timegrid-event, .fc-timegrid-event.fc-event-mirror, .fc-timegrid-more-link{
-      box-shadow: 0 0 0 0 transparent !important;
-    }
-    .fc-button-primary{
-      background: transparent !important;
-      border: none !important;
-    }
-    .fc-button-primary:hover{
-      background: #888ea888 !important;
-    }
+      .fc-timegrid-event-harness-inset .fc-timegrid-event, .fc-timegrid-event.fc-event-mirror, .fc-timegrid-more-link{
+        box-shadow: 0 0 0 0 transparent !important;
+      }
+      .fc-button-primary{
+        background: transparent !important;
+        border: none !important;
+      }
+      .fc-button-primary:hover{
+        background: #888ea888 !important;
+      }
 
-    .fc-button-active{
-      background: rgb(169, 120, 28) !important;
-      box-shadow: none !important;
-    }
-    .fc-button-active:hover{
-      background: rgb(169, 120, 28) !important;
-      box-shadow: none !important;
-    }
+      .fc-button-active{
+        background: rgb(169, 120, 28) !important;
+        box-shadow: none !important;
+      }
+      .fc-button-active:hover{
+        background: rgb(169, 120, 28) !important;
+        box-shadow: none !important;
+      }
 
 
-  </style>
+    </style>
+
+
+{% endif %}
+
+
+
+{% if app.user.theme == "light" %}
+  
+
+    <style>
+      .daterangepicker.dropdown-menu {
+          z-index: 1059;
+      }
+      .fc-row.fc-week.fc-widget-content{
+        margin-right: 0 !important;
+      }
+      .fc-button-group > button {
+        float: left !important;
+        margin: 0 0 0 4px !important;
+        border-radius: 6px !important;
+        color: grey;
+      }
+
+      .fc .fc-button-group > *{
+        color: grey;
+      }
+      button.fc-today-button{
+        color: grey !important;
+      }
+      button.fc-today-button:focus { 
+        background: transparent !important; 
+        color: rgb(169, 120, 28) !important;
+        box-shadow: none !important;
+      }
+
+      /* BORDER COLOR */
+      tbody > *{
+        border-color: #e0e6ed !important;
+      }
+      .fc-scrollgrid {
+        border-color: #e0e6ed !important;
+      }
+      tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td {
+        border-color: #e0e6ed !important;
+      }
+
+      .fc .fc-scrollgrid-section-sticky>*{
+        background: transparent !important;
+        border-color: #e0e6ed !important;
+      }
+
+      /* BACKGROUND COLOR */
+      tr.fc-list-day.fc-day.fc-day-tue.fc-day-past > th {
+        background: transparent !important;
+      }
+      .fc-list-day-cushion.fc-cell-shaded{
+        background: transparent !important;
+      }
+      .fc .fc-list-sticky .fc-list-day>*{
+        background: transparent !important;
+        position:  relative!important;
+      }
+      tr.fc-list-event.fc-event.fc-event-start.fc-event-end.fc-event-today.fc-event-future:hover{
+        cursor: pointer !important;
+      }
+      td.fc-list-event-title{
+        border-color: #e0e6ed!important;
+      }
+      td.fc-list-event-graphic{
+        border-color: #e0e6ed!important;
+      }
+      td.fc-list-event-time{
+        border-color: #e0e6ed !important;
+      }
+
+      /* HEIGHT AND SCROLL */
+      tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td > .fc-scroller-harness > .fc-scroller{
+        height: 400px !important;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+      }
+      .fc-list{
+        height: 400px !important;
+        border-color: #e0e6ed !important;
+      }
+      .fc-list > .fc-scroller{
+        height: 400px !important;
+        overflow-y: scroll !important;
+        overflow-x: hidden !important;
+      }
+      tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td > .fc-scroller-harness > .fc-scroller::-webkit-scrollbar, .fc-list > .fc-scroller::-webkit-scrollbar{
+        background: transparent !important;
+        width: 4px;
+        transition: 0.2 ease-in-out;
+      }
+      tr.fc-scrollgrid-section.fc-scrollgrid-section-body > td > .fc-scroller-harness > .fc-scroller::-webkit-scrollbar-thumb, .fc-list > .fc-scroller::-webkit-scrollbar-thumb{
+        background: #888ea888 !important;
+        border-radius: 2px !important;
+      }
+
+      .fc-day-today { 
+        background: transparent !important; 
+      }
+
+      .fc-theme-standard td, .fc-theme-standard th{
+        border-color: #e0e6ed !important;
+      }
+
+      .fc-timegrid-event-harness-inset .fc-timegrid-event, .fc-timegrid-event.fc-event-mirror, .fc-timegrid-more-link{
+        box-shadow: 0 0 0 0 transparent !important;
+      }
+      .fc-button-primary{
+        background: transparent !important;
+        border: none !important;
+      }
+      .fc-button-primary:hover{
+        background: #888ea888 !important;
+      }
+
+      .fc-button-active{
+        background: rgb(169, 120, 28) !important;
+        box-shadow: none !important;
+      }
+      .fc-button-active:hover{
+        background: rgb(169, 120, 28) !important;
+        box-shadow: none !important;
+      }
+
+
+    </style>
+
+
+  {% endif %}
+
 {% endblock %}

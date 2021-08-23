@@ -6,6 +6,7 @@ use App\Entity\FichesClients;
 use App\Entity\SmsList;
 use App\Manager\EmailManager;
 use App\Manager\SmsManager;
+use App\Repository\AppointmentsRepository;
 use App\Repository\UsersRepository;
 use App\Repository\FichesClientsRepository;
 use Doctrine\ORM\EntityManagerInterface;
@@ -41,19 +42,26 @@ class PostAppointments extends AbstractController
     protected $smsManager;
 
     /**
+     * @var AppointmentsRepository
+     */
+    protected $appointmentsRepo;
+
+    /**
      * PostAppointments constructor.
      * @param UsersRepository $userRepo
      * @param FichesClientsRepository $fichesClientsRepository
      * @param EntityManagerInterface $em
      * @param EmailManager $mailer
      * @param SmsManager $smsManager
+     * @param AppointmentsRepository $appointmentsRepo
      */
     public function __construct(
                                 UsersRepository $userRepo,
                                 FichesClientsRepository $fichesClientsRepository,
                                 EntityManagerInterface $em,
                                 EmailManager $mailer,
-                                SmsManager $smsManager
+                                SmsManager $smsManager,
+                                AppointmentsRepository $appointmentsRepo
                                )
     {
         $this->userRepository = $userRepo;
@@ -61,6 +69,7 @@ class PostAppointments extends AbstractController
         $this->em = $em;
         $this->mailer = $mailer;
         $this->smsManager = $smsManager;
+        $this->appointmentsRepo = $appointmentsRepo;
     }
 
     /**
@@ -80,71 +89,85 @@ class PostAppointments extends AbstractController
             "id" => $data->getId()
         ];
 
-        $ficheClient = $this->fichesClientsRepository->findFicheClientByTel($data->getTel());
-        if($ficheClient){
-          
-            $addRdv = $ficheClient[0]->getRdv();
-            $addRdv[] = $rdv;
-            
-            $ficheClient[0]->setRdv($addRdv);
+        $bool = false;
 
-            $this->em->persist($ficheClient[0]);
-            $this->em->flush();
-
-        }else{
-
-            $fiche = new FichesClients();
-            $fiche->setNom($data->getLastname());
-            $fiche->setPrenom($data->getFirstName());
-            $fiche->setTel($data->getTel());
-            $fiche->setEmail($data->getEmail());
-            $fiche->setCommerce($data->getUsers());
-
-            $rdvArray = array();
-            $rdvArray[] = $rdv; 
-            $fiche->setRdv($rdvArray);
-
-            $this->em->persist($fiche);
-            $this->em->flush();
+        if(!$this->appointmentsRepo->findAppointmentByGroupeId($data->getUsers(), $data->getGroupeId())){
+            $bool = true;
         }
 
-        $this->mailer->confirmationMail(
-            $data->getLastName(). ' ' .$data->getFirstName(),
-            $data->getUsers()->getCompanyName(),
-            $data->getUserTakeAppointments()->getCompanyName(),
-            $data->getStart(),
-            $data->getEmail()
-        );
+        if($bool === true){
 
-        $date = date_format($data->getStart(),  'dmY-H:i');
+            $ficheClient = $this->fichesClientsRepository->findFicheClientByTel($data->getTel());
+            if($ficheClient){
+            
+                $addRdv = $ficheClient[0]->getRdv();
+                $addRdv[] = $rdv;
+                
+                $ficheClient[0]->setRdv($addRdv);
 
-        $dateForSendSms = date_format($data->getStart(),  'Y-m-d H:i:s');
-        $time = strtotime($dateForSendSms);
-        $time = $time - (120 * 60);
-        $dates = date("Y-m-d H:i:s", $time);
-        $dateForSendSms = date('dmY-H:i', $time);
+                $this->em->persist($ficheClient[0]);
+                $this->em->flush();
+
+            }else{
+
+                $fiche = new FichesClients();
+                $fiche->setNom($data->getLastname());
+                $fiche->setPrenom($data->getFirstName());
+                $fiche->setTel($data->getTel());
+                $fiche->setEmail($data->getEmail());
+                $fiche->setCommerce($data->getUsers());
+
+                $rdvArray = array();
+                $rdvArray[] = $rdv; 
+                $fiche->setRdv($rdvArray);
+
+                $this->em->persist($fiche);
+                $this->em->flush();
+            }
+
+            $this->mailer->confirmationMail(
+                $data->getLastName(). ' ' .$data->getFirstName(),
+                $data->getUsers()->getCompanyName(),
+                $data->getUserTakeAppointments()->getCompanyName(),
+                $data->getStart(),
+                $data->getEmail()
+            );
+
+            $date = date_format($data->getStart(),  'dmY-H:i');
+
+            $dateForSendSms = date_format($data->getStart(),  'Y-m-d H:i:s');
+            $time = strtotime($dateForSendSms);
+            $time = $time - (120 * 60);
+            $dates = date("Y-m-d H:i:s", $time);
+            $dateForSendSms = date('dmY-H:i', $time);
 
 
-        $sms = $this->smsManager->sendSmsPost(
-            "x83B1b2YPUeNzilSS74oGqVzIG5T90qC",
-            "Bonjour, vous avez rdv chez ".$data->getUsers()->getCompanyName()." aujourd'hui à ".date_format($data->getStart(), 'H:i'),
-            "0666712423",
-            "R&Clic",
-            1,
-            $dateForSendSms
-        );
+            $sms = $this->smsManager->sendSmsPost(
+                "x83B1b2YPUeNzilSS74oGqVzIG5T90qC",
+                "Bonjour, vous avez rdv chez ".$data->getUsers()->getCompanyName()." aujourd'hui à ".date_format($data->getStart(), 'H:i'),
+                "0666712423",
+                "R&Clic",
+                1,
+                $dateForSendSms
+            );
+
+        }
 
         $this->em->persist($data);
         $this->em->flush();
 
-        $smsList = new SmsList();
-        $smsList->setDate($data->getStart());
-        $smsList->setCommerce($data->getUsers());
-        $smsList->setRdv($data);
-        $smsList->setInfos(utf8_encode($sms));
+        if($bool === true){
 
-        $this->em->persist($smsList);
-        $this->em->flush();
+            $smsList = new SmsList();
+            $smsList->setDate($data->getStart());
+            $smsList->setCommerce($data->getUsers());
+            $smsList->setRdv($data);
+            $smsList->setInfos(utf8_encode($sms));
+
+            $this->em->persist($smsList);
+            $this->em->flush();
+
+        }
 
         return [
             'appointments' => $data,

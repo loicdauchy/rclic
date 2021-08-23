@@ -31,6 +31,7 @@ class SmsList
 
     /**
      * @ORM\OneToOne(targetEntity=Appointments::class, cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=true, onDelete="SET NULL")
      */
     private $rdv;
 

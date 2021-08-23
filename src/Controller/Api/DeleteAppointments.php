@@ -2,6 +2,7 @@
 
 namespace App\Controller\Api;
 
+use App\Manager\SmsManager;
 use App\Repository\UsersRepository;
 use App\Repository\AppointmentsRepository;
 use App\Repository\SmsListRepository;
@@ -33,23 +34,31 @@ class DeleteAppointments extends AbstractController
     protected $em;
 
     /**
+     * @var SmsManager
+     */
+    protected $smsManager;
+
+    /**
      * GetAppointments constructor.
      * @param UsersRepository $userRepo
      * @param AppointmentsRepository $appointmentRepository
      * @param SmsListRepository $smsListRepository
      * @param EntityManagerInterface $em
+     * @param SmsManager $smsManager
      */
     public function __construct(
                                 UsersRepository $userRepo,
                                 AppointmentsRepository $appointmentRepository,
                                 SmsListRepository $smsListRepository,
-                                EntityManagerInterface $em
+                                EntityManagerInterface $em,
+                                SmsManager $smsManager
                                )
     {
         $this->userRepository = $userRepo;
         $this->appointmentRepository = $appointmentRepository;
         $this->smsListRepository = $smsListRepository;
         $this->em = $em;
+        $this->smsManager = $smsManager;
     }
 
     /**
@@ -60,16 +69,27 @@ class DeleteAppointments extends AbstractController
     public function __invoke($id)
     {
         $rdv = $this->appointmentRepository->find($id);
-        $smsList = $this->smsListRepository->findByRdv($rdv)[0];
 
-        $this->em->remove($smsList);
-        $this->em->flush();
+        if($this->smsListRepository->findByRdv($rdv)){
+
+            $smsList = $this->smsListRepository->findByRdv($rdv)[0];
+            $infos = $smsList->getInfos();
+
+            $parse = substr($infos, strpos($infos, "|") + 1);  
+            $smsId = substr($parse, strpos($parse, "|") + 2);  
+            $str= str_replace("\n","",$smsId);
+
+            $this->smsManager->deleteSms(
+                "x83B1b2YPUeNzilSS74oGqVzIG5T90qC",
+                $str
+            );
+        }
 
         $this->em->remove($rdv);
         $this->em->flush();
 
         return [
-            'message' => 'success',
+            'message' => 'success'
         ];
     }
 }

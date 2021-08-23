@@ -26,6 +26,11 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
  *          "normalization_context"={"groups"="read:collaborateur"},
  *          "path"="/collaborateurs/get/{id}",
  *          "controller"=App\Controller\Api\GetCollaborateur::class
+ *       },
+ *       "update_theme"={
+ *          "method"="PATCH",
+ *          "path"="/users/theme/{id}",
+ *          "controller"=App\Controller\Api\UpdateTheme::class
  *       }
  *  }
  * )
@@ -161,6 +166,11 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
      * @ORM\OneToMany(targetEntity=SmsList::class, mappedBy="commerce")
      */
     private $smsLists;
+
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true)
+     */
+    private $theme;
 
     public function __construct()
     {
@@ -593,6 +603,18 @@ class Users implements UserInterface, PasswordAuthenticatedUserInterface
                 $smsList->setCommerce(null);
             }
         }
+
+        return $this;
+    }
+
+    public function getTheme(): ?string
+    {
+        return $this->theme;
+    }
+
+    public function setTheme(?string $theme): self
+    {
+        $this->theme = $theme;
 
         return $this;
     }

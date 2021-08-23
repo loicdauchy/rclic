@@ -39,6 +39,7 @@ window.onload = () => {
   var eventColorUp = "";
   var editorAdd;
   var editorEdit;
+  var collaborateurAppointmentsDeleteId = null;
 
 
   // FULLCALENDAR OPTIONS PART
@@ -184,6 +185,7 @@ window.onload = () => {
           document.getElementById('selectPrestaEdit').value = res.prestation.id.toString();
           document.getElementById('cardSubtitleEdit').innerHTML = frenchDate(start.value);
           document.getElementById('rdvId').value = res.id;
+          collaborateurAppointmentsDeleteId = res.userTakeAppointments.id;
 
           if(res.note){
             editorEdit.setData(res.note);
@@ -822,7 +824,7 @@ window.onload = () => {
       var xhr = new XMLHttpRequest();
       xhr.open('POST', '/api/appointments/post');
       xhr.onload = () => {
-          const res = JSON.parse(xhr.response);  
+          const res = JSON.parse(xhr.response)['hydra:member'][0];  
           console.log({
             type: "CONSOLE ERROR",
             data: res
@@ -831,13 +833,14 @@ window.onload = () => {
           for(var i = 0; i < agendaEvents.length; i++){
             if(agendaEvents[i].id === -1){
               agendaEvents[i].id = res.id
+              console.log(agendaEvents[i])
             }
           }   
           console.log(agendaEvents);
 
           for(var i = 0; i < collaborateurs.length; i++){
             if(collaborateurs[i].id === parseInt(document.getElementById('selectCollaborateur').value)){
-              collaborateurs[i].rdv.push(res['hydra:member'][0]);
+              collaborateurs[i].rdv.push(res);
               console.log(collaborateurs[i])
             }
           }
@@ -902,7 +905,7 @@ window.onload = () => {
           var xhr = new XMLHttpRequest();
           xhr.open('POST', '/api/appointments/post');
           xhr.onload = () => {
-                  const res = JSON.parse(xhr.response);  
+                  const res = JSON.parse(xhr.response)['hydra:member'][0];  
 
                   for(var i = 0; i < agendaEvents.length; i++){
                     if(agendaEvents[i].id === -2){
@@ -913,7 +916,7 @@ window.onload = () => {
 
                   for(var i = 0; i < collaborateurs.length; i++){
                     if(collaborateurs[i].id === parseInt(document.getElementById('selectCollaborateur').value)){
-                      collaborateurs[i].rdv.push(res['hydra:member'][0]);
+                      collaborateurs[i].rdv.push(res);
                       console.log(collaborateurs[i])
                     }
                   }
@@ -969,6 +972,22 @@ window.onload = () => {
           for(var i = 0; i < agendaEvents.length; i++){
             if(parseInt(document.getElementById('rdvId').value) === parseInt(agendaEvents[i].id)){
 
+              collaborateurs.forEach(collaborateur => {
+
+                if (collaborateur.id === collaborateurAppointmentsDeleteId) {
+     
+                  collaborateur.rdv.forEach((rdv, index)=> {
+
+                    if (rdv.id === parseInt(document.getElementById('rdvId').value)) {
+                      collaborateur.rdv.splice(index, 1);
+                    }
+
+                  });
+
+                }
+
+              });
+              
               deleteEvent++;
               var groupId = parseInt(agendaEvents[i].groupId);
               agendaEvents.splice(i, 1);
@@ -977,16 +996,27 @@ window.onload = () => {
                 
                 if(parseInt(document.getElementById('rdvId').value) !== parseInt(agendaEvents[y].id) && parseInt(groupId) === parseInt(agendaEvents[y].groupId)){
                   deleteEvent++;
-                  console.log('okokok')
+      
                   var xhr = new XMLHttpRequest();
                   xhr.open('DELETE', '/api/appointments/delete/'+agendaEvents[y].id);
+
+                  collaborateurs.forEach(collaborateur => {
+
+                    if (collaborateur.id === collaborateurAppointmentsDeleteId) {
+         
+                      collaborateur.rdv.forEach((rdv, index)=> {
+    
+                        if (rdv.id === parseInt(agendaEvents[y].id)) {
+                          collaborateur.rdv.splice(index, 1);
+                        }
+    
+                      });
+    
+                    }
+    
+                  });
                   agendaEvents.splice(y, 1)
                   xhr.onload = () => {
-
-                    console.log({
-                      type: "CONSOLE DELETE RDV",
-                      data: JSON.parse(xhr.response)
-                    })
 
                     if(deleteEvent === 2){
                       setTimeout(() => {

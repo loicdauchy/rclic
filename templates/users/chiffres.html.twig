@@ -3,19 +3,44 @@
 {% block title %}Mes chiffres{% endblock %}
 
 {% block body %}
-    <div class="container">
         <div id="main"></div>
-    </div>  
     <input type="hidden" id="userId" value="{{userId}}">
 {% endblock %}
 
 {% block stylesheets %}
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.css" integrity="sha256-u40zn9KeZYpMjgYaxWJccb4HnP0i8XI17xkXrEklevE=" crossorigin="anonymous">
+    <style>
+        .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
+            margin-left: 12px;
+            width: 64.4%;
+        }
+        #main{
+            padding-right: 20px;
+            padding-left: 20px;
+        }
+        .fc-header-toolbar.fc-toolbar.fc-toolbar-ltr{
+            flex-direction: column;
+            align-items: flex-start;
+        }
+        .fc-toolbar-chunk > .fc-button-group {
+            margin-left: 0;
+        }
+        button.fc-today-button{
+            margin-top: 10px !important;
+        }
+        h2.fc-toolbar-title{
+            margin-top: 10px !important;
+        }
+
+    </style>
 {% endblock %}
 
 {% block javascripts %}
     <script>
         document.getElementById('titlePage').innerHTML = "Mes chiffres";
+        const mailScroll = new PerfectScrollbar('.main-content', {
+            suppressScrollX : true
+        });
     </script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.8.0/main.min.js" integrity="sha256-AOrsg7pOO9zNtKymdz4LsI+KyLEHhTccJrZVU4UFwIU=" crossorigin="anonymous"></script>
     <script src="{{ asset('js/chiffres.js') }}"></script>
